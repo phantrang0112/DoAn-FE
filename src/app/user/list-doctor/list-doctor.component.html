@@ -1,0 +1,63 @@
+<!-- ======= Team Section ======= -->
+<section id="team" style="margin-top: 100px;" class="team section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Đội ngũ bác sĩ</h2>
+      <p>Phòng khám Bệnh viện quy tụ đội ngũ chuyên gia, bác sĩ, dược sĩ và điều
+        dưỡng có trình độ chuyên môn cao, tay nghề giỏi, luôn tận tâm và chu đáo
+        với người bệnh.
+
+        Phòng khám luôn đặt người bệnh là trọng tâm, và cam kết mang đến dịch vụ
+        chăm sóc sức khỏe tốt nhất cho quý khách hàng.</p>
+    </div>
+    <div class="row">
+
+
+      <div class="col-3">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item nav-link-inner--text" *ngFor="let item of
+            listKhoa">
+            <a class="nav-link-span" routerLinkActive="active"
+              [routerLink]="['/dashboard']">
+              <i class="fa fa-users" style="margin-right: 40px;"></i>
+              <span class=""> &emsp; {{item.name}}</span>
+            </a>
+            <hr style="margin: 4px;">
+          </li>
+
+        </ul>
+      </div>
+      <div class="col-9">
+        <div class="row">
+
+          <div class="col-lg-6" *ngFor="let item of listDoctor">
+            <div class="member d-flex align-items-start" data-aos="zoom-in"
+              data-aos-delay="100">
+              <div class="pic"><img style="height: 165px;"
+                  src="assets/{{item.img}}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>{{item.name}}</h4>
+                <span> Số điện thoại: {{item.phone}}</span>
+                <span> Email: {{item.email}}</span>
+                <p>{{item.khoa}}</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+</section><!-- End Team Section -->
