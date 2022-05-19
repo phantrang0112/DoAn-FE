@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class RegistrationScheduleComponent implements OnInit {
     gioKham: new FormControl(null,Validators.required),
     gia: new FormControl(),
   })
-  constructor(private headerService: HeaderserviceService) { }
+  constructor(private headerService: HeaderserviceService,private route: Router) { }
 
   ngOnInit() {
     this.headerService.setActive('appointment-schedule');
@@ -54,6 +55,9 @@ export class RegistrationScheduleComponent implements OnInit {
   }
   createTime(){
 
+  }
+  payment(){
+    this.route.navigate(['payment']);
   }
 
 }
