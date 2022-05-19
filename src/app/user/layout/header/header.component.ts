@@ -16,7 +16,7 @@ export class UserHeaderComponent implements OnInit,DoCheck {
   class_bix = false;
   size;
   isDesktop: boolean;
-  home = true;
+  home ;
   header;
 
 
@@ -29,6 +29,7 @@ export class UserHeaderComponent implements OnInit,DoCheck {
   private mediaService = new MediaService('(min-width: 991px)');
 
   ngOnInit() {
+    this.home=this.headerService.getThisHome();
     this.header = this.headerService.getHeader();
     this.mediaService.match$.subscribe(value => {
       this.isDesktop = value;
@@ -75,11 +76,14 @@ export class UserHeaderComponent implements OnInit,DoCheck {
   headerClick(name) {
     if(name!='home'){
       this.home= false;
+      this.headerService.setThisHome(false);
       this.class = 'header-scrolled';
     }
   }
   ngDoCheck(){
     this.header = this.headerService.getHeader();
+    this.home= this.headerService.getThisHome();
+
  }
 
 
