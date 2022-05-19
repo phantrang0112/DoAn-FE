@@ -11,7 +11,7 @@ export class HeaderserviceService {
     {'title':"Lịch khám",'active':'','name':'appointment-schedule'},
     {'title':"Liên hệ",'active':'','name':'contact'},
     {'title':"Hỏi đáp với bác sĩ",'active':'','name':'ask-answer'},
-    {'title':"Thông tin cá nhân",'active':'','name':'account'},
+    {'title':"Thông tin cá nhân",'active':'','name':'my-account'},
     {'title':"Đăng nhập",'active':'','name':'login'},
 ]
   constructor() { }

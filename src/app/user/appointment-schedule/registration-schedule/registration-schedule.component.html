@@ -11,17 +11,17 @@
 
 
     <div class="col-8">
-      <form [formGroup]="formDangKy">
+      <form [formGroup]="formDangKy" (ngSubmit)="payment()">
         <div>
           <h6> 1.Chọn phương thức khám</h6>
           <div>
-            <button class="btn btn-outline-success btn-color"
+            <a class="btn btn-outline-success btn-color"
               style="margin-right: 5px;"
               [ngClass]="changeColors" (click)="changeColor(false)">Khám trực
-              tiếp</button>
-            <button class="btn btn-outline-success btn-color"
+              tiếp</a>
+            <a class="btn btn-outline-success btn-color"
               [ngClass]="changeColors1"
-              (click)="changeColor(true)">Khám online</button>
+              (click)="changeColor(true)">Khám online</a>
           </div>
         </div>
         <div>
@@ -61,7 +61,7 @@
           <h6> 5. Chọn giờ khám</h6>
           <div class="row">
             <div class="col-2" style="margin: 10px 0px;">
-              <button class="btn btn-outline-success btn-time">02h30p</button>
+              <a class="btn btn-outline-success btn-time">02h30p</a>
             </div>
 
           </div>
@@ -72,7 +72,7 @@
             <p formControlName="gia"> Giá: <input formControlName="gia" style="color: red; border: none;"/> đồng</p>
           </div>
         </div>
-        <button  [disabled]="!formDangKy.valid" class="btn btn-danger">Xác nhận đăng ký</button>
+        <button type="submit" [disabled]="!formDangKy.valid" class="btn btn-danger">Xác nhận đăng ký</button>
 
       </form>
     </div>

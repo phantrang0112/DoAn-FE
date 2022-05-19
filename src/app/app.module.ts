@@ -31,6 +31,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from './user/contact/contact.component';
 import { AskAnswerComponent } from './user/ask-answer/ask-answer.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { PaymentComponent } from './user/appointment-schedule/registration-schedule/payment/payment.component';
+import { MyAccountComponent } from './user/my-account/my-account.component';
+import { TalkComponent } from './user/talk/talk.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +54,9 @@ import { CKEditorModule } from 'ckeditor4-angular';
     RegistrationScheduleComponent,
     ContactComponent,
     AskAnswerComponent,
+    PaymentComponent,
+    MyAccountComponent,
+    TalkComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +73,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    CKEditorModule
+    CKEditorModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { HeaderserviceService } from 'src/app/service/userservice/headerservice.
 export class RegisterComponent implements OnInit {
 
   constructor(private headerService: HeaderserviceService) { }
-
+  formRegister:FormGroup;
   ngOnInit() {
     this.headerService.setActive('login');
   }
