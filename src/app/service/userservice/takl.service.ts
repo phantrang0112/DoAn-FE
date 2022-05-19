@@ -20,8 +20,8 @@ export class TaklService {
   async createCurrentSession() {
     await Talk.ready;
     const user = {
-      id: 1,
-      username: 'Alice',
+      id: 4,
+      username: 'trang',
       email: 'alice@example.com',
       photoUrl: 'https://demo.talkjs.com/img/alice.jpg',
       welcomeMessage: 'Hey there! How are you? :-)',
@@ -43,8 +43,8 @@ export class TaklService {
   }
   async createInbox(session: Talk.Session) {
     const otherApplicationUser = {
-      id: 5,
-      username: 'Lo',
+      id: 1,
+      username: 'Alice',
       email: 'sebastian@example.com',
       photoUrl: 'https://demo.talkjs.com/img/sebastian.jpg',
       welcomeMessage: 'Hey, how can I help?',

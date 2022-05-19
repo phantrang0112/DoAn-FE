@@ -14,6 +14,7 @@ export class HeaderserviceService {
     {'title':"Thông tin cá nhân",'active':'','name':'my-account'},
     {'title':"Đăng nhập",'active':'','name':'login'},
 ]
+thisHome=true;
   constructor() { }
   getHeader(){
     return this.header;
@@ -30,5 +31,11 @@ export class HeaderserviceService {
   }
   classActive(){
 
+   }
+   getThisHome(){
+     return this.thisHome;
+   }
+   setThisHome(flag){
+      this.thisHome=flag;
    }
 }
