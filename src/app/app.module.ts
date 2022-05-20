@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -35,6 +35,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { PaymentComponent } from './user/appointment-schedule/registration-schedule/payment/payment.component';
 import { MyAccountComponent } from './user/my-account/my-account.component';
 import { TalkComponent } from './user/talk/talk.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { TalkComponent } from './user/talk/talk.component';
     MatSelectModule,
     ReactiveFormsModule,
     CKEditorModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
