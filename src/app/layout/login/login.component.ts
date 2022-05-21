@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 import {UserAccount} from '../../user/models/user-account';
 import {UserserviceService} from '../../service/userservice.service';
 import {AuthenticationService} from '../../service/authentication.service';
 import {first} from 'rxjs/operators';
+import { ErrorStateMatcher } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -62,4 +63,13 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+  matcher = new MyErrorStateMatcher();
+}
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+
 }

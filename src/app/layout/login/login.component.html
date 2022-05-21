@@ -17,8 +17,24 @@
             <span class="login100-form-title">
               Member Login
             </span>
+            <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
+              <mat-label >username</mat-label>
+              <input id="username" class="col-6" type="text" matInput
+                formControlName="username" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="f.username.errors.required">
+                *Add <strong>username!</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
+              <mat-label >Password</mat-label>
+              <input id="password" class="col-6" type="password" matInput
+                formControlName="password" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="f.password.errors.required">
+                *Add <strong>password!</strong>
+              </mat-error>
+            </mat-form-field>
 
-            <div class="wrap-input100 validate-input">
+            <!-- <div class="wrap-input100 validate-input">
               <input class="input100" type="text" formControlName="username" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
               <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Tên đăng nhập không được để trống</div>
@@ -27,9 +43,9 @@
               <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>
-            </div>
+            </div> -->
 
-            <div class="wrap-input100 validate-input">
+            <!-- <div class="wrap-input100 validate-input"  data-validate = "Password is required">
               <input class="input100" type="password" formControlName="password" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" >
               <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Mật khẩu không được để trống</div>
@@ -38,7 +54,7 @@
               <span class="symbol-input100">
                 <i class="fa fa-lock" aria-hidden="true"></i>
               </span>
-            </div>
+            </div> -->
 
             <div class="container-login100-form-btn">
               <button class="login100-form-btn">
