@@ -1,4 +1,4 @@
-export class Patient {
+  export class Patient {
   public id: number;
   public fName: string;
   public address: string;
