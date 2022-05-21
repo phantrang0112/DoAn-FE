@@ -1,11 +1,13 @@
-import { Component, Directive, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { TaklService } from 'src/app/service/userservice/takl.service';
 import Talk from 'talkjs';
+import * as $ from 'jquery';
 import { UserComponent } from '../user.component';
 @Component({
   selector: 'app-talk',
   templateUrl: './talk.component.html',
-  styleUrls: ['./talk.component.css']
+  styleUrls: ['./talk.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class TalkComponent implements OnInit {
 
@@ -17,6 +19,9 @@ export class TalkComponent implements OnInit {
   constructor(private talkService: TaklService) {}
   // @ViewChild() talkjsContainer!: ElementRef;
   ngOnInit() {
+    $('#action_menu_btn').click(function(){
+      $('.action_menu').toggle();
+  });
     this.createInbox();
   }
   @ViewChild('talkjsContainer', {static: false}) talkjsContainer!: ElementRef;
