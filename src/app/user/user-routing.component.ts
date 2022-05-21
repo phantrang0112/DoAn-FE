@@ -13,12 +13,10 @@ import {ListDoctorComponent} from './list-doctor/list-doctor.component';
 import {MyAccountComponent} from './my-account/my-account.component';
 import {TalkComponent} from './talk/talk.component';
 
-const routes: Routes = [
+export const UserRoutes: Routes = [
 
   {path: 'home', component: HomeComponent},
   {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
   {path: 'about', component: AboutComponent},
   {path: 'list-doctor', component: ListDoctorComponent},
   {path: 'appointment-schedule', component: AppointmentScheduleComponent},
@@ -31,9 +29,9 @@ const routes: Routes = [
   // { path: '**', pathMatch:'full', redirectTo: 'routePath' }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}
+// @NgModule({
+//   imports: [RouterModule.forRoot(userRoutes)],
+//   exports: [RouterModule]
+// })
+// export class UserRoutingModule {
+// }
