@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Patient} from '../user/models/patient';
-import {UserAccount} from '../user/models/user-account';
+import {Patient} from '../models/patient';
+import {UserAccount} from '../models/user-account';
 
 const baseUrl = 'http://localhost:8080/webyte/account';
 
