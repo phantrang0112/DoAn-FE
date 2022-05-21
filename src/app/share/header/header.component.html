@@ -8,7 +8,7 @@
 
     <nav id="navbar" class="navbar" [ngClass]="navbar_mobile">
       <ul *ngFor="let item of header">
-        <li><a class="nav-link scrollto {{item.active}}" [routerLink]="[item.name]"  routerLinkActive="router-link-active" (click)="headerClick(item.name)">{{item.title}}</a></li>
+        <li><a class="nav-link scrollto {{item.active}}" [routerLink]="['/'+item.name]"  routerLinkActive="router-link-active" (click)="headerClick(item.name)">{{item.title}}</a></li>
         <!-- <li><a class="nav-link scrollto active" [routerLink]="['home']"  routerLinkActive="router-link-active">Trang chủ</a></li>
         <li><a class="nav-link scrollto" (click)="about()">Giới thiệu</a></li>
         <li><a class="nav-link scrollto" href="#services">Danh mục bác sĩ</a></li>
