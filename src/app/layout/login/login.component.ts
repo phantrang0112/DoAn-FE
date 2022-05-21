@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
-import {UserAccount} from '../../user/models/user-account';
 import {UserserviceService} from '../../service/userservice.service';
 import {AuthenticationService} from '../../service/authentication.service';
 import {first} from 'rxjs/operators';

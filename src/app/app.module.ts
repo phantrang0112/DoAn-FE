@@ -36,6 +36,7 @@ import { PaymentComponent } from './user/appointment-schedule/registration-sched
 import { MyAccountComponent } from './user/my-account/my-account.component';
 import { TalkComponent } from './user/talk/talk.component';
 import {HttpClientModule} from '@angular/common/http';
+import { DoctorComponent } from './doctor/doctor.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {HttpClientModule} from '@angular/common/http';
     AskAnswerComponent,
     PaymentComponent,
     MyAccountComponent,
-    TalkComponent
+    TalkComponent,
+    DoctorComponent,
   ],
   imports: [
     BrowserModule,
