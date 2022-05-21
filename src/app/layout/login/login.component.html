@@ -13,21 +13,27 @@
             <img src="./assets/imglogin.png" alt="IMG">
           </div>
 
-          <form [formGroup]="formLogin" class="login100-form validate-form col-6">
+          <form [formGroup]="formLogin" class="login100-form validate-form col-6" (ngSubmit)="login()">
             <span class="login100-form-title">
               Member Login
             </span>
 
-            <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-              <input class="input100" type="text" name="email" placeholder="Email">
+            <div class="wrap-input100 validate-input">
+              <input class="input100" type="text" formControlName="username" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Tên đăng nhập không được để trống</div>
+              </div>
               <span class="focus-input100"></span>
               <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>
             </div>
 
-            <div class="wrap-input100 validate-input" data-validate = "Password is required">
-              <input class="input100" type="password" name="pass" placeholder="Password">
+            <div class="wrap-input100 validate-input">
+              <input class="input100" type="password" formControlName="password" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" >
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Mật khẩu không được để trống</div>
+              </div>
               <span class="focus-input100"></span>
               <span class="symbol-input100">
                 <i class="fa fa-lock" aria-hidden="true"></i>
