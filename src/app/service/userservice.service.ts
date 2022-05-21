@@ -34,7 +34,9 @@ export class UserserviceService {
   findByTitle(title: any): Observable<Patient[]> {
     return this.http.get<Patient[]>(`${baseUrl}?title=${title}`);
   }
-  login(user: UserAccount): Observable<any> {
-    return this.http.post(baseUrl + '/login', user);
+
+  register(user: UserAccount) {
+    console.log('registerUser= ' + user.username);
+    return this.http.post(`${baseUrl}/${'signup'}`, user);
   }
 }

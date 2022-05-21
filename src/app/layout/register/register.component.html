@@ -13,40 +13,81 @@
             <img src="./assets/imglogin.png" alt="IMG">
           </div>
 
-          <form [formGroup]="formRegister" class="login100-form validate-form col-6">
+          <form [formGroup]="formRegister" class="login100-form validate-form col-6" (ngSubmit)="onSubmit()">
             <span class="login100-form-title">
               Register
             </span>
-            <div class="wrap-input100 validate-input" data-validate = "Username is required">
-              <input class="input100" type="text" name="pass" placeholder="Username">
-              <span class="focus-input100"></span>
+<!--            <div class="wrap-input100 validate-input" data-validate = "Username is required">-->
+<!--              <input class="input100" type="text" name="pass" placeholder="Username">-->
+<!--              <span class="focus-input100"></span>-->
 
-            </div>
-            <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-              <input class="input100" type="text" name="email" placeholder="Email">
-              <span class="focus-input100"></span>
+<!--            </div>-->
+<!--            <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">-->
+<!--              <input class="input100" type="text" name="email" placeholder="Email">-->
+<!--              <span class="focus-input100"></span>-->
 
-            </div>
+<!--            </div>-->
 
-            <div class="wrap-input100 validate-input" data-validate = "Phone is required">
-              <input class="input100" type="text" name="pass" placeholder="Phone">
-              <span class="focus-input100"></span>
+<!--            <div class="wrap-input100 validate-input" data-validate = "Phone is required">-->
+<!--              <input class="input100" type="text" name="pass" placeholder="Phone">-->
+<!--              <span class="focus-input100"></span>-->
 
-            </div>
-            <div class="wrap-input100 validate-input" data-validate = "Password is required">
-              <input class="input100" type="password" name="pass" placeholder="Password">
-              <span class="focus-input100"></span>
+<!--            </div>-->
+<!--            <div class="wrap-input100 validate-input" data-validate = "Password is required">-->
+<!--              <input class="input100" type="password" name="pass" placeholder="Password">-->
+<!--              <span class="focus-input100"></span>-->
 
-            </div>
-            <div class="wrap-input100 validate-input" data-validate = "Password is required">
-              <input class="input100" type="password" name="pass" placeholder="Confirm Password">
-              <span class="focus-input100"></span>
+<!--            </div>-->
+<!--            <div class="wrap-input100 validate-input" data-validate = "Password is required">-->
+<!--              <input class="input100" type="password" name="pass" placeholder="Confirm Password">-->
+<!--              <span class="focus-input100"></span>-->
 
-            </div>
+<!--            </div>-->
+            <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
+              <mat-label >Username</mat-label>
+              <input id="username" class="col-6" type="text" matInput
+                     formControlName="username" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="submitted && f.username.errors?.required">
+                *Add <strong>username!</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
+              <mat-label >Email</mat-label>
+              <input id="email" class="col-6" type="email" matInput
+                     formControlName="email" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="submitted && f.email.errors?.required">
+                *Add <strong>email!</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
+              <mat-label >Phone</mat-label>
+              <input id="phone" class="col-6" type="text" matInput
+                     formControlName="phone" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="submitted && f.phone.errors?.required">
+                *Add <strong>phone!</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
+              <mat-label >Password</mat-label>
+              <input id="password" class="col-6" type="password" matInput
+                     formControlName="password" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="submitted && f.password.errors?.required">
+                *Add <strong>password!</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
+              <mat-label >Confirm Passord</mat-label>
+              <input id="confirmPassword" class="col-6" type="password" matInput
+                     formControlName="confirmPassword" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="submitted && f.confirmPassword.errors?.required">
+                *Add <strong>confirm password!</strong>
+              </mat-error>
+            </mat-form-field>
 
             <div class="container-login100-form-btn">
-              <button class="login100-form-btn">
-                register
+              <button [disabled]="loading" class="login100-form-btn">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Register
               </button>
             </div>
 

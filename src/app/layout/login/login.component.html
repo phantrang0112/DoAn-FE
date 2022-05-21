@@ -21,16 +21,16 @@
               <mat-label >username</mat-label>
               <input id="username" class="col-6" type="text" matInput
                 formControlName="username" [errorStateMatcher]="matcher" />
-              <mat-error *ngIf="f.username.errors.required">
-                *Add <strong>username!</strong>
+              <mat-error *ngIf="submitted && f.username.errors?.required">
+                *Nhập <strong>tên đăng nhập!</strong>
               </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
               <mat-label >Password</mat-label>
               <input id="password" class="col-6" type="password" matInput
                 formControlName="password" [errorStateMatcher]="matcher" />
-              <mat-error *ngIf="f.password.errors.required">
-                *Add <strong>password!</strong>
+              <mat-error *ngIf="submitted && f.password.errors?.required">
+                *Nhập <strong>mật khẩu!</strong>
               </mat-error>
             </mat-form-field>
 
@@ -57,7 +57,8 @@
             </div> -->
 
             <div class="container-login100-form-btn">
-              <button class="login100-form-btn">
+              <button [disabled]="loading" class="login100-form-btn">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 Login
               </button>
             </div>

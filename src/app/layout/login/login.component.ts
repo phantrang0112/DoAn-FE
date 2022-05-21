@@ -6,6 +6,7 @@ import {UserserviceService} from '../../service/userservice.service';
 import {AuthenticationService} from '../../service/authentication.service';
 import {first} from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,9 @@ export class LoginComponent implements OnInit {
   username: string = String(' ');
   password: string = String(' ');
   submitted = false;
-
-  constructor(private router: Router, private headerService: HeaderserviceService,
+  loading = false;
+  matcher = new MyErrorStateMatcher();
+  constructor(private router: Router, private headerService: HeaderserviceService, private alertService: AlertService,
               private formBuilder: FormBuilder, private authentication: AuthenticationService) {
   }
 
@@ -47,22 +49,22 @@ export class LoginComponent implements OnInit {
     }
     this.username = this.formLogin.value.username;
     this.password = this.formLogin.value.password;
+    this.loading = true;
     this.authentication.login(this.username, this.password)
       .subscribe(
         data => {
-          if (data!=null){
+          if (data != null) {
             this.router.navigate(['home']);
-            console.log('login ok');
           } else {
-            console.log('login loi');
+            this.loading = false;
           }
         },
         error => {
-          console.log('login loi');
+          this.alertService.error(error);
+          this.loading = false;
         }
       );
   }
-  matcher = new MyErrorStateMatcher();
 }
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
