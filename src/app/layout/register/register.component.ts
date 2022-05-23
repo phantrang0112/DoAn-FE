@@ -8,6 +8,7 @@ import {AlertService} from '../../service/alert.service';
 import {Router} from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material';
 import {ValidatorsCharacters} from '../../shared/util/validators-characters';
+import {Patient} from '../../models/patient';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,7 @@ import {ValidatorsCharacters} from '../../shared/util/validators-characters';
 })
 export class RegisterComponent implements OnInit {
   user = new UserAccount();
+  patient = new Patient();
   username: string = String(' ');
   password: string = String(' ');
   email: string = String(' ');
@@ -24,7 +26,22 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   loading = false;
   matcher = new MyErrorStateMatcher();
-
+  // employee = {
+  //   firstName: 'vo',
+  //   lastName: 'long',
+  //   age: 15,
+  //   jobTitle: 'ok',
+  // };
+  //
+  // employee2 = {
+  //   username: 'long2',
+  //   phone: 1234,
+  //   age: 13,
+  //   jobTitle: 'ok',
+  //   address: 'ha tinh',
+  // };
+  // tslint:disable-next-line:ban-types
+  object = [];
   constructor(private headerService: HeaderserviceService, private userService: UserserviceService,
               private formBuilder: FormBuilder, private alertService: AlertService,
               private router: Router) {
@@ -33,6 +50,7 @@ export class RegisterComponent implements OnInit {
   formRegister: FormGroup;
 
   ngOnInit() {
+
     this.headerService.setActive('register');
     this.formRegister = this.formBuilder.group({
         username: ['', [Validators.minLength(5), Validators.maxLength(20), Validators.required, ValidatorsCharacters.Username]],
@@ -60,21 +78,26 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
     this.user.username = this.formRegister.value.username;
-    this.user.email = this.formRegister.value.email;
     this.user.password = this.formRegister.value.password;
-    this.user.phone = this.formRegister.value.phone;
-    this.user.accountID = 1;
-    console.log(this.user);
+    this.user.idrole = 1;
+    this.user.id = 8;
+    this.object.push(this.user);
+    this.patient.email = this.formRegister.value.email;
+    this.patient.phone = this.formRegister.value.phone;
+    this.object.push(this.patient);
+    console.log(this.object);
     this.loading = true;
-    this.userService.register(this.user)
+    this.userService.register(this.object)
       .subscribe(
         data => {
           this.alertService.success('Registration successful', true);
+          this.object = [];
           this.router.navigate(['/login']);
         },
         error => {
           this.alertService.error(error);
           this.loading = false;
+          this.object = [];
         });
   }
 }
