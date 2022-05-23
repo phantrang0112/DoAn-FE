@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { DoctorComponent } from './doctor/doctor.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './layout/login/login.component';
 import { RegisterComponent } from './layout/register/register.component';
@@ -10,11 +11,11 @@ import { UserComponent } from './user/user.component';
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'user/home',
     pathMatch: 'full',
   },
   {
-    path: '',
+    path: 'user',
     component: UserComponent,
     children: [
       {
@@ -24,7 +25,7 @@ const routes: Routes =[
     ]
   },
   {
-    path: '',
+    path: 'user',
     component: LayoutComponent,
     children: [
       {
@@ -34,9 +35,20 @@ const routes: Routes =[
     ]
   },
   {
-    path: '**',
-    redirectTo: 'home'
+    path: 'doctor',
+    component: DoctorComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('src/app/doctor/doctor.module').then(m=>m.DoctorModule)
+      }
+    ]
   },
+  {
+    path: '**',
+    redirectTo: 'user/home'
+  },
+
   // {path: 'login', component: LoginComponent},
   // {path: 'register', component: RegisterComponent},
 ];
