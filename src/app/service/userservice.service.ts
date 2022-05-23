@@ -35,8 +35,8 @@ export class UserserviceService {
     return this.http.get<Patient[]>(`${baseUrl}?title=${title}`);
   }
 
-  register(user: UserAccount) {
-    console.log('registerUser= ' + user.username);
-    return this.http.post(`${baseUrl}/${'signup'}`, user);
+  register(obj: any[]) {
+    console.log('registerUser= ' + obj);
+    return this.http.post(`${baseUrl}/${'signupUser'}`, obj);
   }
 }
