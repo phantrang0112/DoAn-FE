@@ -8,7 +8,7 @@ import { HeaderserviceService } from 'src/app/service/userservice/headerservice.
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private headerService:HeaderserviceService) { }
+  constructor(private headerService: HeaderserviceService) { }
 
   ngOnInit() {
     this.headerService.setActive('contact');
