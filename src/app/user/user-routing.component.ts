@@ -12,11 +12,12 @@ import {HomeComponent} from './home/home.component';
 import {ListDoctorComponent} from './list-doctor/list-doctor.component';
 import {MyAccountComponent} from './my-account/my-account.component';
 import {TalkComponent} from './talk/talk.component';
+import {AuthGuard} from '../shared/guards/auth-guard.guard';
 
 export const UserRoutes: Routes = [
 
   {path: 'home', component: HomeComponent},
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'about', component: AboutComponent},
   {path: 'list-doctor', component: ListDoctorComponent},
   {path: 'appointment-schedule', component: AppointmentScheduleComponent},

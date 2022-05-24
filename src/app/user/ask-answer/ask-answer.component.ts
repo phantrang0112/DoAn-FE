@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
+import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 
 @Component({
   selector: 'app-ask-answer',
@@ -9,14 +9,19 @@ import { HeaderserviceService } from 'src/app/service/userservice/headerservice.
 })
 export class AskAnswerComponent implements OnInit {
   panelOpenState = false;
-  constructor(private headerService:HeaderserviceService) { }
-  post= false;
+
+  constructor(private headerService: HeaderserviceService) {
+  }
+
+  post = false;
   public Editor = ClassicEditor;
+
   ngOnInit() {
     this.headerService.setActive('ask-answer');
   }
- clickPost(){
-   this.post=!this.post;
-   console.log(this.post)
- }
+
+  clickPost() {
+    this.post = !this.post;
+    console.log(this.post);
+  }
 }
