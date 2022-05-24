@@ -37,8 +37,9 @@ export class AppointmentScheduleComponent implements OnInit {
       cancelButtonAriaLabel: 'OK'
     });
   }
+  registrationSchedule(){
+    this.route.navigate(['user/registration-schedule'])
 
-  registrationSchedule() {
-    this.route.navigate(['registration-schedule']);
+ 
   }
 }
