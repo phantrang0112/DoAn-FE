@@ -57,7 +57,7 @@ export class RegistrationScheduleComponent implements OnInit {
 
   }
   payment(){
-    this.route.navigate(['payment']);
+    this.route.navigate(['user/payment']);
   }
 
 }

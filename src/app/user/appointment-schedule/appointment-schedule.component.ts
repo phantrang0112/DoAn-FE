@@ -34,6 +34,6 @@ export class AppointmentScheduleComponent implements OnInit {
     })
   }
   registrationSchedule(){
-    this.route.navigate(['registration-schedule'])
+    this.route.navigate(['user/registration-schedule'])
   }
 }

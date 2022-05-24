@@ -4,11 +4,13 @@ import { RouterModule } from "@angular/router";
 import { DoctorRoutes } from "./doctor.routing.componet";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HomeComponent } from './home/home.component';
+import { AppointmentScheduleComponent } from './appointment-schedule/appointment-schedule.component';
 
 
 @NgModule({
   declarations: [
-HomeComponent],
+    HomeComponent,
+    AppointmentScheduleComponent],
   imports: [
 
     CommonModule,
@@ -19,5 +21,5 @@ HomeComponent],
 
 })
 
-export class DoctorModule {}
+export class DoctorModule { }
 
