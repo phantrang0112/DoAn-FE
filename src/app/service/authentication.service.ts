@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {UserAccount} from '../models/user-account';
 import {map} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,17 @@ export class AuthenticationService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
+  existUser() {
+    return localStorage.getItem('currentUser') != null ;
+  }
+
   public get currentUserValue(): UserAccount {
     return this.currentUserSubject.value;
   }
 
   login(username: string, password: string) {
     console.log(username);
-    return this.http.post<any>(`http://localhost:8080/webyte/account/login`, { username, password })
+    return this.http.post<any>(`${environment.baseURL}/login`, {username, password})
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.token) {

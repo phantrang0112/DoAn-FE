@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  envName: 'DEV',
+  baseURL: 'http://localhost:8080/webyte/account',
+  rootURL: 'http://localhost:8080'
 };
 
 /*

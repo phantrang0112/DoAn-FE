@@ -26,20 +26,6 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   loading = false;
   matcher = new MyErrorStateMatcher();
-  // employee = {
-  //   firstName: 'vo',
-  //   lastName: 'long',
-  //   age: 15,
-  //   jobTitle: 'ok',
-  // };
-  //
-  // employee2 = {
-  //   username: 'long2',
-  //   phone: 1234,
-  //   age: 13,
-  //   jobTitle: 'ok',
-  //   address: 'ha tinh',
-  // };
   // tslint:disable-next-line:ban-types
   object = [];
   constructor(private headerService: HeaderserviceService, private userService: UserserviceService,
@@ -80,7 +66,6 @@ export class RegisterComponent implements OnInit {
     this.user.username = this.formRegister.value.username;
     this.user.password = this.formRegister.value.password;
     this.user.idrole = 1;
-    this.user.id = 8;
     this.object.push(this.user);
     this.patient.email = this.formRegister.value.email;
     this.patient.phone = this.formRegister.value.phone;

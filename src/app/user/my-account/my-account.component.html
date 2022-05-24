@@ -18,33 +18,33 @@
     <br><br>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label >Fullname</mat-label>
-      <input id="first-name" class="col-6" type="text" matInput
-        formControlName="name" [errorStateMatcher]="matcher" [readonly]="display"/>
-      <mat-error *ngIf="addEmployeeForm.controls.name.hasError('required')">
+      <input id="fullName" class="col-6" type="text" matInput
+        formControlName="fullName" [errorStateMatcher]="matcher" [readonly]="display"/>
+      <mat-error *ngIf="addEmployeeForm.controls.fullName.hasError('required')">
         *Add <strong>Full Name!</strong>
       </mat-error>
     </mat-form-field>
-    <mat-form-field *ngIf="id==0" class="example-full-width" appearance="fill">
-      <mat-label >username</mat-label>
-      <input id="username" class="col-6" type="text" matInput
-        formControlName="username" [errorStateMatcher]="matcher" [readonly]="display"/>
-      <mat-error *ngIf="addEmployeeForm.controls.username.hasError('required')">
-        *Add <strong>username!</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field *ngIf="id==0" class="example-full-width" appearance="fill">
-      <mat-label >Password</mat-label>
-      <input id="password" class="col-6" type="password" matInput
-        formControlName="password" [errorStateMatcher]="matcher"[readonly]="display" />
-      <mat-error *ngIf="addEmployeeForm.controls.password.hasError('required')">
-        *Add <strong>password!</strong>
-      </mat-error>
-    </mat-form-field>
+<!--    <mat-form-field *ngIf="id==0" class="example-full-width" appearance="fill">-->
+<!--      <mat-label >username</mat-label>-->
+<!--      <input id="username" class="col-6" type="text" matInput-->
+<!--        formControlName="username" [errorStateMatcher]="matcher" [readonly]="display"/>-->
+<!--      <mat-error *ngIf="addEmployeeForm.controls.username.hasError('required')">-->
+<!--        *Add <strong>username!</strong>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+<!--    <mat-form-field *ngIf="id==0" class="example-full-width" appearance="fill">-->
+<!--      <mat-label >Password</mat-label>-->
+<!--      <input id="password" class="col-6" type="password" matInput-->
+<!--        formControlName="password" [errorStateMatcher]="matcher"[readonly]="display" />-->
+<!--      <mat-error *ngIf="addEmployeeForm.controls.password.hasError('required')">-->
+<!--        *Add <strong>password!</strong>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Email</mat-label>
       <input class="col-6" id="last-name" type="email" matInput
         formControlName="email" [errorStateMatcher]="matcher" [readonly]="display">
-        <mat-error *ngIf="addEmployeeForm.controls.phone.hasError('required')">
+        <mat-error *ngIf="addEmployeeForm.controls.email.hasError('required')">
           *Add <strong>email</strong>
         </mat-error>
         <mat-error *ngIf="addEmployeeForm.controls.email.hasError('email')||addEmployeeForm.controls.email.hasError('pattern')">
@@ -55,7 +55,7 @@
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Phone</mat-label>
-      <input class="col-6" id="last-name" type="text" matInput
+      <input class="col-6" id="phone" type="text" matInput
         formControlName="phone" [errorStateMatcher]="matcher" [readonly]="display">
       <mat-error *ngIf="addEmployeeForm.controls.phone.hasError('maxLength')!=null">
         *Phone number must have 10 digits
@@ -68,10 +68,10 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Address</mat-label>
-      <input id="last-name" class="col-6" type="text" matInput
+      <input id="address" class="col-6" type="text" matInput
         formControlName="address" [errorStateMatcher]="matcher"[readonly]="display">
       <mat-error *ngIf="addEmployeeForm.controls.address.hasError('required')">
-        *Add<strong>Address!</strong>
+        *Add <strong>Address!</strong>
       </mat-error>
     </mat-form-field>
     <!-- <mat-form-field class="example-full-width" appearance="fill">
@@ -84,14 +84,14 @@
     </mat-form-field>
     <br>
     <br> -->
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Age</mat-label>
-      <input type="date" matInput formControlName="age"
-        [errorStateMatcher]="matcher"[readonly]="display">
-      <mat-error *ngIf="addEmployeeForm.controls.age.hasError('required')">
-        *Add <strong>Age!</strong>
-      </mat-error>
-    </mat-form-field>
+<!--    <mat-form-field class="example-full-width" appearance="fill">-->
+<!--      <mat-label>Age</mat-label>-->
+<!--      <input type="date" matInput formControlName="age"-->
+<!--        [errorStateMatcher]="matcher"[readonly]="display">-->
+<!--      <mat-error *ngIf="addEmployeeForm.controls.age.hasError('required')">-->
+<!--        *Add <strong>Age!</strong>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
     <br>
     <br>
     <br>
