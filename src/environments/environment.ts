@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
   envName: 'DEV',
-  baseURL: 'http://localhost:8080/webyte/account',
-  rootURL: 'http://localhost:8080'
+  baseURL: 'http://localhost:8080/webyte/account/',
+  patientURL : 'http://localhost:8080/patients/',
+  rootURL: 'http://localhost:8080/'
 };
 
 /*

@@ -4,4 +4,5 @@ export class UserAccount {
   public password: string;
   public idrole: number;
   public token: string;
+  public message: string;
 }

@@ -5,8 +5,11 @@ import {HeaderserviceService} from 'src/app/service/userservice/headerservice.se
 import {UserserviceService} from '../../service/userservice.service';
 import {AuthenticationService} from '../../service/authentication.service';
 import {first} from 'rxjs/operators';
-import { ErrorStateMatcher } from '@angular/material';
+import {ErrorStateMatcher} from '@angular/material';
 import {AlertService} from '../../service/alert.service';
+import {NotifyService} from '../../service/notify.service';
+import {UserAccount} from '../../models/user-account';
+import {Patient} from '../../models/patient';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +17,16 @@ import {AlertService} from '../../service/alert.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username: string = String(' ');
-  password: string = String(' ');
+  user = new UserAccount();
+  patient = new Patient();
   submitted = false;
   loading = false;
+  id: number;
   matcher = new MyErrorStateMatcher();
+
   constructor(private router: Router, private headerService: HeaderserviceService, private alertService: AlertService,
-              private formBuilder: FormBuilder, private authentication: AuthenticationService) {
+              private formBuilder: FormBuilder, private authentication: AuthenticationService, private notify: NotifyService,
+              private userService: UserserviceService) {
   }
 
   formLogin: FormGroup;
@@ -41,20 +47,24 @@ export class LoginComponent implements OnInit {
     return this.formLogin.controls;
   }
 
-  login() {
+  async login() {
     this.submitted = true;
 
     if (this.formLogin.invalid) {
       return;
     }
-    this.username = this.formLogin.value.username;
-    this.password = this.formLogin.value.password;
+    this.user.username = this.formLogin.value.username;
+    this.user.password = this.formLogin.value.password;
     this.loading = true;
-    this.authentication.login(this.username, this.password)
-      .subscribe(
+    // tslint:disable-next-line:no-unused-expression
+    await this.authentication.login(this.user.username, this.user.password)
+      .toPromise().then(
         data => {
           if (data != null) {
+            this.notify.notifySuccessToggerMessage('Login success!!!');
             this.router.navigate(['home']);
+            this.user = data;
+            console.log('this User = ' + this.user);
           } else {
             this.loading = false;
           }
@@ -64,8 +74,20 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
+    await this.userService.getPatientById(this.user.id)
+      .toPromise().then(
+        patientData => {
+          if (patientData != null) {
+            this.patient = patientData;
+            console.log('patient = ' + this.patient);
+          }
+        }, error => {
+          console.log('error = ' + error);
+        }
+      );
   }
 }
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

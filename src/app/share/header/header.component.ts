@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {ReplaySubject} from 'rxjs';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 import {AuthenticationService} from '../../service/authentication.service';
+import {NotifyService} from '../../service/notify.service';
+import {UserserviceService} from '../../service/userservice.service';
 
 
 @Component({
@@ -14,7 +16,9 @@ import {AuthenticationService} from '../../service/authentication.service';
 export class UserHeaderComponent implements OnInit, DoCheck {
 
 
-  constructor(private route: Router, private headerService: HeaderserviceService, private  authentication: AuthenticationService) {
+  constructor(private route: Router, private headerService: HeaderserviceService,
+              private  authentication: AuthenticationService, private notify: NotifyService,
+              private  userService: UserserviceService) {
     this.class = '';
     this.navbar_mobile = '';
     this.scrolled = window.pageYOffset > 48;
@@ -96,7 +100,9 @@ export class UserHeaderComponent implements OnInit, DoCheck {
       this.class = 'header-scrolled';
       // tslint:disable-next-line:triple-equals
       if (name == 'logout') {
+        this.notify.notifyCancel('Logout success!!!');
         this.authentication.logout();
+        this.userService.logout();
         console.log(this.authentication.currentUserValue);
         this.existUser = false;
       }

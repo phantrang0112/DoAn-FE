@@ -1,25 +1,37 @@
-import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
-import { LayoutRoutes } from "./layout.routing.component";
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTabsModule } from "@angular/material";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterModule } from "@angular/router";
-import { MatCarouselModule } from "@ngmodule/material-carousel";
-import { HeaderComponent } from "./header/header.component";
-import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./register/register.component";
+import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {LayoutRoutes} from './layout.routing.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatSelectModule,
+  MatTabsModule
+} from '@angular/material';
+import {RouterModule} from '@angular/router';
+import {MatCarouselModule} from '@ngmodule/material-carousel';
+import {HeaderComponent} from './header/header.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {ChangePasswordComponent} from './login/change-password/change-password.component';
+import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
-  LoginComponent,
- RegisterComponent,
- HeaderComponent
-],
+    LoginComponent,
+    RegisterComponent,
+    HeaderComponent,
+    ChangePasswordComponent,
+    ForgotPasswordComponent
+  ],
   imports: [
-
     CommonModule,
     RouterModule.forChild(LayoutRoutes),
     MatTabsModule,
@@ -36,10 +48,8 @@ import { RegisterComponent } from "./register/register.component";
     ReactiveFormsModule,
     MatExpansionModule,
     HttpClientModule,
-
   ],
-
+  exports: [ ]
 })
 
-export class LayoutModule {}
-
+export class LayoutModule { }

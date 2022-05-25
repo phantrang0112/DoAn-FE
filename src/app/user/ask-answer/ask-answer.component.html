@@ -19,23 +19,22 @@
   <div>
     <hr>
     <h4>Danh sách các câu hỏi</h4>
-    <mat-accordion>
+    <mat-accordion *ngFor="let benhnhan of [1,2,3]">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-
           <mat-panel-title>
             <img src="assets/bv2.jpg" style="width:30px ;height:30px ; border-radius: 50%; margin-right: 20px;" />
-            <span>Bệnh nhân A</span>
+            <span>Bệnh nhân #{{benhnhan}}</span>
           </mat-panel-title>
           <mat-panel-description>
             bệnh gì nên khám khoa nào?
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <div style="margin-left: 50px;">
+        <div style="margin-left: 50px;" *ngFor="let rep of ['A','B','C']">
           <div>
             <div style="display: flex;">
               <img src="assets/bv2.jpg" style="width:30px ;height:30px ; border-radius: 50%; margin-right: 20px;" />
-              <mat-panel-title> Bác sĩ B</mat-panel-title>
+              <mat-panel-title>Bác sĩ #{{rep}}</mat-panel-title>
             </div>
 
             <mat-panel-description style="margin-left: 50px;">Câu trả lời</mat-panel-description>
@@ -50,35 +49,35 @@
         </div>
 
       </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
+<!--      <mat-expansion-panel>-->
+<!--        <mat-expansion-panel-header>-->
 
-          <mat-panel-title>
-            <img src="assets/bv2.jpg" style="width:30px ;height:30px ; border-radius: 50%; margin-right: 20px;" />
-            <span>Bệnh nhân A</span>
-          </mat-panel-title>
-          <mat-panel-description>
-            bệnh gì nên khám khoa nào?
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div style="margin-left: 50px;">
-          <div>
-            <div style="display: flex;">
-              <img src="assets/bv2.jpg" style="width:30px ;height:30px ; border-radius: 50%; margin-right: 20px;" />
-              <mat-panel-title> Bác sĩ B</mat-panel-title>
-            </div>
+<!--          <mat-panel-title>-->
+<!--            <img src="assets/bv2.jpg" style="width:30px ;height:30px ; border-radius: 50%; margin-right: 20px;" />-->
+<!--            <span>Bệnh nhân A</span>-->
+<!--          </mat-panel-title>-->
+<!--          <mat-panel-description>-->
+<!--            bệnh gì nên khám khoa nào?-->
+<!--          </mat-panel-description>-->
+<!--        </mat-expansion-panel-header>-->
+<!--        <div style="margin-left: 50px;">-->
+<!--          <div>-->
+<!--            <div style="display: flex;">-->
+<!--              <img src="assets/bv2.jpg" style="width:30px ;height:30px ; border-radius: 50%; margin-right: 20px;" />-->
+<!--              <mat-panel-title> Bác sĩ B</mat-panel-title>-->
+<!--            </div>-->
 
-            <mat-panel-description style="margin-left: 50px;">Câu trả lời</mat-panel-description>
-          </div>
-          <hr>
-          <div style="width: 100%;">
-            <mat-form-field class="row">
-              <input matInput placeholder="Phản hồi" />
-            </mat-form-field>
-            <button class="btn btn-primary" style="margin-left: 50px;">gửi</button>
-          </div>
-        </div>
-      </mat-expansion-panel>
+<!--            <mat-panel-description style="margin-left: 50px;">Câu trả lời</mat-panel-description>-->
+<!--          </div>-->
+<!--          <hr>-->
+<!--          <div style="width: 100%;">-->
+<!--            <mat-form-field class="row">-->
+<!--              <input matInput placeholder="Phản hồi" />-->
+<!--            </mat-form-field>-->
+<!--            <button class="btn btn-primary" style="margin-left: 50px;">gửi</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </mat-expansion-panel>-->
     </mat-accordion>
   </div>
 </div>

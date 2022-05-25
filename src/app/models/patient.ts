@@ -4,6 +4,7 @@
   public address: string;
   public phone: string;
   public email: string;
-  public accountID: string;
+  public accountid: number;
   public img: string;
+  public birthday: string;
 }
