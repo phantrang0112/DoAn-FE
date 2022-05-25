@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatPaginator, MatSort, MatTable, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -127,13 +128,23 @@ export class DetailComponent implements OnInit {
     },
   ];
   @ViewChild('selectList', { static: false }) selectList: ElementRef;
-  myDropDown : string;
+  myDropDown: string;
   onChangeofOptions(newGov) {
     console.log(newGov);
- }
+  }
   stateGroupOptions: Observable<StateGroup[]>;
+  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+  dataSource: MatTableDataSource<UserData>;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  users;
+  constructor(private _formBuilder: FormBuilder) {
+    this.users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(this.users);
+  }
 
   ngOnInit() {
     this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges.pipe(
@@ -160,34 +171,108 @@ export class DetailComponent implements OnInit {
     if (!event) {
       this.sickList = this.sickListOrgin;
     }
-    if ( event.key.length <=1) {
+    if (event.key.length <= 1) {
 
       console.log(this.search)
       this.sickList = this.sickListOrgin.filter(a => a.toLowerCase()
         .includes(this.search.toLowerCase()));
-        console.log(this.sicks.value.length)
-        if(this.sicks.value.length>0){
-          for(let i=0;i<this.sicks.value.length;i++){
-            if(!this.sickList.includes(this.sicks.value[i])){
-              this.sickList.push(this.sicks.value[i]);
-            }
-
+      console.log(this.sicks.value.length)
+      if (this.sicks.value.length > 0) {
+        for (let i = 0; i < this.sicks.value.length; i++) {
+          if (!this.sickList.includes(this.sicks.value[i])) {
+            this.sickList.push(this.sicks.value[i]);
           }
-        }
-        // else if(this.sicks.value.length>0){
-        //   this.sickList.push(this.sicks.value[0]);
-        // }
 
-let d= this.sicks.value;
-this.sicks.setValue(d);
+        }
+      }
+      // else if(this.sicks.value.length>0){
+      //   this.sickList.push(this.sicks.value[0]);
+      // }
+
+      let d = this.sicks.value;
+      this.sicks.setValue(d);
 
     }
-    else{
+    else {
       this.sickList = this.sickListOrgin;
     }
-    console.log(this.sickList+ typeof event.key);
+    console.log(this.sickList + typeof event.key);
 
   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  addData() {
+    const randomElementIndex = Math.floor(Math.random() * this.users.length);
+    this.users.push(this.users[randomElementIndex]);
+    this.dataSource= new MatTableDataSource(this.users);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
 }
 
 
+function createNewUser(id: number): UserData {
+  const name =
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
+    ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
+    '.';
+
+  return {
+    id: id.toString(),
+    name: name,
+    progress: Math.round(Math.random() * 100).toString(),
+    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+  };
+}
+export interface UserData {
+  id: string;
+  name: string;
+  progress: string;
+  fruit: string;
+}
+
+/** Constants used to fill up our data base. */
+const FRUITS: string[] = [
+  'blueberry',
+  'lychee',
+  'kiwi',
+  'mango',
+  'peach',
+  'lime',
+  'pomegranate',
+  'pineapple',
+];
+const NAMES: string[] = [
+  'Maia',
+  'Asher',
+  'Olivia',
+  'Atticus',
+  'Amelia',
+  'Jack',
+  'Charlotte',
+  'Theodore',
+  'Isla',
+  'Oliver',
+  'Isabella',
+  'Jasper',
+  'Cora',
+  'Levi',
+  'Violet',
+  'Arthur',
+  'Mia',
+  'Thomas',
+  'Elizabeth',
+];

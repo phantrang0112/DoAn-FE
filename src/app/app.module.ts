@@ -24,11 +24,11 @@ import {AppRoutingModule} from './app-routing.component';
 import {RouterModule} from '@angular/router';
 import {ShareComponent} from './share/share.component';
 import {AdminComponent} from './admin/admin.component';
-import {HeaderDoctorComponent} from './share/header-doctor/header-doctor.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ShareModule} from './share/share.mudule';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
+
 
 @NgModule({
   declarations: [
