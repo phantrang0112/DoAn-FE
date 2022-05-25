@@ -5,17 +5,33 @@ import { DoctorRoutes } from "./doctor.routing.componet";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HomeComponent } from './home/home.component';
 import { AppointmentScheduleComponent } from './appointment-schedule/appointment-schedule.component';
-
-
+import { ListASComponent } from './list-as/list-as.component';
+import { DetailComponent } from './list-as/detail/detail.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatNativeDateModule, MatSelectModule } from "@angular/material";
 @NgModule({
   declarations: [
     HomeComponent,
-    AppointmentScheduleComponent],
+    AppointmentScheduleComponent,
+    ListASComponent,
+    DetailComponent,
+
+   ],
   imports: [
 
     CommonModule,
     RouterModule.forChild(DoctorRoutes),
     NgbModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    ReactiveFormsModule,
 
   ],
 
