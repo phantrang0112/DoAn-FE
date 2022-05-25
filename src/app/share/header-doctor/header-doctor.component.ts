@@ -29,9 +29,9 @@ declare interface RouteInfo {
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Trang chủ',  icon: 'fa fa-home ', class: '' },
-    { path: '/icons', title: 'Lịch Hẹn Khám',  icon:'fa fa-calendar-plus-o text-blue', class: '' },
-    { path: '/maps', title: 'Danh sách lịch khám',  icon:'fa fa-list-alt text-orange', class: '' },
+    { path: '/doctor/home', title: 'Trang chủ',  icon: 'fa fa-home ', class: '' },
+    { path: '/doctor/appointment-schedule', title: 'Lịch Hẹn Khám',  icon:'fa fa-calendar-plus-o text-blue', class: '' },
+    { path: '/doctor/listAS', title: 'Danh sách lịch khám',  icon:'fa fa-list-alt text-orange', class: '' },
     { path: '/user-profile', title: 'Đăng ký lịch trực',  icon:'fa fa-calendar text-yellow', class: '' },
     { path: '/tables', title: 'Hỏi đáp với bệnh nhân',  icon:'fa fa-question-circle text-red', class: '' },
 ];

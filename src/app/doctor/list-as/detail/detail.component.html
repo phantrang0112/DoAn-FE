@@ -1,0 +1,49 @@
+<div >
+  <div class=" text-center" style="margin-top: 30px;">
+    <h1>Chi tiết lịch khám</h1>
+    <a href="">Danh sách lịch khám</a><a href="" class="text-info">|Chi tiết lịch khám</a>
+  </div>
+
+<div>
+
+  <div>
+    <h2>Đơn thuốc số:</h2>
+  </div>
+  <div>
+    <p>Tên bệnh nhân:</p>
+  </div>
+  <div><p (click)="return()">Ngày khám</p></div>
+ <div class="row">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Bệnh</mat-label>
+    <mat-select #selectList [formControl]="sicks" multiple   [(ngModel)]="myDropDown"
+    (ngModelChange)="onChangeofOptions($event)">
+      <input type="text"  matInput style="height: 50px;" [(ngModel)]="search" (keyup)="filterItem($event)" >
+      <mat-option *ngFor="let item of sickList" [value]="item">{{item}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <form class="col-8" [formGroup]="stateForm">
+    <mat-form-field appearance="fill">
+      <mat-label>States Group</mat-label>
+      <input type="text"
+             matInput
+             formControlName="stateGroup"
+             required
+             [matAutocomplete]="autoGroup">
+        <mat-autocomplete #autoGroup="matAutocomplete" >
+          <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
+            <mat-option *ngFor="let name of group.names" [value]="name">
+              {{name}}
+            </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+ </div>
+
+
+
+</div>
+
+</div>
