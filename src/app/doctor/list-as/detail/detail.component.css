@@ -1,9 +1,12 @@
 
-
-.demo-button-container {
-  padding-bottom: 16px;
+a{
+  text-decoration: none;
 }
 
-.demo-button + .demo-button {
-  margin-left: 8px;
+.btn_color{
+  background-color: rgb(44, 169, 170);
+  color: white;
+}
+.btn_color:hover {
+  background-color:  rgb(75, 230, 230);
 }

@@ -4,6 +4,7 @@ import { DoctorComponent } from "./doctor.component";
 import { HomeComponent } from "./home/home.component";
 import { DetailComponent } from "./list-as/detail/detail.component";
 import { ListASComponent } from "./list-as/list-as.component";
+import { RegisterScheduleComponent } from "./register-schedule/register-schedule.component";
 
 
 export const DoctorRoutes: Routes = [
@@ -12,4 +13,5 @@ export const DoctorRoutes: Routes = [
   {path: 'appointment-schedule', component: AppointmentScheduleComponent},
   {path: 'listAS', component: ListASComponent},
   {path: 'listASdetail', component: DetailComponent},
+  {path: 'register-schedule', component: RegisterScheduleComponent},
 ]

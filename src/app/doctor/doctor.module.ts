@@ -15,12 +15,15 @@ import { MatNativeDateModule, MatSelectModule } from "@angular/material";
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
+import { RegisterScheduleComponent } from './register-schedule/register-schedule.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     HomeComponent,
     AppointmentScheduleComponent,
     ListASComponent,
     DetailComponent,
+    RegisterScheduleComponent,
 
    ],
   imports: [
@@ -37,7 +40,8 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCheckboxModule
 
   ],
 
