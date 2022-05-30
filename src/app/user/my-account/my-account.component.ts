@@ -6,6 +6,7 @@ import {Patient} from '../../models/patient';
 import {AuthenticationService} from '../../service/authentication.service';
 import {UserserviceService} from '../../service/userservice.service';
 import {NotifyService} from '../../service/notify.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-my-account',
@@ -18,13 +19,11 @@ export class MyAccountComponent implements OnInit {
   }
 
   addEmployeeForm = new FormGroup({
-    fullName: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]),
+    fullname: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]),
     address: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]),
     img: new FormControl(),
     birthday: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required, ValidatorsCharacters.PhoneFax]),
-    // username: new FormControl('', [Validators.required]),
-    // password: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email, ValidatorsCharacters.EmailPattern])
   });
   id = 0;
@@ -35,15 +34,13 @@ export class MyAccountComponent implements OnInit {
   patient = new Patient();
   obj = new Patient();
   matcher = new MyErrorStateMatcher();
-
+  date = new Date();
   ngOnInit() {
     this.addEmployeeForm.controls.img.setValue('bv1.jpg');
-
     this.patient = this.userService.currentPatientValue;
-    console.log('this.authentication.currentUserValue.id = ' + this.patient.id);
-    console.log('this.authentication.currentUserValue.idAccount = ' + this.patient.accountid);
+    console.log(convert(this.patient.birthday));
+    this.patient.birthday = convert(this.patient.birthday);
   }
-
   changeImg() {
 
     const id = this.id;
@@ -57,6 +54,8 @@ export class MyAccountComponent implements OnInit {
 
   changeInfo() {
     this.obj = this.addEmployeeForm.value;
+    this.obj.birthday = convert(this.addEmployeeForm.value.birthday);
+    console.log('birthday in form = ' + this.obj.birthday);
     this.obj.id = this.patient.id;
     this.obj.accountid = this.patient.accountid;
     console.log(this.obj);
@@ -80,3 +79,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 
 }
+function convert(str) {
+  // tslint:disable-next-line:prefer-const one-variable-per-declaration
+  const date = new Date(str),
+    month = ('0' + (date.getMonth() + 1)).slice(-2),
+    day = ('0' + date.getDate()).slice(-2);
+  return [date.getFullYear(), month, day].join('-');
+}
+

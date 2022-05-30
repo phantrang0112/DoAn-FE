@@ -2,7 +2,7 @@
 
   <div class="section-title">
     <h2>Thông tin cá nhân</h2>
-
+    <p>DateTime as Milliseconds : {{patient.birthday  | date:'yyyy-MM-dd'}}
   </div>
   <form [formGroup]="addEmployeeForm" (ngSubmit)="changeInfo()">
     <div  class="justify-content-center text-center mt-3"style="position: relative;">
@@ -18,9 +18,9 @@
     <br><br>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label >Fullname</mat-label>
-      <input id="fullName" class="col-6" type="text" matInput
-        formControlName="fullName" [errorStateMatcher]="matcher" [readonly]="display" [(ngModel)]="patient.fullName"/>
-      <mat-error *ngIf="addEmployeeForm.controls.fullName.hasError('required')">
+      <input id="fullname" class="col-6" type="text" matInput
+        formControlName="fullname" [errorStateMatcher]="matcher" [readonly]="display" [(ngModel)]="patient.fullname"/>
+      <mat-error *ngIf="addEmployeeForm.controls.fullname.hasError('required')">
         *Add <strong>Full Name!</strong>
       </mat-error>
     </mat-form-field>
@@ -87,7 +87,7 @@
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Birthday</mat-label>
       <input type="date" matInput formControlName="birthday" id="birthday"
-        [errorStateMatcher]="matcher"[readonly]="display">
+        [errorStateMatcher]="matcher"[readonly]="display" [(ngModel)]="patient.birthday">
       <mat-error *ngIf="addEmployeeForm.controls.birthday.hasError('required')">
         *Add <strong>birthday!</strong>
       </mat-error>

@@ -1,6 +1,6 @@
   export class Patient {
   public id: number;
-  public fullName: string;
+  public fullname: string;
   public address: string;
   public phone: string;
   public email: string;
