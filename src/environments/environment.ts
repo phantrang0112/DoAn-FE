@@ -7,6 +7,8 @@ export const environment = {
   envName: 'DEV',
   baseURL: 'http://localhost:8080/webyte/account/',
   patientURL : 'http://localhost:8080/patients/',
+  doctorURL : 'http://localhost:8080/webyte/doctor/',
+  deptURL:'http://localhost:8080/webyte/dept/',
   rootURL: 'http://localhost:8080/'
 };
 
