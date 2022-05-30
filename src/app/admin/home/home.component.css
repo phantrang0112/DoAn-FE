@@ -13,3 +13,7 @@ a{
   left: 50%;
   transform: translate(-50%, -50%);
  }
+.card-header{
+  background-color:rgb(244, 246, 251,0.3);
+  border: none;
+}

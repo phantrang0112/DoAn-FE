@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import * as moment from 'moment';
 
@@ -8,18 +8,31 @@ import * as moment from 'moment';
   templateUrl: './register-schedule.component.html',
   styleUrls: ['./register-schedule.component.css']
 })
-export class RegisterScheduleComponent implements OnInit {
+export class RegisterScheduleComponent implements OnInit,DoCheck {
 
   constructor() { }
+  ngDoCheck(): void {
+    console.log(this.selection);
+  }
 
   ngOnInit() {
     var date = new Date();
     console.log(date.getDate())
-    if (date.getDay() == 4) {
-      let a = moment().add(7, 'days').format('YYYY MM DD');
-      console.log(a)
+    if (date.getDay() == 5) {
+      for(let i=1; i<8;i++){
+        let day = moment().add(i, 'days').format('YYYY MM DD');
+        date= new Date(day);
+        ELEMENT_DATA[i-1].date=moment(day).format('DD/MM/YYYY');
+        ELEMENT_DATA[i-1].weekdays=this.changeDay(date.getDay());
+        ELEMENT_DATA[i-1].status="Chưa đăng ký";
+      }
+
+    }
+    else{
+
     }
   }
+
   changeDay(current_day) {
     let day_name;
     switch (current_day) {
@@ -65,6 +78,7 @@ export class RegisterScheduleComponent implements OnInit {
     }
 
     this.selection.select(...this.dataSource.data);
+
   }
 
   /** The label for the checkbox on the passed row */
@@ -73,6 +87,7 @@ export class RegisterScheduleComponent implements OnInit {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+
   }
 
 }

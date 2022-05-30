@@ -31,8 +31,13 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/admin/home', title: 'Trang chủ',  icon: 'fa fa-home ', class: '' },
-    { path: '/doctor/appointment-schedule', title: 'Lịch Hẹn Khám',  icon:'fa fa-calendar-plus-o text-blue', class: '' },
-    { path: '/doctor/listAS', title: 'Danh sách lịch khám',  icon:'fa fa-list-alt text-orange', class: '' },
-    { path: '/user-profile', title: 'Đăng ký lịch trực',  icon:'fa fa-calendar text-yellow', class: '' },
-    { path: '/tables', title: 'Hỏi đáp với bệnh nhân',  icon:'fa fa-question-circle text-red', class: '' },
-];
+    { path: '/doctor/appointment-schedule', title: 'Danh sách lịch hẹn khám',  icon:'fa fa-calendar-plus-o text-blue', class: '' },
+    { path: '/doctor/listAS', title: 'Danh sách Khoa',  icon:'fa fa-list-alt text-orange', class: '' },
+    { path: '/user-profile', title: 'Danh sách bệnh nhân ',  icon:'fa fa-calendar text-yellow', class: '' },
+    { path: '/tables', title: 'Danh sách thuốc',  icon:'fa fa-question-circle text-red', class: '' },
+    { path: '/tables', title: 'Danh sách bệnh',  icon:'fa fa-question-circle text-red', class: '' },
+    { path: '/tables', title: 'Danh sách bài viết',  icon:'fa fa-question-circle text-red', class: '' },
+    { path: '/tables', title: 'Danh sách lịch trực',  icon:'fa fa-question-circle text-red', class: '' },
+    { path: '/tables', title: 'Thông tin cá nhân',  icon:'fa fa-question-circle text-red', class: '' },
+
+  ];

@@ -11,12 +11,15 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatNativeDateModule, MatSelectModule } from "@angular/material";
+import { MatExpansionModule, MatNativeDateModule, MatSelectModule } from "@angular/material";
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import { RegisterScheduleComponent } from './register-schedule/register-schedule.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AskAnswerComponent } from './ask-answer/ask-answer.component';
+import { CKEditorModule } from "ckeditor4-angular";
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -24,6 +27,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ListASComponent,
     DetailComponent,
     RegisterScheduleComponent,
+    AskAnswerComponent,
 
    ],
   imports: [
@@ -41,8 +45,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
-    MatCheckboxModule
-
+    MatCheckboxModule,
+    CKEditorModule,
+    MatExpansionModule,
+    MatIconModule
   ],
 
 })
