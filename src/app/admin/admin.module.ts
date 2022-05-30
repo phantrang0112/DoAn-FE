@@ -6,16 +6,24 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AdminRoutes } from "./admin.routing";
 import { HomeComponent } from './home/home.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ListAppointmentComponent } from './list-appointment/list-appointment.component';
+import {MatTableModule} from '@angular/material/table';
+import { ListOfAppointmentComponent } from './list-of-appointment/list-of-appointment.component';
+import { DepartmentComponent } from './department/department.component';
 @NgModule({
   declarations: [
-   HomeComponent],
+   HomeComponent,
+   ListAppointmentComponent,
+   ListOfAppointmentComponent,
+   DepartmentComponent],
   imports: [
 
     CommonModule,
     RouterModule.forChild(AdminRoutes),
     NgbModule,
     FormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTableModule
 
 
   ],
