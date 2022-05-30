@@ -20,7 +20,7 @@ export class DoctorService {
   };
   constructor(private httpclient: HttpClient,) { }
   public getListDoctor(): Observable<any> {
-    const url = `${environment.doctorURL}`;
+    const url = `${environment.doctorURL}all`;
     return this.httpclient.get<any>(url, this.httpOptions);// Nhớ import catchError
   }
 }

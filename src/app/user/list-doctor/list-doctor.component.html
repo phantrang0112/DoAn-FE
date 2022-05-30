@@ -16,9 +16,15 @@
 
       <div class="col-3">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item nav-link-inner--text">
+            <a class="nav-link-span" (click)="listDept()">
+              <i class="fa fa-users" style="margin-right: 40px;"></i>
+              <span class=""> &emsp;Tất cả</span>
+            </a>
+            <hr style="margin: 4px;">
+          </li>
           <li class="nav-item nav-link-inner--text" *ngFor="let item of listKhoa">
-            <a class="nav-link-span" routerLinkActive="active"
-              [routerLink]="['/dashboard']">
+            <a class="nav-link-span" (click)="listDept(item.deptname)">
               <i class="fa fa-users" style="margin-right: 40px;"></i>
               <span class=""> &emsp; {{item.deptname}}</span>
             </a>
@@ -39,7 +45,7 @@
                 <h4>{{item.fullname}}</h4>
                 <span> Số điện thoại: {{item.phone}}</span>
                 <span> Email: {{item.email}}</span>
-                <p>{{item.deptname}}</p>
+                <p> Khoa: {{item.deptname}}</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
