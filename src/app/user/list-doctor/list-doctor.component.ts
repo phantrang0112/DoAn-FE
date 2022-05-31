@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as internal from 'assert';
 import { DeptService } from 'src/app/service/userservice/dept.service';
 import { DoctorService } from 'src/app/service/userservice/doctor.service';
-import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
+import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
 
 @Component({
   selector: 'app-list-doctor',
@@ -11,25 +11,27 @@ import {HeaderserviceService} from 'src/app/service/userservice/headerservice.se
 })
 export class ListDoctorComponent implements OnInit {
   listDoctor;
+  listDoctorTam;
   //   {name: 'Bác sĩ A', phone: '032724567', email: 'phantrang011220@gmail.com', khoa: 'Khoa A', img: 'bv1.jpg'},
   //   {name: 'Bác sĩ A', phone: '032724567', email: 'phantrang011220@gmail.com', khoa: 'Khoa A', img: 'bv1.jpg'},
   //   {name: 'Bác sĩ A', phone: '032724567', email: 'phantrang011220@gmail.com', khoa: 'Khoa A', img: 'bv1.jpg'},
   //   {name: 'Bác sĩ A', phone: '032724567', email: 'phantrang011220@gmail.com', khoa: 'Khoa A', img: 'bv1.jpg'}
 
-  listKhoa:dept;
+  listKhoa: dept;
   // \= [{name: 'KhoaA'},
   //   {name: 'KhoaA'},
   //   {name: 'KhoaA'},
   //   {name: 'KhoaA'},
   // ];
 
-  constructor(private headerService: HeaderserviceService, private doctorService: DoctorService,private deptService: DeptService) {
-    doctorService.getListDoctor().subscribe((data)=>{
-      this.listDoctor=data;
+  constructor(private headerService: HeaderserviceService, private doctorService: DoctorService, private deptService: DeptService) {
+    doctorService.getListDoctor().subscribe((data) => {
+      this.listDoctor = data;
+      this.listDoctorTam = data;
       console.log(this.listDoctor);
     });
-    deptService.getListDept().subscribe((data)=>{
-      this.listKhoa=data;
+    deptService.getListDept().subscribe((data) => {
+      this.listKhoa = data;
       console.log(this.listKhoa);
     });
 
@@ -38,6 +40,26 @@ export class ListDoctorComponent implements OnInit {
 
   ngOnInit() {
     this.headerService.setActive('list-doctor');
+  }
+  listDept(deptName) {
+    let list=[];
+    let item:any;
+    console.log(deptName)
+    if(deptName!==undefined){
+      for ( item of this.listDoctorTam) {
+        console.log(item);
+        if (item.deptname === deptName) {
+          list.push(item);
+        }
+
+      }
+      this.listDoctor = list;
+    }
+    else{
+      this.listDoctor=this.listDoctorTam;
+    }
+
+    console.log(list+deptName)
   }
 
 }
