@@ -8,10 +8,11 @@ export const environment = {
   baseURL: 'http://localhost:8080/webyte/account/',
   patientURL : 'http://localhost:8080/patients/',
   doctorURL : 'http://localhost:8080/webyte/doctor/',
-  deptURL: 'http://localhost:8080/webyte/dept/',
-  newURL: 'http://localhost:8080/webyte/news/',
-  dutyScheduleURL: 'http://localhost:8080/webyte/duty-schedule/',
-  appointmentURL: 'http://localhost:8080/webyte/appointment-schedule/',
+  deptURL:'http://localhost:8080/webyte/dept/',
+  newURL:'http://localhost:8080/webyte/news/',
+  dutyScheduleURL:'http://localhost:8080/webyte/duty-schedule/',
+  appointmentURL:'http://localhost:8080/webyte/appointment-schedule/',
+  paymentURL:'http://localhost:8080/pay',
   rootURL: 'http://localhost:8080/',
 };
 

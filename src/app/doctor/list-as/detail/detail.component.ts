@@ -167,7 +167,7 @@ export class DetailComponent implements OnInit {
       console.log(this.search)
       this.sickList = this.sickListOrgin.filter(a => a.toLowerCase()
         .includes(this.search.toLowerCase()));
-      console.log(this.sicks.value.length)
+      console.log("formControl"+ this.sicks.value.length)
       if (this.sicks.value.length > 0) {
         for (let i = 0; i < this.sicks.value.length; i++) {
           if (!this.sickList.includes(this.sicks.value[i])) {
@@ -180,8 +180,7 @@ export class DetailComponent implements OnInit {
       //   this.sickList.push(this.sicks.value[0]);
       // }
 
-      let d = this.sicks.value;
-      this.sicks.setValue(d);
+
 
     }
     else {
