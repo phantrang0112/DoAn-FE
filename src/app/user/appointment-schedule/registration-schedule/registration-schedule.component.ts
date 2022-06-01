@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
+import { PaymentService } from 'src/app/service/usersevice/payment.service';
 
 @Component({
   selector: 'app-registration-schedule',
@@ -15,6 +16,7 @@ export class RegistrationScheduleComponent implements OnInit {
   class;
   button;
   online= false;
+  quydoi;
   disableSelect = new FormControl();
   formDangKy= new FormGroup({
     phuongThuc: new FormControl(null,Validators.required),
@@ -24,7 +26,7 @@ export class RegistrationScheduleComponent implements OnInit {
     gioKham: new FormControl(null,Validators.required),
     gia: new FormControl(),
   })
-  constructor(private headerService: HeaderserviceService,private route: Router) { }
+  constructor(private headerService: HeaderserviceService,private route: Router,private paymentService:PaymentService) { }
 
   ngOnInit() {
     this.headerService.setActive('appointment-schedule');
@@ -57,7 +59,26 @@ export class RegistrationScheduleComponent implements OnInit {
 
   }
   payment(){
-    this.route.navigate(['user/payment']);
+    let price:number=+this.formDangKy.controls.gia.value;
+    price= price/23000;
+    console.log(price);
+    this.quydoi=price;
+    this.paymentService.getPayr(price).subscribe(data=>{
+      console.log(data);
+      window.location.href =data.linkPayment;
+
+    })
+    //  window.location.href = 'https://www.google.com';
+    // this.route.navigate(['user/payment']);
   }
 
+}
+export interface scheduleRegistration{
+  id:number;
+  date:string;
+  typeClinic: string;
+  dept: string;
+  doctor:string;
+  time:string;
+  price:number;
 }

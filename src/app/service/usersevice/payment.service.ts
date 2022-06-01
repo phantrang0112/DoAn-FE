@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,11 +7,20 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PaymentService {
-
+  token = localStorage.getItem('token');
+  private httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + this.token,
+    })
+  };
   constructor(private httpclient: HttpClient,) { }
-  public getPayr(): Observable<any> {
+  public getPayr(price:number): Observable<any> {
     const url = `${environment.paymentURL}`;
-    return this.httpclient.post<any>(url,5);// Nhớ import catchError
+    return this.httpclient.post<any>(url,price,this.httpOptions);// Nhớ import catchError
+  }
+  public confirmPay(paymentId,token,payerid): Observable<any> {
+    const url = `${environment.paymentURL}/success`+'?paymentId='+paymentId+'&PayerID='+payerid;
+    return this.httpclient.get<any>(url,this.httpOptions);// Nhớ import catchError
   }
 
 
