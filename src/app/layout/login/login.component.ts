@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 import {UserserviceService} from '../../service/userservice.service';
 import {AuthenticationService} from '../../service/authentication.service';
@@ -22,11 +22,14 @@ export class LoginComponent implements OnInit {
   submitted = false;
   loading = false;
   id: number;
+  error = '';
   matcher = new MyErrorStateMatcher();
+  path = '';
+  role = '';
 
   constructor(private router: Router, private headerService: HeaderserviceService, private alertService: AlertService,
               private formBuilder: FormBuilder, private authentication: AuthenticationService, private notify: NotifyService,
-              private userService: UserserviceService) {
+              private userService: UserserviceService, private route: ActivatedRoute) {
   }
 
   formLogin: FormGroup;
@@ -62,8 +65,10 @@ export class LoginComponent implements OnInit {
         data => {
           if (data != null) {
             this.notify.notifySuccessToggerMessage('Login success!!!');
-            this.router.navigate(['home']);
+            this.path = this.authentication.currentUserValue.role;
+            this.router.navigate([this.path + '/home']);
             this.user = data;
+            // window.location.href = 'https://www.google.com';
             console.log('this User = ' + this.user);
           } else {
             this.loading = false;
@@ -74,7 +79,17 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
-    await this.userService.getPatientById(this.user.id)
+    this.role = this.user.role;
+    if (this.role === 'user') {
+      this.getDataUser();
+    } else if (this.role === 'doctor') {
+      this.getDataDoctor();
+    } else {
+      this.getDataAdmin();
+    }
+  }
+  getDataUser() {
+    this.userService.getPatientById(this.user.id)
       .toPromise().then(
         patientData => {
           if (patientData != null) {
@@ -86,6 +101,9 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+  getDataDoctor() {
+  }
+  getDataAdmin() {}
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

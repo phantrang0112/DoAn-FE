@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,11 @@ export class HomeComponent implements OnInit {
   public datasets: any;
   public data: any;
   public salesChart;
-  public clicked: boolean = true;
-  public clicked1: boolean = false;
+  public clicked = true;
+  public clicked1 = false;
 
+  constructor(private route: Router) {
+  }
   ngOnInit() {
 
     this.datasets = [
@@ -21,22 +24,20 @@ export class HomeComponent implements OnInit {
     this.data = this.datasets[0];
 
 
-    var chartOrders = document.getElementById('chart-orders');
+    const chartOrders = document.getElementById('chart-orders');
 
     parseOptions(Chart, chartOptions());
-
-
-    var ordersChart = new Chart(chartOrders, {
+    const ordersChart = new Chart(chartOrders, {
       type: 'bar',
 
     });
 
-    var chartSales = document.getElementById('chart-sales');
+    const chartSales = document.getElementById('chart-sales');
 
     this.salesChart = new Chart(chartSales, {
-			type: 'line',
+      type: 'line',
 
-		});
+    });
   }
 
 
@@ -45,10 +46,13 @@ export class HomeComponent implements OnInit {
     this.salesChart.update();
   }
 }
+
+// tslint:disable-next-line:no-shadowed-variable
 function parseOptions(Chart: any, arg1: any) {
   throw new Error('Function not implemented.');
 }
 
+// tslint:disable-next-line:no-shadowed-variable
 function Chart(Chart: any, arg1: any) {
   throw new Error('Function not implemented.');
 }

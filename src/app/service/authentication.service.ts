@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {UserAccount} from '../models/user-account';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-
+import {Router} from '@angular/router';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +15,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<UserAccount>;
   public currentUser: Observable<UserAccount>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<UserAccount>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -34,10 +37,10 @@ export class AuthenticationService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-          console.log(user);
+          // console.log(user);
           return user;
         }
-        console.log(user);
+        // console.log(user);
         return null;
       }));
   }
@@ -46,5 +49,6 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.router.navigate(['/user/login']);
   }
 }
