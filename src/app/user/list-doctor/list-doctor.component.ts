@@ -18,11 +18,13 @@ export class ListDoctorComponent implements OnInit {
   //   {name: 'Bác sĩ A', phone: '032724567', email: 'phantrang011220@gmail.com', khoa: 'Khoa A', img: 'bv1.jpg'}
 
   listKhoa: dept;
-  // \= [{name: 'KhoaA'},
-  //   {name: 'KhoaA'},
-  //   {name: 'KhoaA'},
-  //   {name: 'KhoaA'},
-  // ];
+  slides = [
+    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
+    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
+    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
+    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
+    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'}
+  ];
 
   constructor(private headerService: HeaderserviceService, private doctorService: DoctorService, private deptService: DeptService) {
     doctorService.getListDoctor().subscribe((data) => {

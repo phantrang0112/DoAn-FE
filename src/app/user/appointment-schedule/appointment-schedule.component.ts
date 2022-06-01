@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import { AppointmentScheduleService } from 'src/app/service/userservice/appointment-schedule.service';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 import Swal from 'sweetalert2';
 
@@ -9,8 +10,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./appointment-schedule.component.css']
 })
 export class AppointmentScheduleComponent implements OnInit {
-
-  constructor(private headerService: HeaderserviceService, private route: Router) {
+  listAppointmentSchedule;
+  constructor(private headerService: HeaderserviceService, private route: Router,private appoinentService:AppointmentScheduleService) {
+      appoinentService.getListAppoint().subscribe((data)=>{
+        this.listAppointmentSchedule=data;
+        console.log(data);
+      })
   }
 
   length = 100;
@@ -40,6 +45,6 @@ export class AppointmentScheduleComponent implements OnInit {
   registrationSchedule(){
     this.route.navigate(['user/registration-schedule'])
 
- 
+
   }
 }
