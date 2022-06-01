@@ -1,15 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
-import { DoctorComponent } from './doctor/doctor.component';
-import { LayoutComponent } from './layout/layout.component';
-import { LoginComponent } from './layout/login/login.component';
-import { RegisterComponent } from './layout/register/register.component';
-import { UserComponent } from './user/user.component';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule, Routes} from '@angular/router';
+import {AdminComponent} from './admin/admin.component';
+import {DoctorComponent} from './doctor/doctor.component';
+import {LayoutComponent} from './layout/layout.component';
+import {LoginComponent} from './layout/login/login.component';
+import {RegisterComponent} from './layout/register/register.component';
+import {UserComponent} from './user/user.component';
+import {AuthGuard} from './shared/guards/auth-guard.guard';
+import {AuthorityRoleConstant} from './constant/authority/authority-role-constant';
 
-const routes: Routes =[
+const routes: Routes = [
   {
     path: '',
     redirectTo: 'user/home',
@@ -38,10 +40,12 @@ const routes: Routes =[
   {
     path: 'doctor',
     component: DoctorComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [AuthorityRoleConstant.ROLE_DOCTOR] },
     children: [
       {
         path: '',
-        loadChildren: () => import('src/app/doctor/doctor.module').then(m=>m.DoctorModule)
+        loadChildren: () => import('src/app/doctor/doctor.module').then(m => m.DoctorModule)
       },
 
     ]
@@ -49,10 +53,12 @@ const routes: Routes =[
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [AuthorityRoleConstant.ROLE_ADMIN] },
     children: [
       {
         path: '',
-        loadChildren: () => import('src/app/admin/admin.module').then(m=>m.AdminModule)
+        loadChildren: () => import('src/app/admin/admin.module').then(m => m.AdminModule)
       },
 
     ]
@@ -70,7 +76,7 @@ const routes: Routes =[
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
+    RouterModule.forRoot(routes, {
       useHash: true
     })
   ],
@@ -79,4 +85,5 @@ const routes: Routes =[
     RouterModule
   ],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -1,5 +1,5 @@
 export enum AuthorityRoleConstant {
-  ROLE_USER = 'ROLE_USER',
-  ROLE_ADMIN = 'ROLE_ADMIN',
-  ROLE_DOCTOR = 'ROLE_DOCTOR'
+  ROLE_USER = 'user',
+  ROLE_ADMIN = 'admin',
+  ROLE_DOCTOR = 'doctor'
 }

@@ -28,6 +28,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ShareModule} from './share/share.mudule';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
+import {AuthGuard} from './shared/guards/auth-guard.guard';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import {ErrorInterceptor} from './interceptors/error.interceptor';
 
   ],
   providers: [
+    AuthGuard ,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],

@@ -18,9 +18,9 @@ export class DoctorService {
       // 'Content-Type': 'application/json',
     }),
   };
-  constructor(private httpclient: HttpClient,) { }
+  constructor(private httpclient: HttpClient) { }
   public getListDoctor(): Observable<any> {
     const url = `${environment.doctorURL}all`;
-    return this.httpclient.get<any>(url, this.httpOptions);// Nhớ import catchError
+    return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
   }
 }
