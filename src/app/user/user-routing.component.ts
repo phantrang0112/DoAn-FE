@@ -19,6 +19,7 @@ export const UserRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'about', component: AboutComponent},
+  {path: 'about', component: AboutComponent},
   {path: 'list-doctor', component: ListDoctorComponent},
   {path: 'appointment-schedule', component: AppointmentScheduleComponent},
   {path: 'registration-schedule', component: RegistrationScheduleComponent},
