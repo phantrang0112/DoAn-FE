@@ -37,9 +37,8 @@
           <h6> 3.Chọn Khoa Khám</h6>
           <div class="select-khoa">
             <mat-select formControlName="khoa">
-              <mat-option value="option1">Option 1</mat-option>
-              <mat-option value="option2" >Option 2 (disabled)</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
+              <mat-option value="{{dept.deptname}}" *ngFor="let dept of listDept"  (click)="choseDept(dept.deptid)">{{dept.deptname}}</mat-option>
+
             </mat-select>
             <hr style="margin: 5px;">
 
@@ -50,9 +49,7 @@
         <div>
           <div class="select-khoa">
             <mat-select formControlName="bacSi">
-              <mat-option value="option1">Option 1</mat-option>
-              <mat-option value="option2" >Option 2 (disabled)</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
+              <mat-option value="{{item.fullname}}" *ngFor="let item of listDoctor" (click)="doctorChange(item.doctorid)" >{{item.fullname}}</mat-option>
             </mat-select>
             <hr style="margin: 5px;">
           </div>
@@ -69,7 +66,7 @@
         <div *ngIf="online">
           <h6> 6. Giá khám Online(Chỉ dành cho khám online)</h6>
           <div>
-            <p formControlName="gia"> Giá: <input formControlName="gia" style="color: red; border: none;"/> đồng<b>( Giá quy đổi sang ${{quydoi}})</b></p>
+            <p > Giá: <input formControlName="gia" style="color: red; border: none;"/> đồng<b>( Giá quy đổi sang ${{quydoi}})</b></p>
           </div>
         </div>
         <button type="submit" [disabled]="!formDangKy.valid" class="btn btn-danger">Xác nhận đăng ký</button>
@@ -83,7 +80,7 @@
       <p><b>Khoa:</b> {{formDangKy.controls['khoa'].value}}</p>
       <p><b>Bác sĩ:</b> {{formDangKy.controls['bacSi'].value}}</p>
       <p><b>Giờ khám:</b> {{formDangKy.controls['gioKham'].value}}</p>
-      <p  *ngIf="online"><b style="color: red;">Giá khám onl:</b> {{formDangKy.controls['gia'].value}}</p>
+      <!-- <p  *ngIf="online"><b style="color: red;">Giá khám onl:</b> {{formDangKy.controls['gia'].value}}</p> -->
     </div>
   </div>
 
