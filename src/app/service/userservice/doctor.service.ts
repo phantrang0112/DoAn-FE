@@ -49,17 +49,21 @@ export class DoctorService {
   //   return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
   // }
 
-  // public getDoctorById(id: number) {
-  //   return this.httpclient.get<Doctor>(`${environment.doctorURL}${id}`, this.httpOptions).pipe(
-  //     map(doctor => {
-  //       if (doctor != null) {
-  //         localStorage.setItem('currentDoctor', JSON.stringify(doctor));
-  //         this.currentDoctorSubject.next(doctor);
-  //         console.log('doctor = ' + doctor);
-  //         return doctor;
-  //       }
-  //       return null;
-  //     })
-  //   );
-  // }
+  public getDoctorById(id: number) {
+    return this.httpclient.get<Doctor>(`${environment.doctorURL}${id}`, this.httpOptions).pipe(
+      map(doctor => {
+        if (doctor != null) {
+          localStorage.setItem('currentDoctor', JSON.stringify(doctor));
+          this.currentDoctorSubject.next(doctor);
+          console.log('doctor = ' + doctor);
+          return doctor;
+        }
+        return null;
+      })
+    );
+  }
+  public getPriceDoctor(id:number){
+    const url = `${environment.doctorURL}get-price-doctor/`+id;
+    return this.httpclient.get<any>(url, this.httpOptions);
+  }
 }

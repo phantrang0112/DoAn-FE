@@ -20,7 +20,6 @@ import {CKEditorModule} from 'ckeditor4-angular';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {DoctorComponent} from './doctor/doctor.component';
-import {AppRoutingModule} from './app-routing.component';
 import {RouterModule} from '@angular/router';
 import {ShareComponent} from './share/share.component';
 import {AdminComponent} from './admin/admin.component';
@@ -29,6 +28,7 @@ import {ShareModule} from './share/share.mudule';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {AuthGuard} from './shared/guards/auth-guard.guard';
+import { AppRoutingModule } from './app-routing.component';
 
 
 @NgModule({

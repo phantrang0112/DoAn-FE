@@ -38,7 +38,6 @@
           <div class="select-khoa">
             <mat-select formControlName="khoa">
               <mat-option value="{{dept.deptname}}" *ngFor="let dept of listDept"  (click)="choseDept(dept.deptid)">{{dept.deptname}}</mat-option>
-
             </mat-select>
             <hr style="margin: 5px;">
 
@@ -57,8 +56,8 @@
         <div>
           <h6> 5. Chọn giờ khám</h6>
           <div class="row">
-            <div class="col-2" style="margin: 10px 0px;">
-              <a class="btn btn-outline-success btn-time">02h30p</a>
+            <div class="col-2" style="margin: 10px 0px;" *ngFor="let item of time">
+              <a  [ngClass]="colorTime" class="btn btn-outline-success btn-time" (click)="clickTime()">{{item}}</a>
             </div>
 
           </div>
@@ -66,7 +65,7 @@
         <div *ngIf="online">
           <h6> 6. Giá khám Online(Chỉ dành cho khám online)</h6>
           <div>
-            <p > Giá: <input formControlName="gia" style="color: red; border: none;"/> đồng<b>( Giá quy đổi sang ${{quydoi}})</b></p>
+            <p > Giá: <input formControlName="gia" style="color: red; border: none;" readonly/> đồng<b>( Giá quy đổi sang $: {{quydoi}} $)</b></p>
           </div>
         </div>
         <button type="submit" [disabled]="!formDangKy.valid" class="btn btn-danger">Xác nhận đăng ký</button>
