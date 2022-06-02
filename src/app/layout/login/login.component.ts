@@ -4,12 +4,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 import {UserserviceService} from '../../service/userservice.service';
 import {AuthenticationService} from '../../service/authentication.service';
-import {first} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {ErrorStateMatcher} from '@angular/material';
 import {AlertService} from '../../service/alert.service';
 import {NotifyService} from '../../service/notify.service';
 import {UserAccount} from '../../models/user-account';
 import {Patient} from '../../models/patient';
+import {DoctorService} from '../../service/userservice/doctor.service';
+import {Doctor} from '../../models/doctor';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ import {Patient} from '../../models/patient';
 export class LoginComponent implements OnInit {
   user = new UserAccount();
   patient = new Patient();
+  doctor = new Doctor();
   submitted = false;
   loading = false;
   id: number;
@@ -29,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private headerService: HeaderserviceService, private alertService: AlertService,
               private formBuilder: FormBuilder, private authentication: AuthenticationService, private notify: NotifyService,
-              private userService: UserserviceService, private route: ActivatedRoute) {
+              private userService: UserserviceService, private route: ActivatedRoute, private doctorService: DoctorService) {
   }
 
   formLogin: FormGroup;
@@ -83,27 +86,40 @@ export class LoginComponent implements OnInit {
     if (this.role === 'user') {
       this.getDataUser();
     } else if (this.role === 'doctor') {
+      console.log('if doctor = ' + this.role + ' id= ' + this.user.id);
       this.getDataDoctor();
     } else {
       this.getDataAdmin();
     }
   }
+
   getDataUser() {
     this.userService.getPatientById(this.user.id)
       .toPromise().then(
-        patientData => {
-          if (patientData != null) {
-            this.patient = patientData;
-            console.log('patient = ' + this.patient);
-          }
-        }, error => {
-          console.log('error = ' + error);
+      patientData => {
+        if (patientData != null) {
+          this.patient = patientData;
+          console.log('patient = ' + this.patient);
         }
-      );
+      }, error => {
+        console.log('error = ' + error);
+      }
+    );
   }
+
   getDataDoctor() {
+    this.doctorService.getDoctorById(this.user.id).toPromise().then((data => {
+      if (data != null) {
+        this.doctor = data;
+        console.log('doctor = ' + data);
+      } else {
+        this.alertService.error(null);
+      }
+    }));
   }
-  getDataAdmin() {}
+
+  getDataAdmin() {
+  }
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

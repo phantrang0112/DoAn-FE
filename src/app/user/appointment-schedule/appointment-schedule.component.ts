@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { AppointmentScheduleService } from 'src/app/service/userservice/appointment-schedule.service';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 import Swal from 'sweetalert2';
+import {DoctorService} from '../../service/userservice/doctor.service';
 
 @Component({
   selector: 'app-appointment-schedule',
@@ -11,11 +12,14 @@ import Swal from 'sweetalert2';
 })
 export class AppointmentScheduleComponent implements OnInit {
   listAppointmentSchedule;
-  constructor(private headerService: HeaderserviceService, private route: Router,private appoinentService:AppointmentScheduleService) {
-      appoinentService.getListAppoint().subscribe((data)=>{
-        this.listAppointmentSchedule=data;
-        console.log(data);
-      })
+  constructor(private headerService: HeaderserviceService, private route: Router,
+              private appoinentService: AppointmentScheduleService, private doctorService: DoctorService) {
+    this.appoinentService.getListAppoint(this.doctorService.currentDoctorValue.id).subscribe((data) => {
+      this.listAppointmentSchedule = data;
+      console.log('AppointmentSchedule = ' + data);
+    }, error => {
+      console.log('error ' + error);
+    });
   }
 
   length = 100;
@@ -24,6 +28,12 @@ export class AppointmentScheduleComponent implements OnInit {
 
   ngOnInit() {
     this.headerService.setActive('appointment-schedule');
+    this.appoinentService.getListAppoint(this.doctorService.currentDoctorValue.id).subscribe((data) => {
+      this.listAppointmentSchedule = data;
+      console.log('AppointmentSchedule = ' + data);
+    }, error => {
+      console.log('error ' + error);
+    });
   }
 
   clickItemAppointment(stt, trangThai, id) {
@@ -42,8 +52,8 @@ export class AppointmentScheduleComponent implements OnInit {
       cancelButtonAriaLabel: 'OK'
     });
   }
-  registrationSchedule(){
-    this.route.navigate(['user/registration-schedule'])
+  registrationSchedule() {
+    this.route.navigate(['user/registration-schedule']);
 
 
   }
