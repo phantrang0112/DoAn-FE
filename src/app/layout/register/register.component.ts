@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
     this.loading = true;
     this.user.username = this.formRegister.value.username;
     this.user.password = this.formRegister.value.password;
-    this.user.idrole = 1;
+    this.user.role = "1";
     this.object.push(this.user);
     this.patient.email = this.formRegister.value.email;
     this.patient.phone = this.formRegister.value.phone;

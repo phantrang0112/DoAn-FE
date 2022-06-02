@@ -69,7 +69,7 @@
         <div *ngIf="online">
           <h6> 6. Giá khám Online(Chỉ dành cho khám online)</h6>
           <div>
-            <p formControlName="gia"> Giá: <input formControlName="gia" style="color: red; border: none;"/> đồng</p>
+            <p formControlName="gia"> Giá: <input formControlName="gia" style="color: red; border: none;"/> đồng<b>( Giá quy đổi sang ${{quydoi}})</b></p>
           </div>
         </div>
         <button type="submit" [disabled]="!formDangKy.valid" class="btn btn-danger">Xác nhận đăng ký</button>
