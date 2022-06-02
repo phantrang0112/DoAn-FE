@@ -18,16 +18,9 @@ export class AppointmentScheduleService {
       // 'Content-Type': 'application/json',
     }),
   };
-  constructor(private httpclient: HttpClient) { }
-  public getListAppoint(doctorId: number): Observable<any> {
-    const url = `${environment.appointmentURL}allByDoctor/${doctorId}`;
-    return this.httpclient.get<any>(url, this.httpOptions).pipe(
-      map(appointmentURL => {
-        if (appointmentURL != null) {
-          console.log('appointmentURL = ' + appointmentURL);
-          return appointmentURL;
-        }
-        return null;
-      })); // Nhớ import catchError
-  }
+  constructor(private httpclient: HttpClient,) { }
+  public getListAppoint(): Observable<any> {
+    const url = `${environment.appointmentURL}all`;
+    return this.httpclient.get<any>(url, this.httpOptions);// Nhớ import catchError
+}
 }
