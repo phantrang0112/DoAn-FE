@@ -20,11 +20,5 @@ name;
 
     this.headerService.setActive('about');
   }
-  pay() {
-    this.paym.getPayr().subscribe((data) => {
-      console.log(data);
-    }
 
-    )
-  }
 }
