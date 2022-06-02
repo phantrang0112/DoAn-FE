@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
-import { PaymentService } from 'src/app/service/usersevice/payment.service';
+
 
 @Component({
   selector: 'app-about',
@@ -10,7 +10,7 @@ import { PaymentService } from 'src/app/service/usersevice/payment.service';
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private headerService: HeaderserviceService, private paym: PaymentService,private route: ActivatedRoute) { }
+  constructor(private headerService: HeaderserviceService,private route: ActivatedRoute) { }
 name;
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
