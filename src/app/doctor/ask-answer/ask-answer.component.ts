@@ -9,7 +9,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class AskAnswerComponent implements OnInit {
 
   constructor() { }
-  value = 'Clear me';
+  value ;
   selectedValue: string;
   selectedCar: string;
 

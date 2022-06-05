@@ -15,7 +15,7 @@
 
           <form [formGroup]="formRegister" class="login100-form validate-form col-6" (ngSubmit)="onSubmit()">
             <span class="login100-form-title">
-              Register
+              Đăng ký tài khoản
             </span>
 <!--            <div class="wrap-input100 validate-input" data-validate = "Username is required">-->
 <!--              <input class="input100" type="text" name="pass" placeholder="Username">-->
@@ -44,7 +44,7 @@
 
 <!--            </div>-->
             <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
-              <mat-label >Username</mat-label>
+              <mat-label >Tên đăng nhập</mat-label>
               <input id="username" class="col-6" type="text" matInput
                      formControlName="username" [errorStateMatcher]="matcher" />
               <mat-error *ngIf="submitted && f.username.errors?.required">
@@ -59,8 +59,8 @@
                 *Add <strong>email!</strong>
               </mat-error>
             </mat-form-field>
-            <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
-              <mat-label >Phone</mat-label>
+            <mat-form-field class="example-full-width" style="width: 100%; " appearance="fill">
+              <mat-label >Số điện thoại</mat-label>
               <input id="phone" class="col-6" type="text" matInput
                      formControlName="phone" [errorStateMatcher]="matcher" />
               <mat-error *ngIf="submitted && f.phone.errors?.required">
@@ -68,7 +68,7 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
-              <mat-label >Password</mat-label>
+              <mat-label >Mật khẩu</mat-label>
               <input id="password" class="col-6" type="password" matInput
                      formControlName="password" [errorStateMatcher]="matcher" />
               <mat-error *ngIf="submitted && f.password.errors?.required">
@@ -76,7 +76,7 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill">
-              <mat-label >Confirm Passord</mat-label>
+              <mat-label >Nhập lại mật khẩu</mat-label>
               <input id="confirmPassword" class="col-6" type="password" matInput
                      formControlName="confirmPassword" [errorStateMatcher]="matcher" />
               <mat-error *ngIf="submitted && f.confirmPassword.errors?.required">

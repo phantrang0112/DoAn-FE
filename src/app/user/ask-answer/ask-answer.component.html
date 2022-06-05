@@ -10,8 +10,8 @@
     <hr>
   </div>
   <div  *ngIf="post"  style="text-align: right;">
-    <ckeditor data="<p>Hello, world!</p>"></ckeditor>
-    <button style="margin-top: 30px;" class="btn btn-primary">Đăng</button>
+    <ckeditor  (change)="onChange($event)" ></ckeditor>
+    <button (click)="registerAnswer()" style="margin-top: 30px;" class="btn btn-primary">Đăng</button>
 
   </div>
 

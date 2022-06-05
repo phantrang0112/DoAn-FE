@@ -17,7 +17,7 @@
     <br>
     <br><br>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label >Fullname</mat-label>
+      <mat-label >Tên đầy đủ</mat-label>
       <input id="fullname" class="col-6" type="text" matInput
         formControlName="fullname" [errorStateMatcher]="matcher" [readonly]="display" [(ngModel)]="patient.fullname"/>
       <mat-error *ngIf="addEmployeeForm.controls.fullname.hasError('required')">
@@ -54,7 +54,7 @@
 
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Phone</mat-label>
+      <mat-label>Số điện thoại</mat-label>
       <input class="col-6" id="phone" type="text" matInput
         formControlName="phone" [errorStateMatcher]="matcher" [readonly]="display" [(ngModel)]="patient.phone">
       <mat-error *ngIf="addEmployeeForm.controls.phone.hasError('maxLength')!=null">
@@ -67,7 +67,7 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Address</mat-label>
+      <mat-label>Địa chỉ</mat-label>
       <input id="address" class="col-6" type="text" matInput
         formControlName="address" [errorStateMatcher]="matcher"[readonly]="display" [(ngModel)]="patient.address">
       <mat-error *ngIf="addEmployeeForm.controls.address.hasError('required')">
@@ -75,7 +75,7 @@
       </mat-error>
     </mat-form-field>
      <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Img</mat-label>
+      <mat-label>hình</mat-label>
       <input class="col-6" id="img" type="text" matInput
         formControlName="img" [errorStateMatcher]="matcher">
       <mat-error *ngIf="addEmployeeForm.controls.img.hasError('required')">
@@ -85,7 +85,7 @@
     <br>
     <br>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Birthday</mat-label>
+      <mat-label>Ngày sinh</mat-label>
       <input type="date" matInput formControlName="birthday" id="birthday"
         [errorStateMatcher]="matcher"[readonly]="display" [(ngModel)]="patient.birthday">
       <mat-error *ngIf="addEmployeeForm.controls.birthday.hasError('required')">

@@ -13,13 +13,37 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registration-schedule.component.css']
 })
 export class RegistrationScheduleComponent implements OnInit {
-  time = [{
-    time: '07:00', class: ''
-  }, '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
-    '11:00', '11:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30',
-    '06:30', '07:00', '07:30', '08:30'];
+  time = [
+    { time: '07:00', class: ''},
+    { time: '07:30', class: ''},
+    { time: '08:00', class: ''},
+    { time: '08:30', class: ''},
+    { time: '09:00', class: ''},
+    { time: '09:30', class: ''},
+    { time: '10:00', class: ''},
+    { time: '10:30', class: ''},
+    { time: '11:00', class: ''},
+    { time: '11:30', class: ''},
+    { time: '12:00', class: ''},
+    { time: '12:30', class: ''},
+    { time: '13:00', class: ''},
+    { time: '13:30', class: ''},
+
+    { time: '14:00', class: ''},
+    { time: '14:30', class: ''},
+    { time: '15:00', class: ''},
+    { time: '15:30', class: ''},
+    { time: '16:00', class: ''},
+    { time: '16:30', class: ''},
+    { time: '17:00', class: ''},
+    { time: '17:30', class: ''},
+    { time: '18:30', class: ''},
+    { time: '19:00', class: ''},
+    { time: '19:30', class: ''},
+    { time: '20:00', class: ''},
+    { time: '20:30', class: ''},]
   changeColors = '';
-  changeColors1 = 'change-color';
+  changeColors1='';
   click = false;
   class;
   button;
@@ -56,15 +80,15 @@ export class RegistrationScheduleComponent implements OnInit {
     this.click = !this.click;
     console.log(click);
     if (this.click) {
-      this.changeColors = 'change-color';
+      this.changeColors1 = 'change-color';
       this.formDangKy.controls.phuongThuc.setValue('khám online');
       this.online = true;
-      this.changeColors1 = '';
-    } else {
       this.changeColors = '';
+    } else {
+      this.changeColors1 = '';
       this.online = false;
       this.formDangKy.controls.phuongThuc.setValue('Khám trực tiếp');
-      this.changeColors1 = 'change-color';
+      this.changeColors = 'change-color';
 
     }
     this.formDangKy.controls.gioKham.setValue(300000);
@@ -125,8 +149,18 @@ export class RegistrationScheduleComponent implements OnInit {
 
   }
 
-  clickTime() {
-    this.colorTime = 'btn-color';
+  clickTime(name) {
+    console.log(name);
+    for(let item of this.time){
+      if(item.time===name){
+        item.class='btn-color';
+      }
+      else{
+        item.class = '';
+      }
+    }
+
+
   }
 
   generateTime() {

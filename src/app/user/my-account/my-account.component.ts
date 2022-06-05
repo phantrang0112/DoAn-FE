@@ -7,6 +7,7 @@ import {AuthenticationService} from '../../service/authentication.service';
 import {UserserviceService} from '../../service/userservice.service';
 import {NotifyService} from '../../service/notify.service';
 import {DatePipe} from '@angular/common';
+import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
 
 @Component({
   selector: 'app-my-account',
@@ -15,7 +16,7 @@ import {DatePipe} from '@angular/common';
 })
 export class MyAccountComponent implements OnInit {
   constructor(private authentication: AuthenticationService, private userService: UserserviceService,
-              private notify: NotifyService) {
+              private notify: NotifyService, private headerService: HeaderserviceService) {
   }
 
   addEmployeeForm = new FormGroup({
@@ -36,6 +37,7 @@ export class MyAccountComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   date = new Date();
   ngOnInit() {
+    this.headerService.setActive('my-account');
     this.addEmployeeForm.controls.img.setValue('bv1.jpg');
     this.patient = this.userService.currentPatientValue;
     console.log(convert(this.patient.birthday));
