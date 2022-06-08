@@ -24,7 +24,7 @@ export class RegisterScheduleComponent implements OnInit, DoCheck {
   ngOnInit() {
     let date = new Date();
     console.log(date.getDate());
-    if (date.getDay() === 4) {
+    if (date.getDay() === 0) {
       for (let i = 2; i < 9; i++) {
         const day = moment().add(i, 'days').format('YYYY MM DD');
         date = new Date(day);

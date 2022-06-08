@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor4 } from 'ckeditor4-angular';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 
 @Component({
@@ -9,13 +9,11 @@ import {HeaderserviceService} from 'src/app/service/userservice/headerservice.se
 })
 export class AskAnswerComponent implements OnInit {
   panelOpenState = false;
-
+ data;
   constructor(private headerService: HeaderserviceService) {
   }
 
   post = false;
-  public Editor = ClassicEditor;
-
   ngOnInit() {
     this.headerService.setActive('ask-answer');
   }
@@ -24,4 +22,10 @@ export class AskAnswerComponent implements OnInit {
     this.post = !this.post;
     console.log(this.post);
   }
+  registerAnswer(){
+    console.log(this.data);
+  }
+  public onChange( event: CKEditor4.EventInfo ) {
+    this.data= event.editor.getData();
+}
 }

@@ -15,11 +15,11 @@
         <div>
           <h6> 1.Chọn phương thức khám</h6>
           <div>
-            <a class="btn btn-outline-success btn-color"
+            <a class="btn btn-outline-success btn-time"
               style="margin-right: 5px;"
               [ngClass]="changeColors" (click)="changeColor(false)">Khám trực
               tiếp</a>
-            <a class="btn btn-outline-success btn-color"
+            <a class="btn btn-outline-success btn-time"
               [ngClass]="changeColors1"
               (click)="changeColor(true)">Khám online</a>
           </div>
@@ -57,7 +57,7 @@
           <h6> 5. Chọn giờ khám</h6>
           <div class="row">
             <div class="col-2" style="margin: 10px 0px;" *ngFor="let item of time">
-              <a  [ngClass]="colorTime" class="btn btn-outline-success btn-time" (click)="clickTime()">{{item}}</a>
+              <a  class="btn btn-outline-success btn-time" [ngClass]="item.class" (click)="clickTime(item.time)">{{item.time}}</a>
             </div>
 
           </div>

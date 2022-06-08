@@ -19,8 +19,8 @@ export class ListDoctorComponent implements OnInit {
 
   listKhoa: dept;
   slides = [
-    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
-    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
+    {image: './assets/imglogin.png', text: 'Khoa: khoa Nội', title: 'Nguyen văn a'},
+    {image: './assets/imglogin.png', text: 'khoa: khoa Nội', title: 'Nguyen văn a'},
     {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
     {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
     {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'}
