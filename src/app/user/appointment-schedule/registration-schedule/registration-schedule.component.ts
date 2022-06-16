@@ -3,10 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { appointmentSchedule } from 'src/app/models/appointment-schedule';
 import { UserserviceService } from 'src/app/service/userservice.service';
+import { AppointmentScheduleService } from 'src/app/service/userservice/appointment-schedule.service';
 import { DeptService } from 'src/app/service/userservice/dept.service';
 import { DoctorService } from 'src/app/service/userservice/doctor.service';
 import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
 import { PaymentService } from 'src/app/service/userservice/paymentservice.service';
+import { ValidatorsCharacters } from 'src/app/shared/util/validators-characters';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -55,11 +57,11 @@ export class RegistrationScheduleComponent implements OnInit {
   listDept;
   listDoctor;
   colorTime;
-  appontmentSchedule: appointmentSchedule= new appointmentSchedule();
+  appontmentSchedule: appointmentSchedule = new appointmentSchedule();
   disableSelect = new FormControl();
   formDangKy = new FormGroup({
     phuongThuc: new FormControl(null, Validators.required),
-    ngayKham: new FormControl(null, Validators.required),
+    ngayKham: new FormControl(null, [Validators.required, ValidatorsCharacters.datePattern]),
     khoa: new FormControl(null, Validators.required),
     bacSi: new FormControl(null, Validators.required),
     gioKham: new FormControl(null, Validators.required),
@@ -67,7 +69,7 @@ export class RegistrationScheduleComponent implements OnInit {
   });
 
   // tslint:disable-next-line:max-line-length
-  constructor(private headerService: HeaderserviceService, private route: Router, private paymentService: PaymentService, private deptService: DeptService, private doctorService: DoctorService,private userService: UserserviceService) {
+  constructor(private headerService: HeaderserviceService, private route: Router, private paymentService: PaymentService, private deptService: DeptService, private doctorService: DoctorService, private userService: UserserviceService,private appointService: AppointmentScheduleService) {
     deptService.getListDept().subscribe(data => {
       this.listDept = data;
     });
@@ -75,7 +77,7 @@ export class RegistrationScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appontmentSchedule.patientid=+localStorage.getItem("id");
+    this.appontmentSchedule.patientid = +localStorage.getItem("id");
     this.headerService.setActive('appointment-schedule');
   }
 
@@ -103,6 +105,13 @@ export class RegistrationScheduleComponent implements OnInit {
 
   clickDate() {
     this.class = 'date-registration-click';
+    this.formDangKy.controls.khoa.setValue(null);
+    this.formDangKy.controls.bacSi.setValue(null);
+    this.formDangKy.controls.gioKham.setValue(null);
+    for (let item of this.time) {
+
+          item.class = '';
+    }
   }
 
   createTime() {
@@ -110,32 +119,27 @@ export class RegistrationScheduleComponent implements OnInit {
   }
 
   payment() {
-    let date =new Date( this.formDangKy.controls.ngayKham.value);
-    let dateNow = new Date();
-    console.log(date+"  "+dateNow)
-    if (date <= dateNow) {
-      this.errorDate = true;
-    }
-    else{
-      this.errorDate = false;
-      this.appontmentSchedule.date=this.formDangKy.controls.ngayKham.value;
-      this.appontmentSchedule.time= this.formDangKy.controls.time.value;
-      this.appontmentSchedule.typeclinic=this.formDangKy.controls.phuongThuc.value;
-      Swal.fire({
-        title: 'Xác nhận thanh toán',
-        text: 'Giá tiền là: ' + this.formDangKy.controls.gia.value + 'VNĐ  ( Được quy đổi sang là:' + this.quydoi + ' $)',
-        icon: 'warning',
-        confirmButtonText: 'Xác nhận',
-        confirmButtonColor: '#3085d6',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.paymentService.getPayr(this.quydoi).subscribe(data => {
-            console.log(data);
-            window.location.href = data.linkPayment;
-          });
-        }
-      });
-    }
+
+    this.appontmentSchedule.date = this.formDangKy.controls.ngayKham.value;
+    this.appontmentSchedule.time = this.formDangKy.controls.gioKham.value;
+    this.appontmentSchedule.typeclinic = this.formDangKy.controls.phuongThuc.value;
+    Swal.fire({
+      title: 'Xác nhận thanh toán',
+      text: 'Giá tiền là: ' + this.formDangKy.controls.gia.value + 'VNĐ  ( Được quy đổi sang là:' + this.quydoi + ' $)',
+      icon: 'warning',
+      confirmButtonText: 'Xác nhận',
+      confirmButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.appointService.postAppoint(appointmentSchedule).subscribe(data=>{
+          console.log(data);
+        });
+        // this.paymentService.getPayr(this.quydoi).subscribe(data => {
+        //   console.log(data);
+        //   window.location.href = data.linkPayment;
+        // });
+      }
+    });
 
 
     //  window.location.href = 'https://www.google.com';
@@ -153,27 +157,37 @@ export class RegistrationScheduleComponent implements OnInit {
   }
 
   doctorChange(doctorid) {
-    this.appontmentSchedule.doctorid=doctorid;
-    if (this.online) {
-      this.doctorService.getPriceDoctor(doctorid).subscribe(data => {
-        this.formDangKy.controls.gia.setValue(data.price);
-        this.quydoi = +(data.price / 23000).toFixed(2);
-      });
+    this.appontmentSchedule.doctorid = doctorid;
+    let date:string= this.formDangKy.controls.ngayKham.value;
+    this.doctorService.getPriceDoctor(doctorid,date).subscribe(data => {
+      console.log(data);
+      this.formDangKy.controls.gia.setValue(data.price.price);
+      this.quydoi = +(data.price.price / 23000).toFixed(2);
+      for( let item of data.listAppoint){
+        console.log(this.time.find(a=>a.time==item.time),item.time);
+        (this.time.find(a=>a.time===item.time)).class='btn-color-active';
+      }
+
+    });
 
 
-    }
+
 
   }
 
   clickTime(name) {
     console.log(this.errorDate);
     for (let item of this.time) {
-      if (item.time === name) {
-        item.class = 'btn-color';
-        this.formDangKy.controls.gioKham.setValue(name);
-      }
-      else {
-        item.class = '';
+      if (item.class !== 'btn-color-active') {
+        if (item.time === name) {
+          item.class = 'btn-color';
+          this.formDangKy.controls.gioKham.setValue(name);
+        }
+        else {
+
+          item.class = '';
+        }
+
       }
     }
 

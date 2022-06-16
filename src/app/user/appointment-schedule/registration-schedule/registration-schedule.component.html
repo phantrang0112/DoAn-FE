@@ -2,14 +2,9 @@
   <div class="col-lg-6 mx-auto">
     <div class="p-3 text-center section-title">
       <h2 class="mt-3">Nội dung đặt lịch khám</h2>
-
-
     </div>
-
   </div>
   <div class="row">
-
-
     <div class="col-8">
       <form [formGroup]="formDangKy" (ngSubmit)="payment()">
         <div>
@@ -30,8 +25,8 @@
             <input formControlName="ngayKham" class="date-registration"
               type="date" [ngClass]="class" (click)="clickDate()">
             <hr style="margin: 5px;">
-            <small class="change-color-red" *ngIf="formDangKy.controls.ngayKham.invalid&&formDangKy.controls.ngayKham.touched" > *chọn ngày khám</small>
-            <small class="change-color-red" *ngIf="errorDate" > *Ngày khám phải lớn hơn ngày hiện tại</small>
+            <small class="change-color-red" *ngIf="formDangKy.controls.ngayKham.hasError('required')&&formDangKy.controls.ngayKham.touched" > *Chọn ngày khám</small>
+            <small class="change-color-red" *ngIf="formDangKy.controls.ngayKham.hasError('datePattern')&&formDangKy.controls.ngayKham.touched" > *Ngày khám phải lớn hơn ngày hiện tại</small>
           </div>
         </div>
         <div>
@@ -76,11 +71,11 @@
     <div class="col-4">
       <h4>Chi tiết </h4>
       <p><b>Phương thức khám:</b> {{formDangKy.controls['phuongThuc'].value}}</p>
-      <p><b>Ngày khám:</b> {{formDangKy.controls['ngayKham'].value}}</p>
+      <p><b>Ngày khám:</b> {{formDangKy.controls['ngayKham'].value|date:'dd-MM-yyyy'}}</p>
       <p><b>Khoa:</b> {{formDangKy.controls['khoa'].value}}</p>
       <p><b>Bác sĩ:</b> {{formDangKy.controls['bacSi'].value}}</p>
       <p><b>Giờ khám:</b> {{formDangKy.controls['gioKham'].value}}</p>
-      <!-- <p  *ngIf="online"><b style="color: red;">Giá khám onl:</b> {{formDangKy.controls['gia'].value}}</p> -->
+      <p  *ngIf="online"><b style="color: red;">Giá khám onl:</b> {{formDangKy.controls['gia'].value}}</p>
     </div>
   </div>
 
