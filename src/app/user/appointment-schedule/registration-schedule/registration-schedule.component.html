@@ -31,6 +31,7 @@
               type="date" [ngClass]="class" (click)="clickDate()">
             <hr style="margin: 5px;">
             <small class="change-color-red" *ngIf="formDangKy.controls.ngayKham.invalid&&formDangKy.controls.ngayKham.touched" > *chọn ngày khám</small>
+            <small class="change-color-red" *ngIf="errorDate" > *Ngày khám phải lớn hơn ngày hiện tại</small>
           </div>
         </div>
         <div>
