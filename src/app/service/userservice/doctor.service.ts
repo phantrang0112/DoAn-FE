@@ -62,8 +62,8 @@ export class DoctorService {
       })
     );
   }
-  public getPriceDoctor(id:number){
-    const url = `${environment.doctorURL}get-price-doctor/`+id;
+  public getPriceDoctor(id:number,date:string){
+    const url = `${environment.doctorURL}get-price-doctor/`+id +'?date='+date;
     return this.httpclient.get<any>(url, this.httpOptions);
   }
 }
