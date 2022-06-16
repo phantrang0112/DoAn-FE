@@ -8,13 +8,14 @@ import {UserAccount} from '../models/user-account';
 import {environment} from '../../environments/environment';
 import {NotifyService} from './notify.service';
 import {error} from 'protractor';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserserviceService {
 
-  constructor(private http: HttpClient, private notify: NotifyService) {
+  constructor(private http: HttpClient, private notify: NotifyService,private authentication:AuthenticationService) {
     this.currentPatientSubject = new BehaviorSubject<Patient>(JSON.parse(localStorage.getItem('currentPatient')));
     this.currentPatient = this.currentPatientSubject.asObservable();
   }
@@ -25,10 +26,15 @@ export class UserserviceService {
   token = localStorage.getItem('token');
   private httpOptions = {
     headers: new HttpHeaders({
-      Authorization: 'Bearer ' + this.token,
-    })
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer ' +this.authentication.currentUserValue.token
+      // ,
+      // 'Authorization': 'Bearer ' + this.token,
+      // "Content-Type": "multipart/form-data",
+      // 'Accept': 'application/json',
+      // 'Content-Type': 'application/json',
+    }),
   };
-
   // PATIENT
   private currentPatientSubject: BehaviorSubject<Patient>;
   public currentPatient: Observable<Patient>;

@@ -20,7 +20,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   addEmployeeForm = new FormGroup({
-    fullname: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]),
+    fullName: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]),
     address: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]),
     img: new FormControl(),
     birthday: new FormControl('', [Validators.required]),
