@@ -19,8 +19,8 @@
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label >Tên đầy đủ</mat-label>
       <input id="fullname" class="col-6" type="text" matInput
-        formControlName="fullname" [errorStateMatcher]="matcher" [readonly]="display" [(ngModel)]="patient.fullname"/>
-      <mat-error *ngIf="addEmployeeForm.controls.fullname.hasError('required')">
+        formControlName="fullName" [errorStateMatcher]="matcher" [readonly]="display" [(ngModel)]="patient.fullName"/>
+      <mat-error *ngIf="addEmployeeForm.controls.fullName.hasError('required')">
         *Add <strong>Full Name!</strong>
       </mat-error>
     </mat-form-field>

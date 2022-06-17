@@ -17,17 +17,16 @@ import {AuthGuard} from '../shared/guards/auth-guard.guard';
 export const UserRoutes: Routes = [
 
   {path: 'home', component: HomeComponent},
-  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'about', component: AboutComponent},
+  {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'list-doctor', component: ListDoctorComponent},
   {path: 'appointment-schedule', component: AppointmentScheduleComponent},
   {path: 'registration-schedule', component: RegistrationScheduleComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'ask-answer', component: AskAnswerComponent},
-  {path: 'payment', component: PaymentComponent},
-  {path: 'my-account', component: MyAccountComponent},
-  {path: 'talk', component: TalkComponent},
+  {path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]},
+  {path: 'my-account', component: MyAccountComponent,canActivate: [AuthGuard]},
+  {path: 'talk', component: TalkComponent, canActivate: [AuthGuard]},
   // { path: '**', pathMatch:'full', redirectTo: 'routePath' }
 ];
 
