@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import {AuthenticationService} from '../../service/authentication.service';
+import { appointmentSchedule } from 'src/app/models/appointment-schedule';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,13 @@ export class AppointmentScheduleService {
     const url = `${environment.appointmentURL}all`;
     return this.httpclient.get<any>(url, this.httpOptions);// Nhớ import catchError
   }
-  public postAppoint(data:any): Observable<any> {
+  public postAppoint(data:appointmentSchedule): Observable<any> {
     console.log('token ' + this.authentication.currentUserValue.token);
     const url = `${environment.appointmentURL}`;
-    return this.httpclient.post<any>(url,data, this.httpOptions);// Nhớ import catchError
+    return this.httpclient.post<any>(url,data,this.httpOptions);// Nhớ import catchError
+  }
+  public getCountTime(date:any):Observable<any>{
+    const url = `${environment.appointmentURL}count-time/`+date;
+    return this.httpclient.get<any>(url,this.httpOptions);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { appointmentSchedule } from 'src/app/models/appointment-schedule';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 import { UserserviceService } from 'src/app/service/userservice.service';
 import { AppointmentScheduleService } from 'src/app/service/userservice/appointment-schedule.service';
 import { DeptService } from 'src/app/service/userservice/dept.service';
@@ -46,6 +47,35 @@ export class RegistrationScheduleComponent implements OnInit {
     { time: '19:30', class: '' },
     { time: '20:00', class: '' },
     { time: '20:30', class: '' },]
+    timeOrigin=  [
+      { time: '07:00', class: '' },
+      { time: '07:30', class: '' },
+      { time: '08:00', class: '' },
+      { time: '08:30', class: '' },
+      { time: '09:00', class: '' },
+      { time: '09:30', class: '' },
+      { time: '10:00', class: '' },
+      { time: '10:30', class: '' },
+      { time: '11:00', class: '' },
+      { time: '11:30', class: '' },
+      { time: '12:00', class: '' },
+      { time: '12:30', class: '' },
+      { time: '13:00', class: '' },
+      { time: '13:30', class: '' },
+
+      { time: '14:00', class: '' },
+      { time: '14:30', class: '' },
+      { time: '15:00', class: '' },
+      { time: '15:30', class: '' },
+      { time: '16:00', class: '' },
+      { time: '16:30', class: '' },
+      { time: '17:00', class: '' },
+      { time: '17:30', class: '' },
+      { time: '18:30', class: '' },
+      { time: '19:00', class: '' },
+      { time: '19:30', class: '' },
+      { time: '20:00', class: '' },
+      { time: '20:30', class: '' },]
   changeColors = '';
   changeColors1 = '';
   click = false;
@@ -57,7 +87,7 @@ export class RegistrationScheduleComponent implements OnInit {
   listDept;
   listDoctor;
   colorTime;
-  appontmentSchedule: appointmentSchedule = new appointmentSchedule();
+  appontmentSchedule: appointmentSchedule=new appointmentSchedule();
   disableSelect = new FormControl();
   formDangKy = new FormGroup({
     phuongThuc: new FormControl(null, Validators.required),
@@ -69,7 +99,8 @@ export class RegistrationScheduleComponent implements OnInit {
   });
 
   // tslint:disable-next-line:max-line-length
-  constructor(private headerService: HeaderserviceService, private route: Router, private paymentService: PaymentService, private deptService: DeptService, private doctorService: DoctorService, private userService: UserserviceService,private appointService: AppointmentScheduleService) {
+  constructor(private headerService: HeaderserviceService, private route: Router, private paymentService: PaymentService, private deptService: DeptService, private doctorService: DoctorService,
+     private userService: UserserviceService,private appointService: AppointmentScheduleService, private authentication: AuthenticationService) {
     deptService.getListDept().subscribe(data => {
       this.listDept = data;
     });
@@ -77,7 +108,7 @@ export class RegistrationScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appontmentSchedule.patientid = +localStorage.getItem("id");
+    this.appontmentSchedule.patientid = +this.authentication.currentUserValue.id;
     this.headerService.setActive('appointment-schedule');
   }
 
@@ -87,13 +118,16 @@ export class RegistrationScheduleComponent implements OnInit {
     console.log(click);
     if (this.click) {
       this.changeColors1 = 'change-color';
-      this.formDangKy.controls.phuongThuc.setValue('khám online');
+      this.formDangKy.controls.phuongThuc.setValue('Online');
+      this.time=this.timeOrigin;
       this.online = true;
       this.changeColors = '';
     } else {
       this.changeColors1 = '';
       this.online = false;
-      this.formDangKy.controls.phuongThuc.setValue('Khám trực tiếp');
+      this.formDangKy.controls.phuongThuc.setValue('Offline');
+      this.time=this.timeOrigin.filter((a,i)=>i%2>0);
+      console.log(this.time);
       this.changeColors = 'change-color';
 
     }
@@ -131,7 +165,7 @@ export class RegistrationScheduleComponent implements OnInit {
       confirmButtonColor: '#3085d6',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.appointService.postAppoint(appointmentSchedule).subscribe(data=>{
+        this.appointService.postAppoint(this.appontmentSchedule).subscribe(data=>{
           console.log(data);
         });
         // this.paymentService.getPayr(this.quydoi).subscribe(data => {
@@ -182,6 +216,7 @@ export class RegistrationScheduleComponent implements OnInit {
         if (item.time === name) {
           item.class = 'btn-color';
           this.formDangKy.controls.gioKham.setValue(name);
+          this.appontmentSchedule.number=+this.time.indexOf(item);
         }
         else {
 
