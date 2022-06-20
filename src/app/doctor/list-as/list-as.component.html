@@ -21,8 +21,9 @@
             </a>
             <div ngbDropdownMenu class="dropdown-menu-right
               dropdown-menu-arrow">
-              <a class="dropdown-item" href="javascript:void(0)">Đã khám</a>
-              <a class="dropdown-item" href="javascript:void(0)">Chờ khám</a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="getListAppSch()">Tất cả</a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="getListExam()">Đã khám</a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="getListWaiting()">Chờ khám</a>
             </div>
           </div>
         </div>
@@ -39,27 +40,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let appSch of listAppSch">
                 <td>1</td>
                 <th scope="row">
                   <div class="media align-items-center">
 
                     <div class="media-body">
-                      <span class="mb-0 text-sm">Argon Design System</span>
+                      <span class="mb-0 text-sm">{{appSch.patientName}}</span>
                     </div>
                   </div>
                 </th>
                 <td>
-                  01/12/2000
+                  {{appSch.date | date:'dd-MM-yyyy'}}
                 </td>
                 <td>
-                  20h30p
+                  {{appSch.time}}
                 </td>
-
                 <td>
-                  đã đăng ký
+                  {{appSch.status}}
                 </td>
-                <td><button class="btn btn-success" (click)="click()">Chi tiết</button></td>
+                <td><button class="btn btn-success" *ngIf="checkStatus(appSch.status)" (click)="click()">Chi tiết</button></td>
               </tr>
             </tbody>
           </table>
