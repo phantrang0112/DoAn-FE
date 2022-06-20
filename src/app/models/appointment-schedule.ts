@@ -7,4 +7,5 @@ export class appointmentSchedule {
   number: number;
   time: string;
   typeclinic: string;
+  price:number;
 }

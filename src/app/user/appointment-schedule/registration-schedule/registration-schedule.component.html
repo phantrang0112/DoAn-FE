@@ -23,7 +23,7 @@
           <h6> 2.Chọn ngày khám</h6>
           <div style="width: 70%;">
             <input formControlName="ngayKham" class="date-registration"
-              type="date" [ngClass]="class" (click)="clickDate()">
+              type="date" [ngClass]="class" (click)="clickDate()" (ngModelChange)="choseDate($event)">
             <hr style="margin: 5px;">
             <small class="change-color-red" *ngIf="formDangKy.controls.ngayKham.hasError('required')&&formDangKy.controls.ngayKham.touched" > *Chọn ngày khám</small>
             <small class="change-color-red" *ngIf="formDangKy.controls.ngayKham.hasError('datePattern')&&formDangKy.controls.ngayKham.touched" > *Ngày khám phải lớn hơn ngày hiện tại</small>

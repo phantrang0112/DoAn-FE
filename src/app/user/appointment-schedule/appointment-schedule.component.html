@@ -26,12 +26,12 @@
 
   </div>
   <div class="row" >
-    <div class="col-4" *ngFor="let item of listAppointmentSchedule">
+    <div  style="margin-bottom: 20px;" class="col-4" *ngFor="let item of listAppointmentSchedule">
       <mat-card class="example-card">
         <div (click)="clickItemAppointment(item.number,item.status)">
-        <mat-card-header>
+        <mat-card-header >
           <div class="col-2"> <div mat-card-avatar class="example-header-image"></div></div>
-          <div class="col-4">
+          <div class="col-4" *ngIf="item.doctorName">
 
             <mat-card-title>Bác sĩ <i class="fa fa-user-md" aria-hidden="true"></i></mat-card-title>
             <mat-card-subtitle>{{item.doctorName}}</mat-card-subtitle>

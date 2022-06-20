@@ -17,7 +17,7 @@ export class HeaderserviceService {
   ];
   headerDefault = [];
   headerAfterLogin = [];
-  thisHome = true;
+  thisHome ;
 
   constructor() {
   }

@@ -36,4 +36,8 @@ export class AppointmentScheduleService {
     const url = `${environment.appointmentURL}count-time/`+date;
     return this.httpclient.get<any>(url,this.httpOptions);
   }
+  public getItemAppoint(id:number): Observable<any>{
+    const url = `${environment.appointmentURL}appointById/`+id;
+    return this.httpclient.get<any>(url,this.httpOptions);
+  }
 }
