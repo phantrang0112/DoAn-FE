@@ -12,6 +12,8 @@ export const environment = {
   newURL: 'http://localhost:8080/webyte/news/',
   dutyScheduleURL: 'http://localhost:8080/webyte/duty-schedule/',
   appointmentURL: 'http://localhost:8080/webyte/appointment-schedule/',
+  prescriptionURL: 'http://localhost:8080/webyte/prescriptions/',
+  sickURL: 'http://localhost:8080/webyte/prescriptions/',
   paymentURL: 'http://localhost:8080/pay',
   rootURL: 'http://localhost:8080/',
 };

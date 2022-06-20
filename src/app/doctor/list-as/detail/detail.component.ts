@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import {PrescriptionService} from '../../../service/doctorservice/prescription.service';
+import {Prescription} from '../../models/prescription';
 
 
 export interface StateGroup {
@@ -9,6 +11,7 @@ export interface StateGroup {
   names: string[];
 }
 
+// tslint:disable-next-line:variable-name
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
 
@@ -23,6 +26,9 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class DetailComponent implements OnInit {
 
+  // tslint:disable-next-line:variable-name
+  constructor(private _formBuilder: FormBuilder, private presService: PrescriptionService) { }
+  listPres: Prescription[];
   stateForm: FormGroup = this._formBuilder.group({
     stateGroup: '',
   });
@@ -130,19 +136,23 @@ export class DetailComponent implements OnInit {
   ];
   @ViewChild('selectList', { static: false }) selectList: ElementRef;
   myDropDown: string;
+  stateGroupOptions: Observable<StateGroup[]>;
   onChangeofOptions(newGov) {
     console.log(newGov);
   }
-  stateGroupOptions: Observable<StateGroup[]>;
-
-  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    // tslint:disable-next-line:no-non-null-assertion
     this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges.pipe(
       startWith(''),
       map(value => this._filterGroup(value)),
     );
-
+    this.presService.getListPrescription().subscribe(data => {
+      if (data) {
+        this.listPres = data;
+        console.log(data);
+      }
+    });
   }
 
   private _filterGroup(value: string): StateGroup[] {
@@ -158,17 +168,18 @@ export class DetailComponent implements OnInit {
     console.log(this.stateForm.value);
   }
   filterItem(event) {
-    console.log(event)
+    console.log(event);
     if (!event) {
       this.sickList = this.sickListOrgin;
     }
     if (event.key.length <= 1) {
 
-      console.log(this.search)
+      console.log(this.search);
       this.sickList = this.sickListOrgin.filter(a => a.toLowerCase()
         .includes(this.search.toLowerCase()));
-      console.log("formControl"+ this.sicks.value.length)
+      console.log('formControl' + this.sicks.value.length);
       if (this.sicks.value.length > 0) {
+        // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < this.sicks.value.length; i++) {
           if (!this.sickList.includes(this.sicks.value[i])) {
             this.sickList.push(this.sicks.value[i]);
@@ -182,8 +193,7 @@ export class DetailComponent implements OnInit {
 
 
 
-    }
-    else {
+    } else {
       this.sickList = this.sickListOrgin;
     }
     console.log(this.sickList + typeof event.key);
