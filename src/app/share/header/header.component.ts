@@ -41,7 +41,11 @@ export class UserHeaderComponent implements OnInit, DoCheck {
   scrolled = false;
 
   ngOnInit() {
+
     this.home = this.headerService.getThisHome();
+    if(this.home!=true){
+      this.class = 'header-scrolled';
+    }
     this.existUser = this.authentication.existUser();
 
     this.mediaService.match$.subscribe(value => {
@@ -86,11 +90,11 @@ export class UserHeaderComponent implements OnInit, DoCheck {
     console.log(this.navbar_mobile + this.isDesktop);
   }
 
-  about() {
-    this.home = false;
-    this.class = 'header-scrolled';
-    this.route.navigate(['about']);
-  }
+  // about() {
+  //   this.home = false;
+  //   this.class = 'header-scrolled';
+  //   this.route.navigate(['about']);
+  // }
 
   headerClick(name) {
     // tslint:disable-next-line:triple-equals

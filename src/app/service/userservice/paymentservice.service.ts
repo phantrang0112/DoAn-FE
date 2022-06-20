@@ -14,13 +14,13 @@ export class PaymentService {
     })
   };
   constructor(private httpclient: HttpClient,) { }
-  public getPayr(price:number): Observable<any> {
+  public getPayr(data): Observable<any> {
     const url = `${environment.paymentURL}`;
-    return this.httpclient.post<any>(url,price,this.httpOptions);// Nhớ import catchError
+    return this.httpclient.post<any>(url,data,this.httpOptions);// Nhớ import catchError
   }
-  public confirmPay(paymentId,token,payerid): Observable<any> {
+  public confirmPay(paymentId,payerid,data): Observable<any> {
     const url = `${environment.paymentURL}/success`+'?paymentId='+paymentId+'&PayerID='+payerid;
-    return this.httpclient.get<any>(url,this.httpOptions);// Nhớ import catchError
+    return this.httpclient.post<any>(url,data,this.httpOptions);// Nhớ import catchError
   }
 
 

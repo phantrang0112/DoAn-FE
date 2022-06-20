@@ -17,6 +17,9 @@
       01-12-2000
     </small>
    </p>
-<button (click)="pay()"> test</button>
+   <input  id="imageUpload" type="file" style="display: none" (change)="changeImg($event)">
+   <label for="imageUpload" class="btn btn-outline-success">Seleccionar imagenes</label>&nbsp;&nbsp;
+   <label>{{fileName?fileName:'No files are selected!!'}}</label>&nbsp;&nbsp;
+   <button class="btn btn-primary"  (click)="uploadImg()"> Update photo</button>
  </div>
 </div>

@@ -9,9 +9,10 @@
   <!-- End -->
   <div class="row">
     <p>Hình thức khám: {{scheduleRegister.typeClinic}}</p>
-    <p>Ngày khám: {{scheduleRegister.date}}</p>
-    <p>Khoa: {{scheduleRegister.dept}}</p>
-    <p>Bác sĩ: {{scheduleRegister.doctor}}</p>
+    <p>Số thứ tự: {{scheduleRegister.number}}</p>
+    <p>Ngày khám: {{scheduleRegister.date|date:'dd-MM-yyyy'}}</p>
+
+    <p>Bác sĩ: {{scheduleRegister.doctorName}}</p>
     <p>Giờ khám{{scheduleRegister.time}}</p>
     <p>Giá: {{scheduleRegister.price}}</p>
     <button class="btn btn-success" (click)="payment()">OK</button>

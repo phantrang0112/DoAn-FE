@@ -66,4 +66,13 @@ export class DoctorService {
     const url = `${environment.doctorURL}get-price-doctor/`+id +'?date='+date;
     return this.httpclient.get<any>(url, this.httpOptions);
   }
+
+  public update(img,data){
+    const formData = new FormData();
+    formData.append('img', img);
+    formData.append('data',data)
+
+    const url = `${'http://localhost:8080/webyte/account/upload/'}`+6 ;
+    return this.httpclient.put<any>(url,formData);
+  }
 }
