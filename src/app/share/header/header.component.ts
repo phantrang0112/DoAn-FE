@@ -104,7 +104,7 @@ export class UserHeaderComponent implements OnInit, DoCheck {
       this.class = 'header-scrolled';
       // tslint:disable-next-line:triple-equals
       if (name == 'logout') {
-        this.notify.notifyCancel('Logout success!!!');
+        this.notify.notifyCancel('Đã đăng xuất!!!');
         this.authentication.logout();
         this.userService.logout();
         console.log(this.authentication.currentUserValue);

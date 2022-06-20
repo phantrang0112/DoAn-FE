@@ -102,7 +102,7 @@ export class NotifyService {
   notifyCancel(text) {
     Swal.fire({
         icon: 'warning',
-        title: 'Cancelled',
+        title: 'Cảnh báo',
         text,
       }
     );

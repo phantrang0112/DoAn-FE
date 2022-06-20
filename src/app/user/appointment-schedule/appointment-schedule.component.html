@@ -6,7 +6,7 @@
     <div class="appointment-header">
       <div style="float: right; margin: 12% 20px;">
         <div class="appointment-title">
-          <a>
+          <a href="">
             Trang chủ
           </a>
           <a>/Lịch khám</a>
@@ -18,21 +18,21 @@
 
     </div>
   </div>
-  <div class="col-lg-6 mx-auto">
+  <div class="col-lg-8 mx-auto">
     <div class="p-3 text-center section-title">
       <h2 class="mt-3">Danh sách lịch khám</h2>
       <button class="btn btn-outline-primary" (click)="clickOffline()">Tất cả </button>
       <button class="btn btn-outline-primary  mx-3"   (click)="clickOffline('Offline')">  Khám trực tiếp </button>
       <button class="btn btn-outline-primary" (click)="clickOffline('Online')" >  Khám trực tuyến </button>
-      <button class="btn btn-outline-primary mx-3" (click)="clickOffline('error')">  Đã hủy</button>
-      <button class="btn btn-outline-primary"  (click)="clickOffline('success')">  Đã khám</button>
+      <button class="btn btn-outline-primary mx-3" (click)="clickOffline('Đã hủy')">  Đã hủy</button>
+      <button class="btn btn-outline-primary"  (click)="clickOffline('Đã khám')">  Đã khám</button>
     </div>
 
   </div>
   <div class="row" >
     <div  style="margin-bottom: 20px;" class="col-4" *ngFor="let item of listAppointmentSchedule">
       <mat-card class="example-card">
-        <div (click)="clickItemAppointment(item.number,item.status,item.time,item.typeClinic)">
+        <div (click)="clickItemAppointment(item.number,item.status,item.time,item.typeClinic,item.idappointmentSchedule)">
         <mat-card-header >
           <div class="col-2"> <div mat-card-avatar class="example-header-image"></div></div>
           <div class="col-4" *ngIf="item.doctorName">
@@ -55,12 +55,13 @@
           <p style="color: rgb(86, 180, 177);"><b>Hình thức khám:</b> {{item.typeClinic}} </p>
 
         </mat-card-content>
-      </div>
         <mat-card-actions class="" style="display: flex;
-          justify-content: center;">
-          <button mat-button color="primary">Đã Đăng Ký</button>
-          <button mat-button color="primary">Hủy</button>
-        </mat-card-actions>
+        justify-content: center;">
+        <button mat-button color="primary">{{item.status}}</button>
+        <button mat-button color="primary" *ngIf="item.status=='Đã đăng ký'">Hủy</button>
+      </mat-card-actions>
+      </div>
+
       </mat-card>
 
     </div>

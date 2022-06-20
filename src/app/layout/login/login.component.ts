@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       .toPromise().then(
         data => {
           if (data != null) {
-            this.notify.notifySuccessToggerMessage('Login success!!!');
+            this.notify.notifySuccessToggerMessage('Đăng nhập thành công!!!');
             this.path = this.authentication.currentUserValue.role;
             this.router.navigate([this.path + '/home']);
             this.user = data;

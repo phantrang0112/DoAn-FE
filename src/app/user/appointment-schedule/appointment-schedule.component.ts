@@ -31,13 +31,17 @@ export class AppointmentScheduleComponent implements OnInit {
     this.headerService.setActive('appointment-schedule');
   }
 
-  clickItemAppointment(stt, trangthai,time, typeclinic) {
-    if (typeclinic === 'Offline') {
+  clickItemAppointment(stt, trangthai, time, typeclinic, id) {
+    console.log(id);
+    if (typeclinic === 'Offline' && trangthai === 'Đã đăng ký') {
       this.notify.notifyNotLink('<p>Số thứ tự của bạn là:</p><strong>' + stt + '</strong>', 'Thời gian khám dự kiến <b>' + time + '</b>, ' +
-        '<p>Bạn vui lòng có mặt trước bệnh viện<b> trước 10 phút </b> để hoàn tất thủ tục đăng ký</p> ',trangthai)
-    }else{
-      this.notify.notifyNotLink('<p>Ngày khám của bạn là:</p><strong>' + stt + '</strong>','Thời gian khám dự kiến <b>' + time + '</b>, ' +
-      '<p>Bạn vui lòng vào website <b> trước 5 phút </b> để chuẩn bị cho quá trình khám</p> ',trangthai)
+        '<p>Bạn vui lòng có mặt trước bệnh viện<b> trước 10 phút </b> để hoàn tất thủ tục đăng ký</p> ', 'info')
+    } else if (typeclinic === 'Online' && trangthai === 'Đã đăng ký') {
+      this.notify.notifyNotLink('<p>Ngày khám của bạn là:</p><strong>' + stt + '</strong>', 'Thời gian khám dự kiến <b>' + time + '</b>, ' +
+        '<p>Bạn vui lòng vào website <b> trước 5 phút </b> để chuẩn bị cho quá trình khám</p> ', 'info')
+    }
+    else if (trangthai === 'Đã khám') {
+      this.route.navigate(['user/appoint-detail',id])
     }
   }
   registrationSchedule() {
@@ -50,7 +54,7 @@ export class AppointmentScheduleComponent implements OnInit {
     if (click === 'Online' || click === 'Offline') {
       this.listAppointmentSchedule = this.listAppointmentScheduleOrigin.filter(a => a.typeClinic == click);
     }
-    else if (click === 'success' || click === 'error') {
+    else if (click === 'Đã đăng ký' || click === 'Đã hủy'||click==='Đã khám') {
       this.listAppointmentSchedule = this.listAppointmentScheduleOrigin.filter(a => a.status == click);
     }
     else {
