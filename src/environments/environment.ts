@@ -14,6 +14,14 @@ export const environment = {
   appointmentURL: 'http://localhost:8080/webyte/appointment-schedule/',
   paymentURL: 'http://localhost:8080/pay',
   rootURL: 'http://localhost:8080/',
+  wsEndpoint: 'ws://localhost:8081/',
+  RTCPeerConfiguration: {
+    iceServers: [
+      {
+        urls: 'stun:stun1.l.google.com:19302'
+      }
+    ]
+  }
 };
 
 /*

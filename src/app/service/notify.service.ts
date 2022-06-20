@@ -67,8 +67,16 @@ export class NotifyService {
   notifySuccessNotLink(title, text) {
     Swal.fire({
       title,
-      text,
+      html: text,
       icon: 'success',
+      iconColor: '#0dd4b9',
+    });
+  }
+  notifyNotLink(title, text,icon) {
+    Swal.fire({
+      title,
+      html: text,
+      icon: icon,
       iconColor: '#0dd4b9',
     });
   }

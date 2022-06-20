@@ -13,6 +13,7 @@ import {ListDoctorComponent} from './list-doctor/list-doctor.component';
 import {MyAccountComponent} from './my-account/my-account.component';
 import {TalkComponent} from './talk/talk.component';
 import {AuthGuard} from '../shared/guards/auth-guard.guard';
+import { VideoCallComponent } from './talk/video-call/video-call.component';
 
 export const UserRoutes: Routes = [
 
@@ -27,6 +28,7 @@ export const UserRoutes: Routes = [
   {path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]},
   {path: 'my-account', component: MyAccountComponent,canActivate: [AuthGuard]},
   {path: 'talk', component: TalkComponent, canActivate: [AuthGuard]},
+  {path: 'video-call', component: VideoCallComponent, canActivate: [AuthGuard]},
   // { path: '**', pathMatch:'full', redirectTo: 'routePath' }
 ];
 
