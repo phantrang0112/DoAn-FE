@@ -29,7 +29,7 @@ export class HeaderDoctorComponent implements OnInit {
     });
   }
   logout() {
-    this.notify.notifyCancel('Logout success!!!');
+    this.notify.notifyCancel('Đăng xuất thành công!!!');
     this.authentication.logout();
   }
 }

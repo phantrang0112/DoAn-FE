@@ -36,13 +36,13 @@ export class AppointmentScheduleComponent implements OnInit {
   }
 
   getListRegistration() {
-    this.listAppSch = this.listOriginal.filter(value => value.status === 'chờ khám');
-    this.status = 'đã đăng ký';
+    this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã đăng ký');
+    this.status = 'Đã đăng ký';
   }
 
   getListCanceled() {
-    this.listAppSch = this.listOriginal.filter(value => value.status === 'đã hủy');
-    this.status = 'đã hủy';
+    this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã hủy');
+    this.status = 'Đã hủy';
   }
 }
 

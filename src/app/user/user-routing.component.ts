@@ -14,6 +14,7 @@ import {MyAccountComponent} from './my-account/my-account.component';
 import {TalkComponent} from './talk/talk.component';
 import {AuthGuard} from '../shared/guards/auth-guard.guard';
 import { VideoCallComponent } from './talk/video-call/video-call.component';
+import { AppointDetailComponent } from './appointment-schedule/appoint-detail/appoint-detail.component';
 
 export const UserRoutes: Routes = [
 
@@ -21,7 +22,7 @@ export const UserRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'list-doctor', component: ListDoctorComponent},
-  {path: 'appointment-schedule', component: AppointmentScheduleComponent},
+  {path: 'appointment-schedule', component: AppointmentScheduleComponent,canActivate: [AuthGuard]},
   {path: 'registration-schedule', component: RegistrationScheduleComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'ask-answer', component: AskAnswerComponent},
@@ -29,6 +30,7 @@ export const UserRoutes: Routes = [
   {path: 'my-account', component: MyAccountComponent,canActivate: [AuthGuard]},
   {path: 'talk', component: TalkComponent, canActivate: [AuthGuard]},
   {path: 'video-call', component: VideoCallComponent, canActivate: [AuthGuard]},
+  {path: 'appoint-detail/:id', component: AppointDetailComponent, canActivate: [AuthGuard]},
   // { path: '**', pathMatch:'full', redirectTo: 'routePath' }
 ];
 

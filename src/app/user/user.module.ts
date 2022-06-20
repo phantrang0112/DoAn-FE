@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTabsModule } from "@angular/material";
+import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTableModule, MatTabsModule } from "@angular/material";
 import { RouterModule } from "@angular/router";
 import { MatCarouselModule } from "@ngmodule/material-carousel";
 import { CKEditorModule } from "ckeditor4-angular";
@@ -21,6 +21,7 @@ import { MyAccountComponent } from "./my-account/my-account.component";
 import { TalkComponent } from "./talk/talk.component";
 import { UserRoutes } from "./user-routing.component";
 import { VideoCallComponent } from './talk/video-call/video-call.component';
+import { AppointDetailComponent } from './appointment-schedule/appoint-detail/appoint-detail.component';
 
 
 
@@ -38,6 +39,7 @@ import { VideoCallComponent } from './talk/video-call/video-call.component';
     HomeComponent,
     SlideShowComponent,
     VideoCallComponent,
+    AppointDetailComponent,
 
 ],
   imports: [
@@ -58,7 +60,10 @@ import { VideoCallComponent } from './talk/video-call/video-call.component';
     CKEditorModule,
     MatExpansionModule,
     HttpClientModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTableModule,
+    MatAutocompleteModule,
+
   ],
 
 })

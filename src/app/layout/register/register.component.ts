@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material';
 import {ValidatorsCharacters} from '../../shared/util/validators-characters';
 import {Patient} from '../../models/patient';
+import { NotifyService } from 'src/app/service/notify.service';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +31,7 @@ export class RegisterComponent implements OnInit {
   object = [];
   constructor(private headerService: HeaderserviceService, private userService: UserserviceService,
               private formBuilder: FormBuilder, private alertService: AlertService,
-              private router: Router) {
+              private router: Router,private notify:NotifyService) {
   }
 
   formRegister: FormGroup;
@@ -65,7 +66,7 @@ export class RegisterComponent implements OnInit {
     this.loading = true;
     this.user.username = this.formRegister.value.username;
     this.user.password = this.formRegister.value.password;
-    this.user.role = 'user';
+    this.user.idrole = 1;
     this.object.push(this.user);
     this.patient.email = this.formRegister.value.email;
     this.patient.phone = this.formRegister.value.phone;
@@ -75,6 +76,8 @@ export class RegisterComponent implements OnInit {
     this.userService.register(this.object)
       .subscribe(
         data => {
+          console.log('đăng ký thành công',data);
+          this.notify.notifySuccess('Đăng ký thành công','/user/login','Vui lòng đăng nhập bằng tài khoản vừa tạo!')
           this.alertService.success('Registration successful', true);
           this.object = [];
           this.router.navigate(['/login']);

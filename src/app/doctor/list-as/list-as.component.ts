@@ -38,7 +38,7 @@ export class ListASComponent implements OnInit {
   }
 
   checkStatus(check: string) {
-    if (check === 'chờ khám') {
+    if (check === 'Chờ khám') {
       return true;
     }
   }
@@ -48,13 +48,13 @@ export class ListASComponent implements OnInit {
   }
 
   getListWaiting() {
-    this.listAppSch = this.listOriginal.filter(value => value.status === 'chờ khám');
-    this.statusFilter = 'chờ khám';
+    this.listAppSch = this.listOriginal.filter(value => value.status === 'Chờ khám');
+    this.statusFilter = 'Chờ khám';
   }
 
   getListExam() {
-    this.listAppSch = this.listOriginal.filter(value => value.status === 'đã khám');
-    this.statusFilter = 'đã khám';
+    this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã khám');
+    this.statusFilter = 'Đã khám';
   }
 
   click() {
