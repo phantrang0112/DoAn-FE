@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTabsModule } from "@angular/material";
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSelectModule, MatTabsModule } from "@angular/material";
 import { RouterModule } from "@angular/router";
 import { MatCarouselModule } from "@ngmodule/material-carousel";
 import { CKEditorModule } from "ckeditor4-angular";
@@ -20,6 +20,7 @@ import { ListDoctorComponent } from "./list-doctor/list-doctor.component";
 import { MyAccountComponent } from "./my-account/my-account.component";
 import { TalkComponent } from "./talk/talk.component";
 import { UserRoutes } from "./user-routing.component";
+import { VideoCallComponent } from './talk/video-call/video-call.component';
 
 
 
@@ -36,6 +37,7 @@ import { UserRoutes } from "./user-routing.component";
     TalkComponent,
     HomeComponent,
     SlideShowComponent,
+    VideoCallComponent,
 
 ],
   imports: [
@@ -55,7 +57,8 @@ import { UserRoutes } from "./user-routing.component";
     ReactiveFormsModule,
     CKEditorModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    MatGridListModule
   ],
 
 })

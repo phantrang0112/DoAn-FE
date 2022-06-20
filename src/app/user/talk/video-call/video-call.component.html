@@ -1,0 +1,16 @@
+<div class="container" style="margin-top: 73px;">
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+      <p class="video-description"></p>
+      <video style="transform: scale(-1,1);" #local_video [autoplay]="true" [muted]="true"></video>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="video-description">remote:</p>
+      <video #received_video [autoplay]="true"></video>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <button mat-raised-button color="primary" (click)="startLocalVideo()" >Start Local</button>
+  <button mat-raised-button color="primary" (click)="pauseLocalVideo()">Stop Local</button>
+  <button mat-raised-button color="primary"(click)="call()" >Call</button>
+  <button mat-raised-button color="primary" (click)="hangUp()">HangUp</button>
+</div>

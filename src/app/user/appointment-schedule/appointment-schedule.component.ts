@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { time } from 'console';
+import { NotifyService } from 'src/app/service/notify.service';
 import { AppointmentScheduleService } from 'src/app/service/userservice/appointment-schedule.service';
 import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
 import Swal from 'sweetalert2';
@@ -10,12 +12,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./appointment-schedule.component.css']
 })
 export class AppointmentScheduleComponent implements OnInit {
+  listAppointmentScheduleOrigin;
   listAppointmentSchedule;
-  constructor(private headerService: HeaderserviceService, private route: Router, private appoinentService: AppointmentScheduleService) {
+  constructor(private headerService: HeaderserviceService, private route: Router, private appoinentService: AppointmentScheduleService, private notify: NotifyService) {
     appoinentService.getListAppoint().subscribe((data) => {
-      this.listAppointmentSchedule = data;
+      this.listAppointmentScheduleOrigin = data;
+      this.listAppointmentSchedule = this.listAppointmentScheduleOrigin;
       console.log(data);
     })
+
   }
 
   length = 100;
@@ -26,25 +31,31 @@ export class AppointmentScheduleComponent implements OnInit {
     this.headerService.setActive('appointment-schedule');
   }
 
-  clickItemAppointment(stt, trangThai, id) {
-    const date = '01-12-2000';
-    const hour = Math.floor((stt * 2) / 60) + 7;
-    const minute = stt * 2 % 60;
-    Swal.fire({
-      title: '<p>Số thứ tự của bạn là:</p><strong>' + stt + '</strong>',
-      icon: trangThai,
-      html:
-        'Thời gian khám dự kiến <b>' + hour + ' giờ ' + minute + ' phút ' + '</b>, ' +
-        '<p>Bạn vui lòng có mặt trước bệnh viện<b> trước 10 phút</b> để hoàn tất thủ tục đăng ký</p> ',
-      showCloseButton: true,
-      focusConfirm: true,
-      confirmButtonText: 'Ok',
-      cancelButtonAriaLabel: 'OK'
-    });
+  clickItemAppointment(stt, trangthai,time, typeclinic) {
+    if (typeclinic === 'Offline') {
+      this.notify.notifyNotLink('<p>Số thứ tự của bạn là:</p><strong>' + stt + '</strong>', 'Thời gian khám dự kiến <b>' + time + '</b>, ' +
+        '<p>Bạn vui lòng có mặt trước bệnh viện<b> trước 10 phút </b> để hoàn tất thủ tục đăng ký</p> ',trangthai)
+    }else{
+      this.notify.notifyNotLink('<p>Ngày khám của bạn là:</p><strong>' + stt + '</strong>','Thời gian khám dự kiến <b>' + time + '</b>, ' +
+      '<p>Bạn vui lòng vào website <b> trước 5 phút </b> để chuẩn bị cho quá trình khám</p> ',trangthai)
+    }
   }
   registrationSchedule() {
     this.route.navigate(['user/registration-schedule'])
 
+
+  }
+  clickOffline(click) {
+
+    if (click === 'Online' || click === 'Offline') {
+      this.listAppointmentSchedule = this.listAppointmentScheduleOrigin.filter(a => a.typeClinic == click);
+    }
+    else if (click === 'success' || click === 'error') {
+      this.listAppointmentSchedule = this.listAppointmentScheduleOrigin.filter(a => a.status == click);
+    }
+    else {
+      this.listAppointmentSchedule = this.listAppointmentScheduleOrigin;
+    }
 
   }
 }
