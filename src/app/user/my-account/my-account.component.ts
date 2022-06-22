@@ -8,6 +8,7 @@ import {UserserviceService} from '../../service/userservice.service';
 import {NotifyService} from '../../service/notify.service';
 import {DatePipe} from '@angular/common';
 import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-account',
@@ -16,7 +17,8 @@ import { HeaderserviceService } from 'src/app/service/userservice/headerservice.
 })
 export class MyAccountComponent implements OnInit {
   constructor(private authentication: AuthenticationService, private userService: UserserviceService,
-              private notify: NotifyService, private headerService: HeaderserviceService) {
+              private notify: NotifyService, private headerService: HeaderserviceService,
+              private router: Router) {
   }
 
   addEmployeeForm = new FormGroup({
@@ -70,6 +72,9 @@ export class MyAccountComponent implements OnInit {
       this.notify.notifiError('Change Info Error!!!', 'Please Re-Enter');
       // console.log('obj = ' + this.obj);
     });
+  }
+  changePass() {
+    this.router.navigate(['user/change-password']);
   }
 }
 

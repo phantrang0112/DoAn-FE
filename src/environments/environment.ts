@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   envName: 'DEV',
   baseURL: 'http://localhost:8080/webyte/account/',
+  forgotPassURL: 'http://localhost:8080/webyte/account/forgotPassword/',
+  changePassURL: 'http://localhost:8080/webyte/account/change-password',
   patientURL: 'http://localhost:8080/patients/',
   doctorURL: 'http://localhost:8080/webyte/doctor/',
   deptURL: 'http://localhost:8080/webyte/dept/',
