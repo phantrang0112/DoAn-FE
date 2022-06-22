@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { CKEditor4 } from 'ckeditor4-angular';
 import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 
@@ -9,6 +10,7 @@ import {HeaderserviceService} from 'src/app/service/userservice/headerservice.se
 })
 export class AskAnswerComponent implements OnInit {
   panelOpenState = false;
+  sendEdit:FormControl= new FormControl();
  data;
   constructor(private headerService: HeaderserviceService) {
   }
@@ -24,6 +26,7 @@ export class AskAnswerComponent implements OnInit {
   }
   registerAnswer(){
     console.log(this.data);
+
   }
   public onChange( event: CKEditor4.EventInfo ) {
     this.data= event.editor.getData();

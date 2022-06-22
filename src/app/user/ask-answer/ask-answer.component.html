@@ -4,13 +4,14 @@
     <h2>Hỏi đáp với bác sĩ</h2>
   </div>
   <div (click)="clickPost()">
-    <p><b>Để lại thắc mắc của bạn chúng tôi sẽ giải đáp chúng !!!</b></p>
-    Gửi thắc mắc
-    <i  class="fa fa-external-link" aria-hidden="true"></i>
+    <p><b>Để lại thắc mắc của bạn chúng tôi sẽ giải đáp chúng !!!</b> </p>
+    Gửi thắc mắc:
+
+    <i class="fas fa-paper-plane" style="color: blue;"></i>
     <hr>
   </div>
   <div  *ngIf="post"  style="text-align: right;">
-    <ckeditor  (change)="onChange($event)" ></ckeditor>
+    <ckeditor (change)="onChange($event)" ></ckeditor>
     <button (click)="registerAnswer()" style="margin-top: 30px;" class="btn btn-primary">Đăng</button>
 
   </div>
