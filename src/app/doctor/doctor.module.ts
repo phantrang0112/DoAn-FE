@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatExpansionModule, MatNativeDateModule, MatSelectModule } from "@angular/material";
+import { MatExpansionModule, MatGridListModule, MatNativeDateModule, MatSelectModule } from "@angular/material";
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
@@ -20,6 +20,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AskAnswerComponent } from './ask-answer/ask-answer.component';
 import { CKEditorModule } from "ckeditor4-angular";
 import {MatIconModule} from '@angular/material/icon';
+import { ChatComponent } from './chat/chat.component';
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     HomeComponent,
@@ -28,6 +30,7 @@ import {MatIconModule} from '@angular/material/icon';
     DetailComponent,
     RegisterScheduleComponent,
     AskAnswerComponent,
+    ChatComponent,
 
    ],
   imports: [
@@ -48,7 +51,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatCheckboxModule,
     CKEditorModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule,
+    MatGridListModule,
   ],
 
 })
