@@ -47,5 +47,7 @@ export const ROUTES: RouteInfo[] = [
   {path: '/doctor/listAS', title: 'Danh sách lịch khám', icon: 'fa fa-list-alt text-orange', class: ''},
   {path: '/doctor/register-schedule', title: 'Đăng ký lịch trực', icon: 'fa fa-calendar text-yellow', class: ''},
   {path: '/doctor/ask-answer', title: 'Hỏi đáp với bệnh nhân', icon: 'fa fa-question-circle text-red', class: ''},
+  // {path: '/doctor/video-chat', title: 'Hỏi đáp với bệnh nhân', icon: 'fa fa-question-circle text-red', class: ''},
+
 ];
 

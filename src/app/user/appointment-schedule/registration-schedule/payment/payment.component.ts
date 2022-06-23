@@ -47,6 +47,8 @@ export class PaymentComponent implements OnInit {
         this.notifyService.notifySuccess('Thành công', 'user/appointment-schedule', 'Thanh toán thành công');
         console.log("thành công");
       }
+
+
     })
   }
 }
