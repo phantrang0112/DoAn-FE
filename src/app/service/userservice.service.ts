@@ -8,14 +8,14 @@ import {UserAccount} from '../models/user-account';
 import {environment} from '../../environments/environment';
 import {NotifyService} from './notify.service';
 import {error} from 'protractor';
-import { AuthenticationService } from './authentication.service';
+import {AuthenticationService} from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserserviceService {
 
-  constructor(private http: HttpClient, private notify: NotifyService,private authentication:AuthenticationService) {
+  constructor(private http: HttpClient, private notify: NotifyService, private authentication: AuthenticationService) {
     this.currentPatientSubject = new BehaviorSubject<Patient>(JSON.parse(localStorage.getItem('currentPatient')));
     this.currentPatient = this.currentPatientSubject.asObservable();
   }
@@ -23,6 +23,7 @@ export class UserserviceService {
   public get currentPatientValue(): Patient {
     return this.currentPatientSubject.value;
   }
+
   token = localStorage.getItem('token');
   private httpOptions = {
     headers: new HttpHeaders({
@@ -64,7 +65,7 @@ export class UserserviceService {
 
   updatePatient(obj: Patient) {
     console.log('obj Update = ' + obj);
-    return this.http.put(`${environment.patientURL}update`, obj).pipe(map( data => {
+    return this.http.put(`${environment.patientURL}update`, obj).pipe(map(data => {
       if (data != null) {
         localStorage.setItem('currentPatient', JSON.stringify(data));
         return data;
@@ -86,6 +87,35 @@ export class UserserviceService {
     }
     // Return an observable with a user-facing error message.
     return throwError('Something bad happened; please try again later.');
+  }
+
+  forgotPassword(email: string) {
+    return this.http.get(`${environment.forgotPassURL}${email}`).pipe(map(data => {
+      if (data) {
+        return data;
+      }
+      return null;
+    }));
+  }
+
+  checkPassword(id: number, password: string): Observable<any> {
+    return this.http.post(`${environment.baseURL}` + 'check-password/' + id, password, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.authentication.currentUserValue.token,
+      })
+        .set('Content-Type', 'application/json')
+        .set('Access-Control-Allow-Credential', 'true'),
+    });
+  }
+
+  changePassword(id: number, password: string): Observable<any> {
+    return this.http.put(`${environment.baseURL}` + 'change-password/' + id, password, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.authentication.currentUserValue.token,
+      })
+        .set('Content-Type', 'application/json')
+        .set('Access-Control-Allow-Credential', 'true'),
+    });
   }
 
   logout() {

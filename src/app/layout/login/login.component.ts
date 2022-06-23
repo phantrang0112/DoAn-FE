@@ -49,6 +49,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['user/register']);
   }
 
+  forgetPass() {
+    this.router.navigate(['user/forgot-password']);
+  }
+
   get f() {
     return this.formLogin.controls;
   }
@@ -71,14 +75,16 @@ export class LoginComponent implements OnInit {
             this.path = this.authentication.currentUserValue.role;
             this.router.navigate([this.path + '/home']);
             this.user = data;
+            console.log(data);
             // window.location.href = 'https://www.google.com';
             console.log('this User = ' + this.user);
           } else {
+            this.notify.notifiError('Đăng nhập thất bại', 'Nhập lại');
             this.loading = false;
           }
         },
         error => {
-          this.alertService.error(error);
+          this.alertService.error('Đăng nhập thất lại!');
           this.loading = false;
         }
       );

@@ -20,7 +20,7 @@ import {MatCarouselModule} from '@ngmodule/material-carousel';
 import {HeaderComponent} from './header/header.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-import {ChangePasswordComponent} from './login/change-password/change-password.component';
+import {ChangePasswordComponent} from '../user/my-account/change-password/change-password.component';
 import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.component';
 
 @NgModule({
@@ -28,7 +28,6 @@ import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.c
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    ChangePasswordComponent,
     ForgotPasswordComponent
   ],
   imports: [

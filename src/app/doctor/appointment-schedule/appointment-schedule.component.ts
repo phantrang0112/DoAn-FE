@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppointmentScheduleService} from '../../service/doctorservice/appointment-schedule.service';
 import {appointmentSchedule} from '../../models/appointment-schedule';
 import {Patient} from '../../models/patient';
 import {PatientService} from '../../service/doctorservice/patient.service';
 import {appointmentScheduleDoctor} from '../models/AppointmentSchedule';
+import {NotifyService} from '../../service/notify.service';
 
 @Component({
   selector: 'app-appointment-schedule',
@@ -15,34 +16,60 @@ export class AppointmentScheduleComponent implements OnInit {
   public listOriginal: appointmentScheduleDoctor[];
   public patientInfo: Patient[];
   public status: string;
+  public existAppSch: boolean;
+  public statusList: string[];
   public item: appointmentScheduleDoctor;
-  constructor(private appointment: AppointmentScheduleService, private patientService: PatientService) { }
+  p: number;
+
+  constructor(private appointment: AppointmentScheduleService, private patientService: PatientService,
+              private notify: NotifyService) {
+    this.status = 'Tất cả';
+  }
 
   ngOnInit() {
     this.getListAppointmentSchedule();
-    this.status = 'Lọc';
   }
 
   getListAppointmentSchedule() {
-    this.appointment.getListAppoint().subscribe( data => {
+    this.appointment.getListAppoint().subscribe(data => {
       if (data) {
+        this.existAppSch = true;
         this.listAppSch = data;
         this.listOriginal = data;
-        console.log(data);
+        console.log(this.listOriginal);
       }
     }, error => {
+      this.existAppSch = false;
+      this.notify.notifyErrorToggerMessage('Danh sách trống');
       console.log(error);
     });
   }
 
+  getListAppSch() {
+    this.status = 'Tất cả';
+    if (this.existAppSch) {
+      this.listAppSch = this.listOriginal;
+    } else {
+      this.notify.notifyErrorToggerMessage('Danh sách trống');
+    }
+  }
+
   getListRegistration() {
-    this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã đăng ký');
     this.status = 'Đã đăng ký';
+    if (this.existAppSch) {
+      this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã đăng ký');
+    } else {
+      this.notify.notifyErrorToggerMessage('Danh sách trống');
+    }
   }
 
   getListCanceled() {
-    this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã hủy');
     this.status = 'Đã hủy';
+    if (this.existAppSch) {
+      this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã hủy');
+    } else {
+      this.notify.notifyErrorToggerMessage('Danh sách trống');
+    }
   }
 }
 

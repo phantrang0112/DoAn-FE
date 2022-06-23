@@ -58,7 +58,6 @@ import { AppRoutingModule } from './app-routing.component';
     HttpClientModule,
     NgbModule,
     ShareModule,
-
   ],
   providers: [
     AuthGuard ,
