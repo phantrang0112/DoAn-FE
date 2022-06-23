@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 export class AppointmentScheduleComponent implements OnInit, DoCheck {
   listAppointmentScheduleOrigin;
   listAppointmentSchedule;
+  room = false;
+  dateNow = new Date();
   constructor(private headerService: HeaderserviceService, private route: Router, private appoinentService: AppointmentScheduleService, private notify: NotifyService) {
     appoinentService.getListAppoint().subscribe((data) => {
       this.listAppointmentScheduleOrigin = data;
@@ -59,18 +61,28 @@ export class AppointmentScheduleComponent implements OnInit, DoCheck {
       this.route.navigate(['user/appoint-detail', item.idappointmentSchedule])
     }
     else if (item.status === 'Chờ khám') {
-      if(item.date== Date.now()){
-        let datenow = Date.now();
-        let datenow2= moment(datenow);
-        let datenow1 = moment(item.time).add(-10, 'minutes');
-        let date= moment(item.time);
-        if(datenow2=>datenow1 && datenow2<=date){
-          this.notify.notifySuccess("chuẩn bị tới giờ khám",'/user/video-call','Vui lòng truy cập vào link dưới để tiến hành khám')
+      let date = new Date(item.date);
+      if (date.getDate() === this.dateNow.getDate()) {
+        let datenow2 = moment(this.dateNow);
+        let dates = moment(item.date).format('YYYY-MM-DD')
+        let datemin = moment(dates + " " + item.time).add(-10, 'minutes');
+        let datemax = moment(dates + " " + item.time);
+
+        console.log(datenow2.format('HH:mm'), datemin.format('HH:mm'), datemax.format('HH:mm'), dates, item.time);
+        if (datenow2 > datemin && datenow2 < datemax) {
+          console.log("hihi")
+          this.notify.notifySuccess("chuẩn bị tới giờ khám", '/user/video-call', 'Vui lòng truy cập vào link dưới để tiến hành khám')
         }
-        else{
-          this.notify.notifyNotLink('<p>Ngày khám của bạn là:</p><strong>' + item.number + '</strong>', 'Thời gian khám dự kiến <b>' + item.time + '</b>, ' +
+        else {
+          console.log("hihi")
+          this.notify.notifyNotLink('<p>Ngày khám của bạn là:</p><strong>' + moment(item.date).format('DD-MM-yyyy') + '</strong>', 'Thời gian khám dự kiến <b>' + item.time + '</b>, ' +
+            '<p>Bạn vui lòng vào website <b> trước 5 phút </b> để chuẩn bị cho quá trình khám</p> ', 'info')
+        }
+      }
+      else {
+        console.log("hihi")
+        this.notify.notifyNotLink('<p>Ngày khám của bạn là:</p><strong>' + moment(item.date).format('DD-MM-yyyy') + '</strong>', 'Thời gian khám dự kiến <b>' + item.time + '</b>, ' +
           '<p>Bạn vui lòng vào website <b> trước 5 phút </b> để chuẩn bị cho quá trình khám</p> ', 'info')
-        }
       }
 
     }

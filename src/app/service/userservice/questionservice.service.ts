@@ -11,7 +11,7 @@ export class QuestionserviceService {
 
   constructor(private httpclient: HttpClient) { }
   public getAllQuestion(): Observable<any> {
-    const url = `${environment.questionURL}get-all-question`;
+    const url = `${environment.questionURL}get-all-question-answers`;
     return this.httpclient.get<any>(url);// Nhớ import catchError
   }
   public insertAllTopics(data:question): Observable<any> {
