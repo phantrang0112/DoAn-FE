@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
             this.path = this.authentication.currentUserValue.role;
             this.router.navigate([this.path + '/home']);
             this.user = data;
+            console.log(data);
             // window.location.href = 'https://www.google.com';
             console.log('this User = ' + this.user);
           } else {
