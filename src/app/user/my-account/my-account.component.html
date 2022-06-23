@@ -23,10 +23,10 @@
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Tên đầy đủ</mat-label>
             <input id="fullname" class="col-6" type="text" matInput
-                   formControlName="fullName" [errorStateMatcher]="matcher" [readonly]="display"
-                   [(ngModel)]="patient.fullName"/>
-            <mat-error *ngIf="addEmployeeForm.controls.fullName.hasError('required')">
-              *Add <strong>Full Name!</strong>
+                   formControlName="fullname" [errorStateMatcher]="matcher" [readonly]="display"
+                   [(ngModel)]="patient.fullname"/>
+            <mat-error *ngIf="addEmployeeForm.controls.fullname.hasError('required')">
+              *Nhập <strong>họ và tên!</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width" appearance="fill">
@@ -35,7 +35,7 @@
                    formControlName="email" [errorStateMatcher]="matcher" [readonly]="display"
                    [(ngModel)]="patient.email">
             <mat-error *ngIf="addEmployeeForm.controls.email.hasError('required')">
-              *Add <strong>email</strong>
+              *Nhập <strong>email</strong>
             </mat-error>
             <mat-error
               *ngIf="addEmployeeForm.controls.email.hasError('email')||addEmployeeForm.controls.email.hasError('pattern')">
@@ -48,7 +48,7 @@
                    formControlName="phone" [errorStateMatcher]="matcher" [readonly]="display"
                    [(ngModel)]="patient.phone">
             <mat-error *ngIf="addEmployeeForm.controls.phone.hasError('maxLength')!=null">
-              *Phone number must have 10 digits
+              *Số điện thoại phải có 10 số
             </mat-error>
 
             <mat-error *ngIf="addEmployeeForm.controls.phone.hasError('required')">
@@ -62,7 +62,7 @@
                    formControlName="address" [errorStateMatcher]="matcher" [readonly]="display"
                    [(ngModel)]="patient.address">
             <mat-error *ngIf="addEmployeeForm.controls.address.hasError('required')">
-              *Add <strong>Address!</strong>
+              *Nhập <strong>địa chỉ!</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width" appearance="fill">
@@ -73,23 +73,18 @@
               *Thêm <strong>hình!</strong>
             </mat-error>
           </mat-form-field>
-          <br>
-          <br>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Ngày sinh</mat-label>
             <input type="date" matInput formControlName="birthday" id="birthday"
                    [errorStateMatcher]="matcher" [readonly]="display" [(ngModel)]="patient.birthday">
             <mat-error *ngIf="addEmployeeForm.controls.birthday.hasError('required')">
-              *Add <strong>birthday!</strong>
+              *Nhập <strong>ngày sinh!</strong>
             </mat-error>
           </mat-form-field>
-          <br>
-          <br>
           <br>
           <button type="submit" class="btn btn-primary"
                   [disabled]="!addEmployeeForm.valid">Sửa thông tin
           </button>
-
           <a style="float: right" (click)="changePass()" class="btn btn-warning">Đổi mật khẩu</a>
         </form>
 

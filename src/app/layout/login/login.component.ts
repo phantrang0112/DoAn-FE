@@ -78,11 +78,12 @@ export class LoginComponent implements OnInit {
             // window.location.href = 'https://www.google.com';
             console.log('this User = ' + this.user);
           } else {
+            this.notify.notifiError('Đăng nhập thất bại', 'Nhập lại');
             this.loading = false;
           }
         },
         error => {
-          this.alertService.error(error);
+          this.alertService.error('Đăng nhập thất lại!');
           this.loading = false;
         }
       );
