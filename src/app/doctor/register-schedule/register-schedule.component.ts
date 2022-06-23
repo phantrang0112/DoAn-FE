@@ -24,7 +24,7 @@ export class RegisterScheduleComponent implements OnInit, DoCheck {
   ngOnInit() {
     let date = new Date();
     console.log(date.getDate());
-    if (date.getDay() === 0) {
+    if (date.getDay() === 2) {
       for (let i = 2; i < 9; i++) {
         const day = moment().add(i, 'days').format('YYYY MM DD');
         date = new Date(day);
@@ -59,7 +59,7 @@ export class RegisterScheduleComponent implements OnInit, DoCheck {
         day_name = 'Thứ năm';
         break;
       case 5:
-        day_name = 'Thứ sau';
+        day_name = 'Thứ sáu';
         break;
       case 6:
         day_name = 'Thứ bảy';
