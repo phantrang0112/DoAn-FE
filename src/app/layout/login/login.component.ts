@@ -49,6 +49,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['user/register']);
   }
 
+  forgetPass() {
+    this.router.navigate(['user/forgot-password']);
+  }
+
   get f() {
     return this.formLogin.controls;
   }
