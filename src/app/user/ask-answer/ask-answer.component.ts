@@ -69,8 +69,10 @@ export class AskAnswerComponent implements OnInit {
     this.newAnswer.answercontent = this.answer.value;
     this.newAnswer.questionid = questionId;
     this.answerService.insertAllAnswer(this.newAnswer).subscribe(data => {
-      console.log(data);
-this.ngOnInit();
+      this.questionService.getAllQuestion().subscribe(data => {
+        this.listQuestion = data;
+        console.log(data);
+      })
     })
   }
 }
