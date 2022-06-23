@@ -34,64 +34,38 @@
           <mat-panel-title>
             <img src="assets/{{item.img}}" style="width:30px ;height:30px ;
               border-radius: 50%; margin-right: 20px;" />
-            <span>Bệnh nhân {{item.accountName}}</span>
+            <span>Bệnh nhân {{item.questionDTO.accountName}}</span>
           </mat-panel-title>
-          <mat-panel-description [innerHtml]="item.questionContent">
+          <mat-panel-description [innerHtml]="item.questionDTO.questionContent">
           </mat-panel-description>
           <mat-panel-description class="justify-content-end">
-            {{item.date|date:'dd-MM-yyyy'}}
+            {{item.questionDTO.date|date:'dd-MM-yyyy'}}
           </mat-panel-description>
 
         </mat-expansion-panel-header>
-        <div style="margin-left: 50px;" *ngFor="let rep of ['A','B','C']">
-          <div>
+        <div style="margin-left: 50px;">
+          <div  *ngFor="let rep of item.listAnswer ">
             <div style="display: flex;">
               <img src="assets/bv2.jpg" style="width:30px ;height:30px ;
                 border-radius: 50%; margin-right: 20px;" />
-              <mat-panel-title>Bác sĩ #{{rep}}</mat-panel-title>
+              <mat-panel-title>Bác sĩ #{{rep.accountName}}</mat-panel-title>
             </div>
 
-            <mat-panel-description style="margin-left: 50px;">Câu trả lời</mat-panel-description>
+            <mat-panel-description style="margin-left: 50px;">{{rep.answercontent}}</mat-panel-description>
+            <mat-panel-description class="justify-content-end">
+              {{rep.date|date:'dd-MM-yyyy'}}
+            </mat-panel-description>
           </div>
           <hr>
           <div style="width: 100%;">
             <mat-form-field class="row">
               <input matInput [formControl]="answer" placeholder="Phản hồi" />
             </mat-form-field>
-            <button class="btn btn-primary" style="margin-left: 50px;" (click)="sendAnswer(item.questionId)">gửi</button>
+            <button class="btn btn-primary" style="margin-left: 50px;" (click)="sendAnswer(item.questionDTO.questionId)">gửi</button>
           </div>
         </div>
 
       </mat-expansion-panel>
-      <!--      <mat-expansion-panel>-->
-      <!--        <mat-expansion-panel-header>-->
-
-      <!--          <mat-panel-title>-->
-      <!--            <img src="assets/bv2.jpg" style="width:30px ;height:30px ; border-radius: 50%; margin-right: 20px;" />-->
-      <!--            <span>Bệnh nhân A</span>-->
-      <!--          </mat-panel-title>-->
-      <!--          <mat-panel-description>-->
-      <!--            bệnh gì nên khám khoa nào?-->
-      <!--          </mat-panel-description>-->
-      <!--        </mat-expansion-panel-header>-->
-      <!--        <div style="margin-left: 50px;">-->
-      <!--          <div>-->
-      <!--            <div style="display: flex;">-->
-      <!--              <img src="assets/bv2.jpg" style="width:30px ;height:30px ; border-radius: 50%; margin-right: 20px;" />-->
-      <!--              <mat-panel-title> Bác sĩ B</mat-panel-title>-->
-      <!--            </div>-->
-
-      <!--            <mat-panel-description style="margin-left: 50px;">Câu trả lời</mat-panel-description>-->
-      <!--          </div>-->
-      <!--          <hr>-->
-      <!--          <div style="width: 100%;">-->
-      <!--            <mat-form-field class="row">-->
-      <!--              <input matInput placeholder="Phản hồi" />-->
-      <!--            </mat-form-field>-->
-      <!--            <button class="btn btn-primary" style="margin-left: 50px;">gửi</button>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </mat-expansion-panel>-->
     </mat-accordion>
   </div>
 </div>

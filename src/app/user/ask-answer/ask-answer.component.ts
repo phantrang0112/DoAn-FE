@@ -24,16 +24,16 @@ export class AskAnswerComponent implements OnInit {
   accountid;
   test = '<p>hi</p>'
   question: question = new question();
-  newAnswer: Answer= new Answer();
+  newAnswer: Answer = new Answer();
   constructor(private headerService: HeaderserviceService, private toppicService: TopicserviceService,
-    private authenticate: AuthenticationService, private questionService: QuestionserviceService,private answerService: AnswerserviceService) {
+    private authenticate: AuthenticationService, private questionService: QuestionserviceService, private answerService: AnswerserviceService) {
   }
 
   post = false;
   ngOnInit() {
     this.headerService.setActive('ask-answer');
     this.question.accountId = this.authenticate.currentUserValue.id;
-    this.accountid= this.authenticate.currentUserValue.id;
+    this.accountid = this.authenticate.currentUserValue.id;
     this.toppicService.getAllTopics().subscribe(data => {
       this.listTopics = data;
       console.log(data);
@@ -65,11 +65,12 @@ export class AskAnswerComponent implements OnInit {
     this.data = event.editor.getData();
   }
   sendAnswer(questionId) {
- this.newAnswer.accountid= this.accountid;
- this.newAnswer.answercontent=this.answer.value;
- this.newAnswer.questionid=questionId;
-this.answerService.insertAllAnswer(this.newAnswer).subscribe(data=>{
-  console.log(data);
-})
+    this.newAnswer.accountid = this.accountid;
+    this.newAnswer.answercontent = this.answer.value;
+    this.newAnswer.questionid = questionId;
+    this.answerService.insertAllAnswer(this.newAnswer).subscribe(data => {
+      console.log(data);
+this.ngOnInit();
+    })
   }
 }

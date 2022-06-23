@@ -19,7 +19,7 @@ export const environment = {
   paymentURL: 'http://localhost:8080/pay',
   topicURL: 'http://localhost:8080/topics/',
   questionURL:'http://localhost:8080/questions/',
-  answerURL:'http://localhost:8080/webyte/answer',
+  answerURL:'http://localhost:8080/webyte/answer/',
   rootURL: 'http://localhost:8080/',
   wsEndpoint: 'ws://localhost:8081/',
   RTCPeerConfiguration: {
