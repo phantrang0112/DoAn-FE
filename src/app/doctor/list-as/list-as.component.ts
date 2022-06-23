@@ -3,6 +3,7 @@ import {Route, Router} from '@angular/router';
 import {AppointmentScheduleService} from '../../service/doctorservice/appointment-schedule.service';
 import {appointmentScheduleDoctor} from '../models/AppointmentSchedule';
 import {Patient} from '../../models/patient';
+import {NotifyService} from '../../service/notify.service';
 
 @Component({
   selector: 'app-list-as',
@@ -12,13 +13,15 @@ import {Patient} from '../../models/patient';
 export class ListASComponent implements OnInit {
   public listAppSch: appointmentScheduleDoctor[];
   public listOriginal: appointmentScheduleDoctor[];
-  public listWaiting: appointmentScheduleDoctor[];
-  public listExam: appointmentScheduleDoctor[];
   public status: string;
+  public existAppSch: boolean;
   public statusFilter: string;
   public item: appointmentScheduleDoctor;
+  p: number;
 
-  constructor(private route: Router, private appointment: AppointmentScheduleService) {
+  constructor(private route: Router, private appointment: AppointmentScheduleService,
+              private notify: NotifyService) {
+    this.status = 'Tất cả';
   }
 
   ngOnInit() {
@@ -28,11 +31,13 @@ export class ListASComponent implements OnInit {
   getListAppointmentSchedule() {
     this.appointment.getListAppoint().subscribe(data => {
       if (data) {
+        this.existAppSch = true;
         this.listAppSch = data;
         this.listOriginal = data;
         console.log(data);
       }
     }, error => {
+      this.existAppSch = false;
       console.log(error);
     });
   }
@@ -44,20 +49,33 @@ export class ListASComponent implements OnInit {
   }
 
   getListAppSch() {
-    this.listAppSch = this.listOriginal;
+    this.status = 'Tất cả';
+    if (this.existAppSch) {
+      this.listAppSch = this.listOriginal;
+    } else {
+      this.notify.notifyErrorToggerMessage('Danh sách trống');
+    }
   }
 
   getListWaiting() {
-    this.listAppSch = this.listOriginal.filter(value => value.status === 'Chờ khám');
-    this.statusFilter = 'Chờ khám';
+    this.status = 'Chờ khám';
+    if (this.existAppSch) {
+      this.listAppSch = this.listOriginal.filter(value => value.status === 'Chờ khám');
+    } else {
+      this.notify.notifyErrorToggerMessage('Danh sách trống');
+    }
   }
 
   getListExam() {
-    this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã khám');
     this.statusFilter = 'Đã khám';
+    if (this.existAppSch) {
+      this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã khám');
+    } else {
+      this.notify.notifyErrorToggerMessage('Danh sách trống');
+    }
   }
 
-  click() {
+  chiTiet(id: number) {
     this.route.navigate(['/doctor/listASdetail']);
   }
 }

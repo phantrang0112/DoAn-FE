@@ -22,7 +22,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   addEmployeeForm = new FormGroup({
-    fullName: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]),
+    fullname: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]),
     address: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]),
     img: new FormControl(),
     birthday: new FormControl('', [Validators.required]),
@@ -42,6 +42,7 @@ export class MyAccountComponent implements OnInit {
     this.headerService.setActive('my-account');
     this.addEmployeeForm.controls.img.setValue('bv1.jpg');
     this.patient = this.userService.currentPatientValue;
+    console.log(this.patient.fullname);
     console.log(convert(this.patient.birthday));
     this.patient.birthday = convert(this.patient.birthday);
   }
@@ -59,18 +60,14 @@ export class MyAccountComponent implements OnInit {
   changeInfo() {
     this.obj = this.addEmployeeForm.value;
     this.obj.birthday = convert(this.addEmployeeForm.value.birthday);
-    console.log('birthday in form = ' + this.obj.birthday);
     this.obj.id = this.patient.id;
     this.obj.accountid = this.patient.accountid;
-    console.log(this.obj);
     this.userService.updatePatient(this.obj).subscribe(data => {
       if (data != null) {
-        this.notify.notifySuccessToggerMessage('Change Info Success');
-        console.log('obj = ' + this.obj);
+        this.notify.notifySuccessToggerMessage('Thay đổi thông tin thành công');
       }
     }, error => {
-      this.notify.notifiError('Change Info Error!!!', 'Please Re-Enter');
-      // console.log('obj = ' + this.obj);
+      this.notify.notifiError('Lỗi thông tin thay đổi!!!', 'Vui lòng nhập lại');
     });
   }
   changePass() {
