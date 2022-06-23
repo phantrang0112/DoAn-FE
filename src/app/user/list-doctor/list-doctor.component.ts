@@ -19,11 +19,11 @@ export class ListDoctorComponent implements OnInit {
 
   listKhoa: dept;
   slides = [
-    {image: './assets/imglogin.png', text: 'Khoa: khoa Nội', title: 'Nguyen văn a'},
-    {image: './assets/imglogin.png', text: 'khoa: khoa Nội', title: 'Nguyen văn a'},
-    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
-    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'},
-    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn a'}
+    {image: './assets/imglogin.png', text: 'Khoa: khoa Nội', title: 'Nguyen văn A'},
+    {image: './assets/imglogin.png', text: 'khoa: khoa Nội', title: 'Nguyen văn B'},
+    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn C'},
+    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn D'},
+    {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn E'}
   ];
 
   constructor(private headerService: HeaderserviceService, private doctorService: DoctorService, private deptService: DeptService) {

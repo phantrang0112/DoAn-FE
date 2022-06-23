@@ -34,14 +34,12 @@ export class VideoCallComponent implements AfterViewInit {
   constructor(private dataService: ChatserviceService) { }
   async call(): Promise<void> {
     this.createPeerConnection();
-    // Add the tracks from the local stream to the RTCPeerConnection
     this.localStream.getTracks().forEach(
       track => this.peerConnection.addTrack(track, this.localStream)
     );
 
     try {
       const offer: RTCSessionDescriptionInit = await this.peerConnection.createOffer(offerOptions);
-      // Establish the offer as the local peer's current description.
       await this.peerConnection.setLocalDescription(offer);
 
       this.inCall = true;
@@ -89,7 +87,6 @@ export class VideoCallComponent implements AfterViewInit {
         break;
       case 'SecurityError':
       case 'PermissionDeniedError':
-        // Do nothing; this is the same as the user canceling the call.
         break;
       default:
         console.log(e);
@@ -110,13 +107,9 @@ export class VideoCallComponent implements AfterViewInit {
       this.peerConnection.onicecandidate = null;
       this.peerConnection.oniceconnectionstatechange = null;
       this.peerConnection.onsignalingstatechange = null;
-
-      // Stop all transceivers on the connection
       this.peerConnection.getTransceivers().forEach(transceiver => {
         transceiver.stop();
       });
-
-      // Close the peer connection
       this.peerConnection.close();
       this.peerConnection = null;
 
@@ -199,23 +192,16 @@ export class VideoCallComponent implements AfterViewInit {
 
     this.peerConnection.setRemoteDescription(new RTCSessionDescription(msg))
       .then(() => {
-
-        // add media stream to local video
         this.localVideo.nativeElement.srcObject = this.localStream;
-
-        // add media tracks to remote connection
         this.localStream.getTracks().forEach(
           track => this.peerConnection.addTrack(track, this.localStream)
         );
 
       }).then(() => {
-
-        // Build SDP for answer message
         return this.peerConnection.createAnswer();
 
       }).then((answer) => {
 
-        // Set local SDP
         return this.peerConnection.setLocalDescription(answer);
 
       }).then(() => {

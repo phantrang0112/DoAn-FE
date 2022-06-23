@@ -22,7 +22,6 @@ export class UserHeaderComponent implements OnInit, DoCheck {
     this.class = '';
     this.navbar_mobile = '';
     this.scrolled = window.pageYOffset > 48;
-    console.log(this.scrolled);
   }
 
   class;
@@ -67,8 +66,6 @@ export class UserHeaderComponent implements OnInit, DoCheck {
         this.class = '';
       }
     }
-
-    console.log(this.scrolled);
   }
 
   click() {
@@ -87,7 +84,6 @@ export class UserHeaderComponent implements OnInit, DoCheck {
 
 
     this.class_bix = !this.class_bix;
-    console.log(this.navbar_mobile + this.isDesktop);
   }
 
   // about() {
@@ -107,7 +103,6 @@ export class UserHeaderComponent implements OnInit, DoCheck {
         this.notify.notifyCancel('Đã đăng xuất!!!');
         this.authentication.logout();
         this.userService.logout();
-        console.log(this.authentication.currentUserValue);
         this.existUser = false;
       }
     }
