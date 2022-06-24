@@ -58,6 +58,7 @@
         <mat-card-actions class="" style="display: flex;
         justify-content: center;">
         <button mat-button color="primary">{{item.status}}</button>
+        <button mat-button style="color: red;" *ngIf="item.status=='Chờ khám'">Vào phòng khám</button>
         <button mat-button color="primary" *ngIf="item.status=='Đã đăng ký'">Hủy</button>
       </mat-card-actions>
       </div>
