@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router} from '@angular/router';
+import { AuthenticationService } from 'src/app/service/authentication.service';
+import { NotifyService } from 'src/app/service/notify.service';
 
 @Component({
   selector: 'app-header-admin',
@@ -12,7 +14,7 @@ export class HeaderAdminComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
  formheader:FormGroup;
-  constructor(private router: Router) { }
+  constructor(private router: Router,private notify:NotifyService,private authentication: AuthenticationService) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -20,7 +22,10 @@ export class HeaderAdminComponent implements OnInit {
       this.isCollapsed = true;
    });
   }
-
+  logout() {
+    this.notify.notifyCancel('Đăng xuất thành công!!!');
+    this.authentication.logout();
+  }
 
 }
 declare interface RouteInfo {
@@ -31,10 +36,10 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/admin/home', title: 'Trang chủ',  icon: 'fa fa-home ', class: '' },
-    { path: '/admin/list-appointment', title: 'Danh sách lịch hẹn khám',  icon:'fa fa-calendar-plus-o text-blue', class: '' },
-    { path: '/admin/list-of-appointment', title: 'Danh sách lịch khám',  icon:'fa fa-calendar-plus-o text-blue', class: '' },
+    { path: '/admin/list-appointment', title: 'Danh sách lịch khám',  icon:'fa fa-calendar-plus-o text-blue', class: '' },
     { path: '/admin/department', title: 'Danh sách Khoa',  icon:'fa fa-list-alt text-orange', class: '' },
-    { path: '/user-profile', title: 'Danh sách bệnh nhân ',  icon:'fa fa-calendar text-yellow', class: '' },
+    { path: '/admin/list-doctor', title: 'Danh sách bác sĩ ',  icon:'fa fa-calendar text-yellow', class: '' },
+    { path: '/admin/list-patient', title: 'Danh sách bệnh nhân ',  icon:'fa fa-calendar text-yellow', class: '' },
     { path: '/tables', title: 'Danh sách thuốc',  icon:'fa fa-question-circle text-red', class: '' },
     { path: '/tables', title: 'Danh sách bệnh',  icon:'fa fa-question-circle text-red', class: '' },
     { path: '/tables', title: 'Danh sách bài viết',  icon:'fa fa-question-circle text-red', class: '' },

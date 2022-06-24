@@ -37,6 +37,7 @@ export class DoctorService {
     return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
   }
 
+
   // constructor(private httpclient: HttpClient) {
   //   this.currentDoctorSubject = new BehaviorSubject<Doctor>(JSON.parse(localStorage.getItem('currentDoctor')));
   //   this.currentDoctor = this.currentDoctorSubject.asObservable();
@@ -53,6 +54,7 @@ export class DoctorService {
   //   const url = `${environment.doctorURL}` + deptid + '/' + date;
   //   return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
   // }
+
 
   public getDoctorById(id: number) {
     return this.httpclient.get<Doctor>(`${environment.doctorURL}${id}`, this.httpOptions).pipe(
