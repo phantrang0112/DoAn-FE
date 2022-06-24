@@ -10,8 +10,8 @@ import {AlertService} from '../../service/alert.service';
 import {NotifyService} from '../../service/notify.service';
 import {UserAccount} from '../../models/user-account';
 import {Patient} from '../../models/patient';
-import {DoctorService} from '../../service/userservice/doctor.service';
 import {Doctor} from '../../models/doctor';
+import {DoctorService} from '../../service/doctorservice/doctor.service';
 
 @Component({
   selector: 'app-login',
@@ -75,9 +75,7 @@ export class LoginComponent implements OnInit {
             this.path = this.authentication.currentUserValue.role;
             this.router.navigate([this.path + '/home']);
             this.user = data;
-            console.log(data);
             // window.location.href = 'https://www.google.com';
-            console.log('this User = ' + this.user);
           } else {
             this.notify.notifiError('Đăng nhập thất bại', 'Nhập lại');
             this.loading = false;
@@ -89,10 +87,11 @@ export class LoginComponent implements OnInit {
         }
       );
     this.role = this.user.role;
+    console.log(this.role);
     if (this.role === 'user') {
       this.getDataUser();
-    } else if (this.role === 'doctor') {
-      console.log('if doctor = ' + this.role + ' id= ' + this.user.id);
+    }
+    if (this.role === 'doctor') {
       this.getDataDoctor();
     } else {
       this.getDataAdmin();
@@ -115,11 +114,11 @@ export class LoginComponent implements OnInit {
 
   getDataDoctor() {
     this.doctorService.getDoctorById(this.user.id).toPromise().then((data => {
-      if (data != null) {
+      if (data) {
         this.doctor = data;
         console.log('doctor = ' + data);
       } else {
-        this.alertService.error(null);
+        console.log('doctor in login is null');
       }
     }));
   }

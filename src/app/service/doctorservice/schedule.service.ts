@@ -7,7 +7,7 @@ import {environment} from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AppointmentScheduleService {
+export class ScheduleService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -19,12 +19,8 @@ export class AppointmentScheduleService {
     }),
   };
   constructor(private httpclient: HttpClient, private authentication: AuthenticationService) { }
-  public getListAppoint(): Observable<any> {
-    const url = `${environment.appointmentURL}all`;
+  public getListSchedule(id: number): Observable<any> {
+    const url = `${environment.scheduleURL}all-doctor-schedule/${id}`;
     return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
-  }
-  public updateStatusAppSch(id: number, trangthai: string): Observable<any> {
-    const url = `${environment.appointmentURL}update-status/${id}/${trangthai}`;
-    return this.httpclient.put<any>(url, this.httpOptions);
   }
 }

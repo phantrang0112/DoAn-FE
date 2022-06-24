@@ -2,6 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import {ScheduleService} from '../app/service/doctorservice/schedule.service';
+
 export const environment = {
   production: false,
   envName: 'DEV',
@@ -16,10 +18,11 @@ export const environment = {
   appointmentURL: 'http://localhost:8080/webyte/appointment-schedule/',
   prescriptionURL: 'http://localhost:8080/webyte/prescriptions/',
   sickURL: 'http://localhost:8080/webyte/prescriptions/',
+  scheduleURL: 'http://localhost:8080/webyte/schedule/',
   paymentURL: 'http://localhost:8080/pay',
   topicURL: 'http://localhost:8080/topics/',
-  questionURL:'http://localhost:8080/questions/',
-  answerURL:'http://localhost:8080/webyte/answer/',
+  questionURL: 'http://localhost:8080/questions/',
+  answerURL: 'http://localhost:8080/webyte/answer/',
   rootURL: 'http://localhost:8080/',
   wsEndpoint: 'ws://localhost:8081/',
   RTCPeerConfiguration: {

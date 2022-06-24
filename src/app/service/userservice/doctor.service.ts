@@ -23,15 +23,20 @@ export class DoctorService {
       // 'Content-Type': 'application/json',
     }),
   };
-  constructor(private httpclient: HttpClient) { }
+
+  constructor(private httpclient: HttpClient) {
+  }
+
   public getListDoctor(): Observable<any> {
     const url = `${environment.doctorURL}all`;
     return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
   }
-  public getListDoctorByDept(deptid,date): Observable<any> {
-    const url = `${environment.doctorURL}`+deptid+'/'+date;
+
+  public getListDoctorByDept(deptid, date): Observable<any> {
+    const url = `${environment.doctorURL}` + deptid + '/' + date;
     return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
   }
+
   // constructor(private httpclient: HttpClient) {
   //   this.currentDoctorSubject = new BehaviorSubject<Doctor>(JSON.parse(localStorage.getItem('currentDoctor')));
   //   this.currentDoctor = this.currentDoctorSubject.asObservable();
@@ -62,17 +67,18 @@ export class DoctorService {
       })
     );
   }
-  public getPriceDoctor(id:number,date:string){
-    const url = `${environment.doctorURL}get-price-doctor/`+id +'?date='+date;
+
+  public getPriceDoctor(id: number, date: string) {
+    const url = `${environment.doctorURL}get-price-doctor/` + id + '?date=' + date;
     return this.httpclient.get<any>(url, this.httpOptions);
   }
 
-  public update(img,data){
+  public update(img, data) {
     const formData = new FormData();
     formData.append('img', img);
-    formData.append('data',data)
+    formData.append('data', data);
 
-    const url = `${'http://localhost:8080/webyte/account/upload/'}`+6 ;
-    return this.httpclient.put<any>(url,formData);
+    const url = `${'http://localhost:8080/webyte/account/upload/'}` + 6;
+    return this.httpclient.put<any>(url, formData);
   }
 }

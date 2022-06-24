@@ -72,11 +72,12 @@ export class NotifyService {
       iconColor: '#0dd4b9',
     });
   }
-  notifyNotLink(title, text,icon) {
+
+  notifyNotLink(title, text, icon) {
     Swal.fire({
       title,
       html: text,
-      icon: icon,
+      icon,
       iconColor: '#0dd4b9',
     });
   }
@@ -113,6 +114,30 @@ export class NotifyService {
       icon: 'error',
       title,
       text
+    });
+  }
+
+  confirmSuccess(title, text, confirmButtonText, title1, text1): any {
+    function returnStatus(status) {
+      return status;
+    }
+    Swal.fire({
+      title,
+      text,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          title1,
+          text1,
+          'success'
+        );
+        this.route.navigate(['doctor/video-call']);
+      }
     });
   }
 }
