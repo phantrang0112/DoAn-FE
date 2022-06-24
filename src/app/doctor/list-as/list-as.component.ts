@@ -91,7 +91,7 @@ export class ListASComponent implements OnInit {
   }
 
   chiTiet(id: number) {
-    this.route.navigate(['/doctor/listASdetail']);
+    this.route.navigate(['/doctor/listASdetail',id]);
   }
 
   vaoKham(patientName: string, time: string, id: number) {

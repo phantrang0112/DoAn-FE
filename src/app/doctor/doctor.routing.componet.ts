@@ -14,7 +14,7 @@ export const DoctorRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'appointment-schedule', component: AppointmentScheduleComponent},
   {path: 'listAS', component: ListASComponent},
-  {path: 'listASdetail', component: DetailComponent},
+  {path: 'listASdetail/:id', component: DetailComponent},
   {path: 'register-schedule', component: RegisterScheduleComponent},
   {path: 'ask-answer', component: AskAnswerComponent},
   {path: 'video-call', component: ChatComponent},

@@ -11,11 +11,13 @@
   <div>
     <div style="margin-left: 15px;">
       <div>
-        <h2>Đơn thuốc số:</h2>
+        <h2>Đơn thuốc số: {{id}}</h2>
       </div>
-      <div><p>Ngày khám:</p></div>
-      <div><p>Bệnh:</p></div>
-      <div><p>Triệu chứng:</p></div>
+      <div><p>Ngày khám: {{date}}</p></div>
+      <div><p>Bệnh: <span *ngFor="let item of listSick.listSick">{{item.sickname}}</span></p>
+
+      </div>
+      <div><p>Triệu chứng:  <span *ngFor="let item of listSick.listSympom">{{item.symptomname}}</span></p></div>
     </div>
 <hr>
     <div>
@@ -28,25 +30,25 @@
         <!-- Position Column -->
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef> STT </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          <td mat-cell *matCellDef="let element,let i=index"> {{i+1}} </td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Tên thuốc </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.medicinename}} </td>
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
+        <ng-container matColumnDef="amount">
           <th mat-header-cell *matHeaderCellDef> Số lượng </th>
-          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
+        <ng-container matColumnDef="dosage">
           <th mat-header-cell *matHeaderCellDef> liều dùng </th>
-          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.dosage}} </td>
         </ng-container>
 
 

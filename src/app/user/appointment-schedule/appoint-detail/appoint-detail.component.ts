@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HealthrecordServiceService } from 'src/app/service/userservice/healthrecord-service.service';
 
 @Component({
   selector: 'app-appoint-detail',
@@ -7,25 +8,27 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./appoint-detail.component.css']
 })
 export class AppointDetailComponent implements OnInit {
-  dataSource = [
-    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-    {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  ];
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  constructor(private router: Router,private route: ActivatedRoute) { }
-id;
+  dataSource;
+  displayedColumns: string[] = ['position', 'name', 'amount', 'dosage'];
+  constructor(private router: Router, private route: ActivatedRoute, private healtherecordService: HealthrecordServiceService) { }
+  id;
+  date;
+  listMedicine;
+  listSick;
   ngOnInit() {
 
     this.id = +this.route.snapshot.paramMap.get('id');
+    this.date = this.route.snapshot.paramMap.get('date');
     console.log(this.id);
+    this.healtherecordService.getListMedicine(this.id).subscribe(data => {
+      this.listMedicine = data;
+      console.log(data);
+      this.dataSource = this.listMedicine;
+    })
+    this.healtherecordService.getListSick(this.id).subscribe(data => {
+      this.listSick = data;
+      console.log(data);
+    })
   }
 
 }
