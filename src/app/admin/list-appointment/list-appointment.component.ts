@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-appointment.component.css']
 })
 export class ListAppointmentComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','date','status',"hmm"];
+  displayedColumns: string[] = ['position', 'idAppoint', 'patientName', 'doctorName','date','status',"hmm"];
   dataSource = ELEMENT_DATA;
   constructor() { }
 

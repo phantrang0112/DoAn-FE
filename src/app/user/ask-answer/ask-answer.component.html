@@ -34,7 +34,7 @@
           <mat-panel-title>
             <img src="assets/{{item.img}}" style="width:30px ;height:30px ;
               border-radius: 50%; margin-right: 20px;" />
-            <span>Bệnh nhân {{item.questionDTO.accountName}}</span>
+            <span><b>Bệnh nhân: </b> {{item.questionDTO.accountName}}</span>
           </mat-panel-title>
           <mat-panel-description [innerHtml]="item.questionDTO.questionContent">
           </mat-panel-description>
@@ -48,7 +48,7 @@
             <div style="display: flex;">
               <img src="assets/bv2.jpg" style="width:30px ;height:30px ;
                 border-radius: 50%; margin-right: 20px;" />
-              <mat-panel-title>Bác sĩ #{{rep.accountName}}</mat-panel-title>
+              <mat-panel-title><b>{{rep.account}}: </b>  {{ rep.accountName}}</mat-panel-title>
             </div>
 
             <mat-panel-description style="margin-left: 50px;">{{rep.answercontent}}</mat-panel-description>
