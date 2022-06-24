@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AdminRoutes } from "./admin.routing";
@@ -10,12 +10,19 @@ import { ListAppointmentComponent } from './list-appointment/list-appointment.co
 import {MatTableModule} from '@angular/material/table';
 import { ListOfAppointmentComponent } from './list-of-appointment/list-of-appointment.component';
 import { DepartmentComponent } from './department/department.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import { MatFormFieldModule, MatNativeDateModule, MatSelectModule } from "@angular/material";
+import { ListDoctorComponent } from './list-doctor/list-doctor.component';
+import { ListPatientComponent } from './list-patient/list-patient.component';
 @NgModule({
   declarations: [
    HomeComponent,
    ListAppointmentComponent,
    ListOfAppointmentComponent,
-   DepartmentComponent],
+   DepartmentComponent,
+   ListDoctorComponent,
+   ListPatientComponent],
   imports: [
 
     CommonModule,
@@ -23,10 +30,14 @@ import { DepartmentComponent } from './department/department.component';
     NgbModule,
     FormsModule,
     MatTooltipModule,
-    MatTableModule
-
-
-  ],
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+  ]
 
 })
 
