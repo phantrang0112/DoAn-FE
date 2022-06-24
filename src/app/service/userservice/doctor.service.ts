@@ -32,22 +32,6 @@ export class DoctorService {
     const url = `${environment.doctorURL}`+deptid+'/'+date;
     return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
   }
-  // constructor(private httpclient: HttpClient) {
-  //   this.currentDoctorSubject = new BehaviorSubject<Doctor>(JSON.parse(localStorage.getItem('currentDoctor')));
-  //   this.currentDoctor = this.currentDoctorSubject.asObservable();
-  // }
-
-  // public get currentDoctorValue(): Doctor {
-  //   return this.currentDoctorSubject.value;
-  // }
-  // public getListDoctor(): Observable<any> {
-  //   const url = `${environment.doctorURL}all`;
-  //   return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
-  // }
-  // public getListDoctorByDept(deptid, date): Observable<any> {
-  //   const url = `${environment.doctorURL}` + deptid + '/' + date;
-  //   return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
-  // }
 
   public getDoctorById(id: number) {
     return this.httpclient.get<Doctor>(`${environment.doctorURL}${id}`, this.httpOptions).pipe(
