@@ -58,7 +58,8 @@ export class AppointmentScheduleComponent implements OnInit, DoCheck {
         '<p>Bạn vui lòng vào website <b> trước 5 phút </b> để chuẩn bị cho quá trình khám</p> ', 'info')
     }
     else if (item.status === 'Đã khám') {
-      this.route.navigate(['user/appoint-detail', item.idappointmentSchedule])
+      let date= moment(item.date).format('DD-MM-yyyy')
+      this.route.navigate(['user/appoint-detail', item.idappointmentSchedule,date.toString()])
     }
     else if (item.status === 'Chờ khám') {
       let date = new Date(item.date);
@@ -85,6 +86,9 @@ export class AppointmentScheduleComponent implements OnInit, DoCheck {
           '<p>Bạn vui lòng vào website <b> trước 5 phút </b> để chuẩn bị cho quá trình khám</p> ', 'info')
       }
 
+
+    }else{
+      this.notify.notifiError('Đơn thuốc đã hủy',"Đơn thuốc của bạn đã hủy!!!")
     }
   }
   registrationSchedule() {

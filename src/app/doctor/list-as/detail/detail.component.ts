@@ -1,15 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import {PrescriptionService} from '../../../service/doctorservice/prescription.service';
-import {Prescription} from '../../models/prescription';
+import { Medicine } from 'src/app/models/medicine';
+import { MedicineServiceService } from 'src/app/service/doctorservice/medicine-service.service';
+import { SickServiceService } from 'src/app/service/doctorservice/sick-service.service';
+import { PrescriptionService } from '../../../service/doctorservice/prescription.service';
+import { Prescription } from '../../models/prescription';
 
 
-export interface StateGroup {
-  letter: string;
-  names: string[];
-}
+
 
 // tslint:disable-next-line:variable-name
 export const _filter = (opt: string[], value: string): string[] => {
@@ -26,144 +27,73 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class DetailComponent implements OnInit {
 
+  id;
+  listSick;
   // tslint:disable-next-line:variable-name
-  constructor(private _formBuilder: FormBuilder, private presService: PrescriptionService) { }
+  constructor(private _formBuilder: FormBuilder, private presService: PrescriptionService, private router: Router, private route: ActivatedRoute, private siskService: SickServiceService, private medicineService: MedicineServiceService) {
+    this.id = +this.route.snapshot.paramMap.get('id');
+  }
   listPres: Prescription[];
   stateForm: FormGroup = this._formBuilder.group({
     stateGroup: '',
   });
+  formMedicine:FormGroup= new FormGroup({
+
+    medicine :new FormControl(),
+    amount: new FormControl(),
+    dosage: new FormControl()
+
+  })
   sicks = new FormControl();
   search;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
-  sickListOrgin: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  sickList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  stateGroups: StateGroup[] = [
-    {
-      letter: 'A',
-      names: ['Alabama', 'Alaska', 'Arizona', 'Arkansas'],
-    },
-    {
-      letter: 'C',
-      names: ['California', 'Colorado', 'Connecticut'],
-    },
-    {
-      letter: 'D',
-      names: ['Delaware'],
-    },
-    {
-      letter: 'F',
-      names: ['Florida'],
-    },
-    {
-      letter: 'G',
-      names: ['Georgia'],
-    },
-    {
-      letter: 'H',
-      names: ['Hawaii'],
-    },
-    {
-      letter: 'I',
-      names: ['Idaho', 'Illinois', 'Indiana', 'Iowa'],
-    },
-    {
-      letter: 'K',
-      names: ['Kansas', 'Kentucky'],
-    },
-    {
-      letter: 'L',
-      names: ['Louisiana'],
-    },
-    {
-      letter: 'M',
-      names: [
-        'Maine',
-        'Maryland',
-        'Massachusetts',
-        'Michigan',
-        'Minnesota',
-        'Mississippi',
-        'Missouri',
-        'Montana',
-      ],
-    },
-    {
-      letter: 'N',
-      names: [
-        'Nebraska',
-        'Nevada',
-        'New Hampshire',
-        'New Jersey',
-        'New Mexico',
-        'New York',
-        'North Carolina',
-        'North Dakota',
-      ],
-    },
-    {
-      letter: 'O',
-      names: ['Ohio', 'Oklahoma', 'Oregon'],
-    },
-    {
-      letter: 'P',
-      names: ['Pennsylvania'],
-    },
-    {
-      letter: 'R',
-      names: ['Rhode Island'],
-    },
-    {
-      letter: 'S',
-      names: ['South Carolina', 'South Dakota'],
-    },
-    {
-      letter: 'T',
-      names: ['Tennessee', 'Texas'],
-    },
-    {
-      letter: 'U',
-      names: ['Utah'],
-    },
-    {
-      letter: 'V',
-      names: ['Vermont', 'Virginia'],
-    },
-    {
-      letter: 'W',
-      names: ['Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
-    },
-  ];
+  sickListOrgin = [];
+  sickList = [];
+  medicineList: Medicine[] = [];
+  medicineListOrigin: Medicine[] = [];
   @ViewChild('selectList', { static: false }) selectList: ElementRef;
   myDropDown: string;
-  stateGroupOptions: Observable<StateGroup[]>;
+  stateGroupOptions: Observable<Medicine[]>;
   onChangeofOptions(newGov) {
     console.log(newGov);
   }
 
   ngOnInit() {
     // tslint:disable-next-line:no-non-null-assertion
-    this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterGroup(value)),
-    );
     this.presService.getListPrescription().subscribe(data => {
       if (data) {
         this.listPres = data;
         console.log(data);
       }
     });
+    this.siskService.getListSick().subscribe(data => {
+      this.listSick = data;
+      console.log(data);
+      this.sickListOrgin = this.listSick;
+      this.sickList = this.sickListOrgin;
+    })
+    this.medicineService.getListMedicine().subscribe(data => {
+      this.medicineListOrigin = data;
+      this.medicineList = this.medicineListOrigin;
+      console.log(data);
+    })
+
   }
 
-  private _filterGroup(value: string): StateGroup[] {
-    if (value) {
-      return this.stateGroups
-        .map(group => ({ letter: group.letter, names: _filter(group.names, value) }))
-        .filter(group => group.names.length > 0);
-
+  private _filterGroup(value) {
+    let listFilter: Medicine[] = [];
+    let search = this.formMedicine.controls.medicine.value;
+    console.log(search);
+    if (value != "") {
+      this.medicineList = this.medicineListOrigin.filter(a => a.medicinename.toLowerCase().includes(search.toLowerCase()));
+      console.log(this.medicineList);
     }
-    return this.stateGroups;
+    else {
+      this.medicineList = this.medicineListOrigin;
+    }
   }
+
   return() {
     console.log(this.stateForm.value);
   }
@@ -175,7 +105,7 @@ export class DetailComponent implements OnInit {
     if (event.key.length <= 1) {
 
       console.log(this.search);
-      this.sickList = this.sickListOrgin.filter(a => a.toLowerCase()
+      this.sickList = this.sickListOrgin.filter(a => a.sickname.toLowerCase()
         .includes(this.search.toLowerCase()));
       console.log('formControl' + this.sicks.value.length);
       if (this.sicks.value.length > 0) {
@@ -208,15 +138,15 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
+  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
+  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
+  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
+  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
+  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
+  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
 ];
 
