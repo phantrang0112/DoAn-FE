@@ -1,5 +1,5 @@
 export class Doctor {
-  public id: number;
+  public doctorid: number;
   public fullname: string;
   public address: string;
   public phone: string;
@@ -7,4 +7,5 @@ export class Doctor {
   public accountid: number;
   public img: string;
   public birthday: string;
+  public deptid: number;
 }

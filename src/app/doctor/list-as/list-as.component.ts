@@ -15,17 +15,32 @@ export class ListASComponent implements OnInit {
   public listOriginal: appointmentScheduleDoctor[];
   public status: string;
   public existAppSch: boolean;
-  public statusFilter: string;
+  public statusExam: boolean;
   public item: appointmentScheduleDoctor;
   p: number;
 
   constructor(private route: Router, private appointment: AppointmentScheduleService,
               private notify: NotifyService) {
     this.status = 'Tất cả';
+    this.statusExam = true;
   }
 
   ngOnInit() {
     this.getListAppointmentSchedule();
+  }
+
+
+
+  checkTimeWithRealTime(time: string, date: string) {
+    const today = new Date();
+    const realDay =  ('0' + today.getDate()).slice(-2) + '-'  + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + today.getFullYear();
+    // console.log('realDay = ' + realDay + ' ---  date = ' + date);
+    // const realTime = today.getHours() + ':' + today.getMinutes();
+    // console.log('realTime = ' + realTime);
+    if (date === realDay) {
+      return true;
+    }
+    return false;
   }
 
   getListAppointmentSchedule() {
@@ -42,8 +57,8 @@ export class ListASComponent implements OnInit {
     });
   }
 
-  checkStatus(check: string) {
-    if (check === 'Chờ khám') {
+  checkMedicalStatus(check: string) {
+    if (check === 'Đã khám') {
       return true;
     }
   }
@@ -67,7 +82,7 @@ export class ListASComponent implements OnInit {
   }
 
   getListExam() {
-    this.statusFilter = 'Đã khám';
+    this.status = 'Đã khám';
     if (this.existAppSch) {
       this.listAppSch = this.listOriginal.filter(value => value.status === 'Đã khám');
     } else {
@@ -77,5 +92,15 @@ export class ListASComponent implements OnInit {
 
   chiTiet(id: number) {
     this.route.navigate(['/doctor/listASdetail']);
+  }
+
+  vaoKham(patientName: string, time: string, id: number) {
+    this.appointment.updateStatusAppSch(id, 'Đã khám').subscribe(data => {
+      if (data) {
+        console.log(data);
+      }
+    });
+    this.notify.confirmSuccess('Bạn có chắc chắn không?', 'Bạn sẽ không thể hoàn nguyên điều này!',
+      'Vâng, tôi đồng ý!', 'Xác nhận vào khám bệnh nhân ' + patientName, 'Thời gian vào khám: ' + time + 'H');
   }
 }

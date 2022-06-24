@@ -119,5 +119,8 @@
       }
     }
   },
-  "defaultProject": "DoAn"
+  "defaultProject": "DoAn",
+  "cli": {
+    "analytics": "ef62fed0-3520-44ec-b570-9ff3322c3718"
+  }
 }

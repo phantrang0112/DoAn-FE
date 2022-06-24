@@ -2,6 +2,11 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import * as moment from 'moment';
+import {ScheduleService} from '../../service/doctorservice/schedule.service';
+import {DoctorService} from '../../service/doctorservice/doctor.service';
+import {Schedule} from '../models/schedule';
+import {Doctor} from '../../models/doctor';
+import {NotifyService} from '../../service/notify.service';
 
 @Component({
   selector: 'app-register-schedule',
@@ -9,8 +14,12 @@ import * as moment from 'moment';
   styleUrls: ['./register-schedule.component.css']
 })
 export class RegisterScheduleComponent implements OnInit, DoCheck {
+  doctorInfo: Doctor;
+  public listSchedule: Schedule [];
 
-  constructor() {
+  constructor(private scheduleService: ScheduleService, private doctorService: DoctorService,
+              private notify: NotifyService) {
+    this.doctorInfo = this.doctorService.currentDoctorValue;
   }
 
   displayedColumns: string[] = ['select', 'position', 'weekdays', 'date', 'status'];
@@ -21,10 +30,11 @@ export class RegisterScheduleComponent implements OnInit, DoCheck {
     console.log(this.selection);
   }
 
+
   ngOnInit() {
     let date = new Date();
     console.log(date.getDate());
-    if (date.getDay() === 2) {
+    if (date.getDay() === 5) {
       for (let i = 2; i < 9; i++) {
         const day = moment().add(i, 'days').format('YYYY MM DD');
         date = new Date(day);
@@ -35,6 +45,26 @@ export class RegisterScheduleComponent implements OnInit, DoCheck {
 
     } else {
 
+    }
+  }
+
+  getListScheduleOfDoctor() {
+    const date = new Date();
+    if (date.getDay() !== 4) {
+    this.scheduleService.getListSchedule(this.doctorInfo.doctorid).toPromise().then(
+      data => {
+        if (data) {
+          this.listSchedule = data;
+          for (let i = 2; i < 9; i++) {
+            this.listSchedule[i - 2].position = i - 1;
+            this.listSchedule[i - 2].weekdays = this.changeDay(this.listSchedule[i].dutyday);
+          }
+          this.dataSource = new MatTableDataSource<Schedule>(this.listSchedule);
+        }
+      }, error => {
+        this.notify.notifiError('Lỗi', 'Không tồn tại danh sách đăng ký lịch trực');
+      }
+    );
     }
   }
 
@@ -107,9 +137,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, weekdays: '', date: '', status: 'H'},
   {position: 2, weekdays: '', date: '', status: 'H'},
   {position: 3, weekdays: '', date: '', status: 'H'},
-  {position: 4, weekdays: 'Hydrogen', date: '', status: 'H'},
-  {position: 5, weekdays: 'Hydrogen', date: '', status: 'H'},
-  {position: 6, weekdays: 'Hydrogen', date: '', status: 'H'},
-  {position: 7, weekdays: 'Hydrogen', date: '', status: 'H'},
+  {position: 4, weekdays: '', date: '', status: 'H'},
+  {position: 5, weekdays: '', date: '', status: 'H'},
+  {position: 6, weekdays: '', date: '', status: 'H'},
+  {position: 7, weekdays: '', date: '', status: 'H'},
 
 ];
