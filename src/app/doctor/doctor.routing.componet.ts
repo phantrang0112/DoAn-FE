@@ -7,6 +7,8 @@ import {HomeComponent} from './home/home.component';
 import {DetailComponent} from './list-as/detail/detail.component';
 import {ListASComponent} from './list-as/list-as.component';
 import {RegisterScheduleComponent} from './register-schedule/register-schedule.component';
+import {MyAccountComponent} from './my-account/my-account.component';
+import {ChangePasswordComponent} from './my-account/change-password/change-password.component';
 
 
 export const DoctorRoutes: Routes = [
@@ -18,4 +20,6 @@ export const DoctorRoutes: Routes = [
   {path: 'register-schedule', component: RegisterScheduleComponent},
   {path: 'ask-answer', component: AskAnswerComponent},
   {path: 'video-call', component: ChatComponent},
+  {path: 'my-account', component: MyAccountComponent},
+  {path: 'change-password', component: ChangePasswordComponent}
 ];

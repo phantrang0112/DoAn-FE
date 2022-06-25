@@ -16,10 +16,13 @@ import {NotifyService} from '../../service/notify.service';
 export class RegisterScheduleComponent implements OnInit, DoCheck {
   doctorInfo: Doctor;
   public listSchedule: Schedule [];
+  public listScheduleExist: Schedule [];
+  checkSaturday: boolean;
 
   constructor(private scheduleService: ScheduleService, private doctorService: DoctorService,
               private notify: NotifyService) {
     this.doctorInfo = this.doctorService.currentDoctorValue;
+    this.checkSaturday = false;
   }
 
   displayedColumns: string[] = ['select', 'position', 'weekdays', 'date', 'status'];
@@ -34,37 +37,48 @@ export class RegisterScheduleComponent implements OnInit, DoCheck {
   ngOnInit() {
     let date = new Date();
     console.log(date.getDate());
-    if (date.getDay() === 5) {
+    if (date.getDay() !== 6) {
       for (let i = 2; i < 9; i++) {
         const day = moment().add(i, 'days').format('YYYY MM DD');
         date = new Date(day);
-        ELEMENT_DATA[i - 2].date = moment(day).format('DD/MM/YYYY');
+        ELEMENT_DATA[i - 2].date = moment(day).format('DD-MM-YYYY');
         ELEMENT_DATA[i - 2].weekdays = this.changeDay(date.getDay());
         ELEMENT_DATA[i - 2].status = 'Chưa đăng ký';
       }
 
     } else {
-
+      this.getListScheduleOfDoctor();
     }
   }
 
   getListScheduleOfDoctor() {
-    const date = new Date();
-    if (date.getDay() !== 4) {
     this.scheduleService.getListSchedule(this.doctorInfo.doctorid).toPromise().then(
-      data => {
-        if (data) {
-          this.listSchedule = data;
-          for (let i = 2; i < 9; i++) {
-            this.listSchedule[i - 2].position = i - 1;
-            this.listSchedule[i - 2].weekdays = this.changeDay(this.listSchedule[i].dutyday);
+        data => {
+          if (data) {
+            this.listSchedule = data;
+            let dateNow = new Date();
+            for (let i = 2; i < 9; i++) {
+              const date = new Date(this.listSchedule[i - 2].dutyday);
+              const day = moment().add(i, 'days');
+              // @ts-ignore
+              dateNow = new Date(day);
+              if (date.getDate() === dateNow.getDate()) {
+                ELEMENT_DATA[i - 2].status = 'Đã đăng ký';
+              }
+              ELEMENT_DATA[i - 2].date = moment(day).format('DD-MM-YYYY');
+              ELEMENT_DATA[i - 2].weekdays = this.changeDay(date.getDay());
+              ELEMENT_DATA[i - 2].status = 'Chưa đăng ký';
+            }
           }
-          this.dataSource = new MatTableDataSource<Schedule>(this.listSchedule);
+        }, error => {
+          this.notify.notifiError('Lỗi', 'Không tồn tại danh sách đăng ký lịch trực');
         }
-      }, error => {
-        this.notify.notifiError('Lỗi', 'Không tồn tại danh sách đăng ký lịch trực');
-      }
-    );
+      );
+  }
+
+  registerListScheduleOfDoctor() {
+    for (let i = 2; i < 9; i++) {
+
     }
   }
 

@@ -1,5 +1,5 @@
-export class Doctor {
-  public doctorid: number;
+export class UserInfo {
+  public id: number;
   public fullname: string;
   public address: string;
   public phone: string;

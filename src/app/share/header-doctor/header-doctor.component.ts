@@ -5,6 +5,7 @@ import {HeaderserviceService} from '../../service/userservice/headerservice.serv
 import {AuthenticationService} from '../../service/authentication.service';
 import {NotifyService} from '../../service/notify.service';
 import {UserserviceService} from '../../service/userservice.service';
+import {DoctorService} from '../../service/doctorservice/doctor.service';
 
 @Component({
   selector: 'app-header-doctor',
@@ -17,9 +18,9 @@ export class HeaderDoctorComponent implements OnInit {
   public isCollapsed = true;
   formheader: FormGroup;
 
-  constructor(private router: Router, private route: Router, private headerService: HeaderserviceService,
+  constructor(private router: Router, private headerService: HeaderserviceService,
               private authentication: AuthenticationService, private notify: NotifyService,
-              private userService: UserserviceService) {
+              private userService: UserserviceService, private doctorService: DoctorService) {
   }
 
   ngOnInit() {
@@ -28,8 +29,14 @@ export class HeaderDoctorComponent implements OnInit {
       this.isCollapsed = true;
     });
   }
+
+  thongTinCaNhan() {
+    this.router.navigate(['/doctor/my-account']);
+  }
+
   logout() {
     this.notify.notifyCancel('Đăng xuất thành công!!!');
+    this.doctorService.logout();
     this.authentication.logout();
   }
 }
@@ -47,6 +54,7 @@ export const ROUTES: RouteInfo[] = [
   {path: '/doctor/listAS', title: 'Danh sách lịch khám', icon: 'fa fa-list-alt text-orange', class: ''},
   {path: '/doctor/register-schedule', title: 'Đăng ký lịch trực', icon: 'fa fa-calendar text-yellow', class: ''},
   {path: '/doctor/ask-answer', title: 'Hỏi đáp với bệnh nhân', icon: 'fa fa-question-circle text-red', class: ''},
+
   // {path: '/doctor/video-chat', title: 'Hỏi đáp với bệnh nhân', icon: 'fa fa-question-circle text-red', class: ''},
 
 ];

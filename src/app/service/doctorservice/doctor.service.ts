@@ -6,6 +6,7 @@ import {NotifyService} from '../notify.service';
 import {AuthenticationService} from '../authentication.service';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
+import {Patient} from '../../models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -44,8 +45,25 @@ export class DoctorService {
     );
   }
 
+  updateDoctor(obj: Doctor) {
+    return this.httpclient.put(`${environment.doctorURL}update`, obj, this.httpOptions).pipe(map(data => {
+      if (data != null) {
+        localStorage.setItem('currentDoctor', JSON.stringify(data));
+        return data;
+      }
+      return null;
+    }));
+  }
+
+
   public get currentDoctorValue(): Doctor {
     console.log('current Doctor= ' + this.currentDoctorSubject.value);
     return this.currentDoctorSubject.value;
+  }
+
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentDoctor');
+    this.currentDoctorSubject.next(null);
   }
 }
