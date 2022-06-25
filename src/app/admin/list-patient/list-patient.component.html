@@ -46,7 +46,7 @@
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let element" style="text-align: right;">
                 <a style="color: rgb(232, 18, 18);margin-right: 10px; font-size: larger; "><i class="fa fa-trash"
-                                                                                              aria-hidden="true"></i></a>
+                                                                                              aria-hidden="true" (click)="xoaBenhNha(element.patientid)"></i></a>
                 <a style="color: rgb(61, 205, 230); font-size: larger;"><i class="fa  fa-pencil-square-o"
                                                                            aria-hidden="true"></i></a>
               </td>

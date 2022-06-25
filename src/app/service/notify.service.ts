@@ -1,13 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {DeptService} from './adminservice/dept.service';
+import {DoctorServiceService} from './adminservice/doctor-service.service';
+import {PatientServiceService} from './adminservice/patient-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotifyService {
 
-  constructor(private route: Router) {
+  constructor(private route: Router, private deptSV: DeptService,
+              private doctorSV: DoctorServiceService, private patientSV: PatientServiceService) {
   }
 
   blockPermission() {
@@ -121,6 +125,7 @@ export class NotifyService {
     function returnStatus(status) {
       return status;
     }
+
     Swal.fire({
       title,
       text,
@@ -139,5 +144,180 @@ export class NotifyService {
         this.route.navigate(['doctor/video-call']);
       }
     });
+  }
+
+  xoaKhoa(id: number) {
+    Swal.fire({
+      title: 'Bạn đã chắc chắn?',
+      text: 'Bạn sẽ xóa khoa này khỏi danh sách khoa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý xóa!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deptSV.deleteDeptByID(id).subscribe(data => {
+          if (data === 1) {
+            this.notifyCancel('Xóa thành công!');
+            this.reloadPage();
+          } else {
+            this.notifyCancel('Khoa đang tồn tại bác sĩ, Không thể xóa!');
+          }
+        }, error => {
+          this.notifyCancel('Xóa không thành công!');
+        });
+      }
+    });
+  }
+
+  xoaBacSi(id: number) {
+    Swal.fire({
+      title: 'Bạn đã chắc chắn?',
+      text: 'Bạn sẽ xóa khỏi danh sách khoa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý xóa!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.doctorSV.deleteDoctorByID(id).subscribe(data => {
+          if (data === 1) {
+            this.notifyCancel('Xóa thành công!');
+            this.reloadPage();
+          } else {
+            this.notifyCancel('Không thể xóa bác sĩ đang có nhiệm vụ!');
+          }
+        }, error => {
+          this.notifyCancel('Xóa không thành công!');
+        });
+      }
+    });
+  }
+
+  xoaThuoc(id: number) {
+    Swal.fire({
+      title: 'Bạn đã chắc chắn?',
+      text: 'Bạn sẽ xóa khỏi danh sách khoa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý xóa!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deptSV.deleteDeptByID(id).subscribe(data => {
+          if (data === 1) {
+            this.notifyCancel('Xóa thành công!');
+            this.reloadPage();
+          } else {
+            this.notifyCancel('Xóa không thành công!');
+          }
+        }, error => {
+          this.notifyCancel('Xóa không thành công!');
+        });
+      }
+    });
+  }
+  xoaBenh(id: number) {
+    Swal.fire({
+      title: 'Bạn đã chắc chắn?',
+      text: 'Bạn sẽ xóa khỏi danh sách khoa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý xóa!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deptSV.deleteDeptByID(id).subscribe(data => {
+          if (data === 1) {
+            this.notifyCancel('Xóa thành công!');
+            this.reloadPage();
+          } else {
+            this.notifyCancel('Xóa không thành công!');
+          }
+        }, error => {
+          this.notifyCancel('Xóa không thành công!');
+        });
+      }
+    });
+  }
+  xoaLichKham(id: number) {
+    Swal.fire({
+      title: 'Bạn đã chắc chắn?',
+      text: 'Bạn sẽ xóa khỏi danh sách khoa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý xóa!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deptSV.deleteDeptByID(id).subscribe(data => {
+          if (data === 1) {
+            this.notifyCancel('Xóa thành công!');
+            this.reloadPage();
+          } else {
+            this.notifyCancel('Xóa không thành công!');
+          }
+        }, error => {
+          this.notifyCancel('Xóa không thành công!');
+        });
+      }
+    });
+  }
+  xoaBenhNhan(id: number) {
+    Swal.fire({
+      title: 'Bạn đã chắc chắn?',
+      text: 'Bạn sẽ xóa khỏi danh sách khoa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý xóa!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.patientSV.deletePatientByID(id).subscribe(data => {
+          if (data === 1) {
+            this.notifyCancel('Xóa thành công!');
+            this.reloadPage();
+          } else {
+            this.notifyCancel('Bệnh nhân đã đăng ký dịch vụ không thể xóa!');
+          }
+        }, error => {
+          this.notifyCancel('Xóa không thành công!');
+        });
+      }
+    });
+  }
+  xoaBaiViet(id: number) {
+    Swal.fire({
+      title: 'Bạn đã chắc chắn?',
+      text: 'Bạn sẽ xóa khỏi danh sách khoa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý xóa!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deptSV.deleteDeptByID(id).subscribe(data => {
+          if (data === 1) {
+            this.notifyCancel('Xóa thành công!');
+            this.reloadPage();
+          } else {
+            this.notifyCancel('Xóa không thành công!');
+          }
+        }, error => {
+          this.notifyCancel('Xóa không thành công!');
+        });
+      }
+    });
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 }

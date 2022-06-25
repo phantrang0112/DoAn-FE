@@ -24,6 +24,7 @@ import { UserRoutes } from './user-routing.component';
 import { VideoCallComponent } from './talk/video-call/video-call.component';
 import { AppointDetailComponent } from './appointment-schedule/appoint-detail/appoint-detail.component';
 import {ChangePasswordComponent} from './my-account/change-password/change-password.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -44,29 +45,30 @@ import {ChangePasswordComponent} from './my-account/change-password/change-passw
     AppointDetailComponent,
     ChangePasswordComponent
 ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(UserRoutes),
-    MatCarouselModule.forRoot(),
-    MatTabsModule,
-    RouterModule,
-    MatCardModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    CKEditorModule,
-    MatExpansionModule,
-    HttpClientModule,
-    MatGridListModule,
-    MatTableModule,
-    MatAutocompleteModule,
+    imports: [
+        CommonModule,
+        RouterModule.forChild(UserRoutes),
+        MatCarouselModule.forRoot(),
+        MatTabsModule,
+        RouterModule,
+        MatCardModule,
+        MatButtonModule,
+        MatPaginatorModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        MatInputModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        CKEditorModule,
+        MatExpansionModule,
+        HttpClientModule,
+        MatGridListModule,
+        MatTableModule,
+        MatAutocompleteModule,
+        NgxPaginationModule,
 
-  ],
+    ],
 
 })
 

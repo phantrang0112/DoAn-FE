@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PatientServiceService} from 'src/app/service/adminservice/patient-service.service';
+import {NotifyService} from '../../service/notify.service';
 
 @Component({
   selector: 'app-list-patient',
@@ -14,7 +15,7 @@ export class ListPatientComponent implements OnInit {
   listAppoint;
   p: number;
 
-  constructor(private patientService: PatientServiceService) {
+  constructor(private patientService: PatientServiceService, private notify: NotifyService) {
 
   }
 
@@ -26,5 +27,7 @@ export class ListPatientComponent implements OnInit {
       this.dataSource = this.listPatientOrigin;
     });
   }
-
+  xoaBenhNha(id: number) {
+    this.notify.xoaBenhNhan(id);
+  }
 }

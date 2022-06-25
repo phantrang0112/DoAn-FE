@@ -4,6 +4,8 @@ import {AppointmentScheduleService} from '../../service/doctorservice/appointmen
 import {appointmentScheduleDoctor} from '../models/AppointmentSchedule';
 import {Patient} from '../../models/patient';
 import {NotifyService} from '../../service/notify.service';
+import {DoctorService} from '../../service/doctorservice/doctor.service';
+import {Doctor} from '../../models/doctor';
 
 @Component({
   selector: 'app-list-as',
@@ -16,13 +18,15 @@ export class ListASComponent implements OnInit {
   public status: string;
   public existAppSch: boolean;
   public statusExam: boolean;
+  public doctorInfo: Doctor;
   public item: appointmentScheduleDoctor;
   p: number;
 
   constructor(private route: Router, private appointment: AppointmentScheduleService,
-              private notify: NotifyService) {
+              private notify: NotifyService, private doctorService: DoctorService) {
     this.status = 'Tất cả';
     this.statusExam = true;
+    this.doctorInfo = this.doctorService.currentDoctorValue;
   }
 
   ngOnInit() {
@@ -44,7 +48,7 @@ export class ListASComponent implements OnInit {
   }
 
   getListAppointmentSchedule() {
-    this.appointment.getListAppoint().subscribe(data => {
+    this.appointment.getListAppointByDoctor(this.doctorInfo.doctorid).subscribe(data => {
       if (data) {
         this.existAppSch = true;
         this.listAppSch = data;
@@ -91,7 +95,7 @@ export class ListASComponent implements OnInit {
   }
 
   chiTiet(id: number) {
-    this.route.navigate(['/doctor/listASdetail',id]);
+    this.route.navigate(['/doctor/listASdetail', id]);
   }
 
   vaoKham(patientName: string, time: string, id: number) {

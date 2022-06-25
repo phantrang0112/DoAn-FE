@@ -20,6 +20,10 @@ export class DeptService {
   constructor(private httpclient: HttpClient) { }
   public getListDept(): Observable<any> {
     const url = `${environment.deptURL}`;
-    return this.httpclient.get<any>(url, this.httpOptions);// Nhớ import catchError
+    return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
+  }
+  public deleteDeptByID(id: number) {
+    const url = `${environment.deptURL}${id}`;
+    return this.httpclient.delete<any>(url, this.httpOptions);
   }
 }
