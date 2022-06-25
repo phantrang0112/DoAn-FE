@@ -59,7 +59,7 @@ export class AppointmentScheduleComponent implements OnInit, DoCheck {
     }
     else if (item.status === 'Đã khám') {
       let date= moment(item.date).format('DD-MM-yyyy')
-      this.route.navigate(['user/appoint-detail', item.idappointmentSchedule,date.toString()])
+      this.route.navigate(['user/appoint-detail', item.idappointmentSchedule,date])
     }
     else if (item.status === 'Chờ khám') {
       let date = new Date(item.date);
