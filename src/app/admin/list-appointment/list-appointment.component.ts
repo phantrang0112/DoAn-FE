@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AppointmentScheduleService } from 'src/app/service/adminservice/appointment-schedule.service';
+import {Component, OnInit} from '@angular/core';
+import {AppointmentScheduleService} from 'src/app/service/adminservice/appointment-schedule.service';
 
 @Component({
   selector: 'app-list-appointment',
@@ -7,10 +7,12 @@ import { AppointmentScheduleService } from 'src/app/service/adminservice/appoint
   styleUrls: ['./list-appointment.component.css']
 })
 export class ListAppointmentComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'idAppoint', 'patientName', 'doctorName', 'date', 'status', 'typeOfClinic',"hmm"];
+  displayedColumns: string[] = ['position', 'idAppoint', 'patientName', 'doctorName', 'date', 'status', 'typeOfClinic', 'hmm'];
   dataSource;
   listAppointOrgin;
   listAppoint;
+  p: number;
+
   constructor(private appointService: AppointmentScheduleService) {
 
   }
@@ -20,14 +22,15 @@ export class ListAppointmentComponent implements OnInit {
       this.dataSource = data;
       this.listAppointOrgin = data;
       this.listAppoint = this.listAppointOrgin;
-    })
+    });
   }
+
   getAppoint(status) {
-    if(status!=null && status!=""){
+    if (status != null && status !== '') {
       this.listAppoint = this.listAppointOrgin.filter(a =>
-        a.status == status
-      )
-    }else{
+        a.status === status
+      );
+    } else {
       this.listAppoint = this.listAppointOrgin;
     }
 
@@ -35,6 +38,7 @@ export class ListAppointmentComponent implements OnInit {
   }
 
 }
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -45,7 +49,7 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', date: '01/1/2022', status: 'vv' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', date: '01/1/2022', status: 'vv' },
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', date: '01/1/2022', status: 'vv'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', date: '01/1/2022', status: 'vv'},
 
 ];

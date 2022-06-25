@@ -11,7 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatExpansionModule, MatGridListModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
+import {MatExpansionModule, MatGridListModule, MatNativeDateModule, MatSelectModule, MatCardModule} from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
@@ -23,6 +23,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {ChatComponent} from './chat/chat.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { ChangePasswordComponent } from './my-account/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     RegisterScheduleComponent,
     AskAnswerComponent,
     ChatComponent,
+    MyAccountComponent,
+    ChangePasswordComponent,
   ],
   imports: [
 
@@ -55,7 +59,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MatIconModule,
     HttpClientModule,
     MatGridListModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatCardModule
   ],
 
 })

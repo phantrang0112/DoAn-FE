@@ -5,6 +5,7 @@ import {HeaderserviceService} from 'src/app/service/userservice/headerservice.se
 import {AuthenticationService} from '../../service/authentication.service';
 import {NotifyService} from '../../service/notify.service';
 import {UserserviceService} from '../../service/userservice.service';
+import {DoctorService} from '../../service/doctorservice/doctor.service';
 
 
 @Component({
@@ -17,8 +18,8 @@ export class UserHeaderComponent implements OnInit, DoCheck {
 
 
   constructor(private route: Router, private headerService: HeaderserviceService,
-              private  authentication: AuthenticationService, private notify: NotifyService,
-              private  userService: UserserviceService) {
+              private authentication: AuthenticationService, private notify: NotifyService,
+              private userService: UserserviceService, private doctorService: DoctorService) {
     this.class = '';
     this.navbar_mobile = '';
     this.scrolled = window.pageYOffset > 48;
@@ -42,7 +43,7 @@ export class UserHeaderComponent implements OnInit, DoCheck {
   ngOnInit() {
 
     this.home = this.headerService.getThisHome();
-    if(this.home!=true){
+    if (this.home !== true) {
       this.class = 'header-scrolled';
     }
     this.existUser = this.authentication.existUser();
@@ -103,6 +104,7 @@ export class UserHeaderComponent implements OnInit, DoCheck {
         this.notify.notifyCancel('Đã đăng xuất!!!');
         this.authentication.logout();
         this.userService.logout();
+        this.doctorService.logout();
         this.existUser = false;
       }
     }

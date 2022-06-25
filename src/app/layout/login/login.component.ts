@@ -12,6 +12,7 @@ import {UserAccount} from '../../models/user-account';
 import {Patient} from '../../models/patient';
 import {Doctor} from '../../models/doctor';
 import {DoctorService} from '../../service/doctorservice/doctor.service';
+import {UserInfo} from '../../models/user-info';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   user = new UserAccount();
   patient = new Patient();
   doctor = new Doctor();
+  admin = new UserInfo();
   submitted = false;
   loading = false;
   id: number;
@@ -93,7 +95,8 @@ export class LoginComponent implements OnInit {
     }
     if (this.role === 'doctor') {
       this.getDataDoctor();
-    } else {
+    }
+    if (this.role === 'admin') {
       this.getDataAdmin();
     }
   }
@@ -124,6 +127,14 @@ export class LoginComponent implements OnInit {
   }
 
   getDataAdmin() {
+    // this.adminService.getAdminById(this.user.id).toPromise().then((data => {
+    //   if (data) {
+    //     this.admin = data;
+    //     console.log('admin = ' + data);
+    //   } else {
+    //     console.log('doctor in login is null');
+    //   }
+    // }));
   }
 }
 
