@@ -8,6 +8,7 @@ import {ListPatientComponent} from './list-patient/list-patient.component';
 import {ListMedicineComponent} from './list-medicine/list-medicine.component';
 import {ListSickComponent} from './list-sick/list-sick.component';
 import {NewsComponent} from './list-news/news.component';
+import {MyAccountComponent} from './my-account/my-account.component';
 
 export const AdminRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -19,4 +20,5 @@ export const AdminRoutes: Routes = [
   {path: 'list-medicine', component: ListMedicineComponent},
   {path: 'list-sick', component: ListSickComponent},
   {path: 'list-news', component: NewsComponent},
+  {path: 'my-account', component: MyAccountComponent}
 ];

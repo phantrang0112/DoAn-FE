@@ -37,6 +37,14 @@ export class ListAppointmentComponent implements OnInit {
     this.dataSource = this.listAppoint;
   }
 
+  xoaKhoa() {
+
+  }
+
+  themKhoa() {
+
+  }
+
 }
 
 export interface PeriodicElement {

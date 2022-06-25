@@ -41,8 +41,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let appSch of listAppSch | paginate: {itemsPerPage:5, currentPage:p}">
-              <td>1</td>
+            <tr *ngFor="let appSch of listAppSch | paginate: {itemsPerPage:5, currentPage:p}  , let i=index">
+              <td>{{i+1}}</td>
               <th scope="row">
                 <div class="media align-items-center">
 

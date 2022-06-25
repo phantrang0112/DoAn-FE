@@ -19,6 +19,7 @@ import {ListMedicineComponent} from './list-medicine/list-medicine.component';
 import {ListSickComponent} from './list-sick/list-sick.component';
 import {NewsComponent} from './list-news/news.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ListPatientComponent,
     ListMedicineComponent,
     ListSickComponent,
-    NewsComponent],
+    NewsComponent,
+    MyAccountComponent],
   imports: [
 
     CommonModule,
