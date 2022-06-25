@@ -5,6 +5,8 @@ import {Patient} from '../../models/patient';
 import {PatientService} from '../../service/doctorservice/patient.service';
 import {appointmentScheduleDoctor} from '../models/AppointmentSchedule';
 import {NotifyService} from '../../service/notify.service';
+import {DoctorService} from '../../service/doctorservice/doctor.service';
+import {Doctor} from '../../models/doctor';
 
 @Component({
   selector: 'app-appointment-schedule',
@@ -18,12 +20,14 @@ export class AppointmentScheduleComponent implements OnInit {
   public status: string;
   public existAppSch: boolean;
   public statusList: string[];
+  public doctorInfo: Doctor;
   public item: appointmentScheduleDoctor;
   p: number;
 
   constructor(private appointment: AppointmentScheduleService, private patientService: PatientService,
-              private notify: NotifyService) {
+              private notify: NotifyService, private doctorService: DoctorService) {
     this.status = 'Tất cả';
+    this.doctorInfo = this.doctorService.currentDoctorValue;
   }
 
   ngOnInit() {
@@ -31,7 +35,7 @@ export class AppointmentScheduleComponent implements OnInit {
   }
 
   getListAppointmentSchedule() {
-    this.appointment.getListAppoint().subscribe(data => {
+    this.appointment.getListAppointByDoctor(this.doctorInfo.doctorid).subscribe(data => {
       if (data) {
         this.existAppSch = true;
         this.listAppSch = data;

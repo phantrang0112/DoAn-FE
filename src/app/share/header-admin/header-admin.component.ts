@@ -49,6 +49,6 @@ export const ROUTES: RouteInfo[] = [
   {path: '/admin/list-sick', title: 'Danh sách bệnh', icon: 'fa fa-question-circle text-red', class: ''},
   {path: '/admin/list-news', title: 'Danh sách bài viết', icon: 'fa fa-question-circle text-red', class: ''},
   {path: '/tables', title: 'Danh sách lịch trực', icon: 'fa fa-question-circle text-red', class: ''},
-  {path: '/tables', title: 'Thông tin cá nhân', icon: 'fa fa-question-circle text-red', class: ''},
+  {path: '/admin/my-account', title: 'Thông tin cá nhân', icon: 'fa fa-question-circle text-red', class: ''},
 
 ];

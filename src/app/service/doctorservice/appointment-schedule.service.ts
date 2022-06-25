@@ -27,4 +27,8 @@ export class AppointmentScheduleService {
     const url = `${environment.appointmentURL}update-status/${id}/${trangthai}`;
     return this.httpclient.put<any>(url, this.httpOptions);
   }
+  public getListAppointByDoctor(id: number): Observable<any> {
+    const url = `${environment.appointmentURL}allByDoctor/${id}`;
+    return this.httpclient.get<any>(url, this.httpOptions); // Nhớ import catchError
+  }
 }

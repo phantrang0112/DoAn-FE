@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as internal from 'assert';
-import { DeptService } from 'src/app/service/userservice/dept.service';
-import { DoctorService } from 'src/app/service/userservice/doctor.service';
-import { HeaderserviceService } from 'src/app/service/userservice/headerservice.service';
+import {DeptService} from 'src/app/service/userservice/dept.service';
+import {DoctorService} from 'src/app/service/userservice/doctor.service';
+import {HeaderserviceService} from 'src/app/service/userservice/headerservice.service';
 
 @Component({
   selector: 'app-list-doctor',
@@ -25,6 +25,7 @@ export class ListDoctorComponent implements OnInit {
     {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn D'},
     {image: './assets/imglogin.png', text: 'khoa: khoaA', title: 'Nguyen văn E'}
   ];
+  p: number;
 
   constructor(private headerService: HeaderserviceService, private doctorService: DoctorService, private deptService: DeptService) {
     doctorService.getListDoctor().subscribe((data) => {
@@ -43,12 +44,13 @@ export class ListDoctorComponent implements OnInit {
   ngOnInit() {
     this.headerService.setActive('list-doctor');
   }
+
   listDept(deptName) {
-    let list=[];
-    let item:any;
-    console.log(deptName)
-    if(deptName!==undefined){
-      for ( item of this.listDoctorTam) {
+    const list = [];
+    let item: any;
+    console.log(deptName);
+    if (deptName !== undefined) {
+      for (item of this.listDoctorTam) {
         console.log(item);
         if (item.deptname === deptName) {
           list.push(item);
@@ -56,12 +58,11 @@ export class ListDoctorComponent implements OnInit {
 
       }
       this.listDoctor = list;
-    }
-    else{
-      this.listDoctor=this.listDoctorTam;
+    } else {
+      this.listDoctor = this.listDoctorTam;
     }
 
-    console.log(list+deptName)
+    console.log(list + deptName);
   }
 
 }
@@ -74,6 +75,8 @@ export interface Doctor {
   id: number;
   username: string;
 }
+
+// tslint:disable-next-line:class-name
 export interface dept {
   id: number;
   name: string;

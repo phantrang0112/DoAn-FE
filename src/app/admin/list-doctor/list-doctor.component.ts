@@ -3,6 +3,7 @@ import {FormControl} from '@angular/forms';
 import {DeptService} from 'src/app/service/adminservice/dept.service';
 import {DoctorServiceService} from 'src/app/service/adminservice/doctor-service.service';
 import {DoctorService} from 'src/app/service/doctorservice/doctor.service';
+import {NotifyService} from '../../service/notify.service';
 
 @Component({
   selector: 'app-list-doctor',
@@ -11,7 +12,8 @@ import {DoctorService} from 'src/app/service/doctorservice/doctor.service';
 })
 export class ListDoctorComponent implements OnInit {
 
-  constructor(private doctorService: DoctorServiceService, private deptService: DeptService) {
+  constructor(private doctorService: DoctorServiceService, private deptService: DeptService,
+              private notify: NotifyService) {
   }
 
   listDoctor;
@@ -37,8 +39,8 @@ export class ListDoctorComponent implements OnInit {
     } else {
       this.listDoctor = this.listDoctorOrigin;
     }
-
-
   }
-
+  xoaBacSi(id: number) {
+    this.notify.xoaBacSi(id);
+  }
 }
