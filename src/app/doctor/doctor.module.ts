@@ -25,7 +25,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { ChangePasswordComponent } from './my-account/change-password/change-password.component';
-
+import { ChartsModule, ThemeService } from 'ng2-charts';
+import { ChartComponent } from './chart/chart.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -37,6 +38,7 @@ import { ChangePasswordComponent } from './my-account/change-password/change-pas
     ChatComponent,
     MyAccountComponent,
     ChangePasswordComponent,
+    ChartComponent,
   ],
   imports: [
 
@@ -60,9 +62,10 @@ import { ChangePasswordComponent } from './my-account/change-password/change-pas
     HttpClientModule,
     MatGridListModule,
     NgxPaginationModule,
-    MatCardModule
+    MatCardModule,
+    ChartsModule,
   ],
-
+  providers:[ThemeService]
 })
 
 export class DoctorModule {

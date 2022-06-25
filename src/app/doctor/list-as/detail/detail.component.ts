@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -40,8 +40,8 @@ export class DetailComponent implements OnInit {
   formMedicine: FormGroup = new FormGroup({
 
     medicine: new FormControl(),
-    amount: new FormControl(),
-    dosage: new FormControl()
+    amount: new FormControl('',[Validators.required, Validators.pattern(/^\d+$/)]),
+    dosage: new FormControl(),
 
   })
   sicks = new FormControl();
@@ -56,6 +56,7 @@ export class DetailComponent implements OnInit {
   @ViewChild('selectList', { static: false }) selectList: ElementRef;
   myDropDown: string;
   stateGroupOptions: Observable<Medicine[]>;
+  p: number;
   onChangeofOptions(newGov) {
     console.log(newGov);
   }

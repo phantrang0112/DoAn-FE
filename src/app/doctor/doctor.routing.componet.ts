@@ -9,6 +9,7 @@ import {ListASComponent} from './list-as/list-as.component';
 import {RegisterScheduleComponent} from './register-schedule/register-schedule.component';
 import {MyAccountComponent} from './my-account/my-account.component';
 import {ChangePasswordComponent} from './my-account/change-password/change-password.component';
+import { ChartComponent } from './chart/chart.component';
 
 
 export const DoctorRoutes: Routes = [
@@ -21,5 +22,6 @@ export const DoctorRoutes: Routes = [
   {path: 'ask-answer', component: AskAnswerComponent},
   {path: 'video-call', component: ChatComponent},
   {path: 'my-account', component: MyAccountComponent},
+  {path: 'chart', component: ChartComponent},
   {path: 'change-password', component: ChangePasswordComponent}
 ];

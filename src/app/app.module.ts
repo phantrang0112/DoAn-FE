@@ -29,6 +29,8 @@ import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {AuthGuard} from './shared/guards/auth-guard.guard';
 import { AppRoutingModule } from './app-routing.component';
+import { ChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import { AppRoutingModule } from './app-routing.component';
     HttpClientModule,
     NgbModule,
     ShareModule,
+
+
   ],
   providers: [
     AuthGuard ,

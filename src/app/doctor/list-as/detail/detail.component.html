@@ -8,12 +8,8 @@
   <div>
     <div style="margin-left: 15px;">
       <div>
-        <h2>Đơn thuốc số:</h2>
+        <h2>Đơn thuốc số: {{id}}</h2>
       </div>
-      <div>
-        <p>Tên bệnh nhân:</p>
-      </div>
-      <div><p (click)="return()">Ngày khám:</p></div>
     </div>
 
     <div>
@@ -51,6 +47,7 @@
         <mat-form-field class="col-2" style="margin: 15px;">
           <mat-label>Số lượng</mat-label>
           <input matInput type="text" formControlName="amount" required>
+          <mat-error *ngIf="formMedicine.controls.amount.hasError('pattern')" style="color: red;"> *Số lượng phải là số </mat-error>
         </mat-form-field>
         <button type="submit" [disabled]="!formMedicine.valid" class="btn btn_color">
           Thêm
@@ -67,38 +64,40 @@
     <p *ngFor="let item of dataSource">
       {{item.medicine}}
     </p>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"
-      style="width: 98%; margin-left:15px ;">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Stt</th>
+          <th scope="col">Tên thuốc</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Liều dùng</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dataSource | paginate: {itemsPerPage:5, currentPage:p} , let i=index ">
+          <td>{{i+1}}</td>
+          <th scope="row">
+            <div class="media align-items-center">
 
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> STT </th>
-        <td mat-cell *matCellDef="let element,let i=index"> {{i+1}} </td>
-      </ng-container>
+              <div class="media-body">
+                <span class="mb-0 text-sm">{{item.medicine}}</span>
+              </div>
+            </div>
+          </th>
+          <td>{{item.dosage}}</td>
+          <td>{{item.amount}}</td>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="medicine">
-        <th mat-header-cell *matHeaderCellDef> Tên thuốc </th>
-        <td mat-cell *matCellDef="let element"> {{element.medicine}} </td>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="dosage">
-        <th mat-header-cell *matHeaderCellDef> Số lượng </th>
-        <td mat-cell *matCellDef="let element"> {{element.dosage}} </td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> liều dùng </th>
-        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
-      </ng-container>
-
-
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <td>
+            <a  (click)=" remove(item)" style="color: rgb(232, 18, 18);margin-right: 10px;
+              font-size: larger;"><i class="fa fa-trash"
+                aria-hidden="true"></i></a>
+              </td>
+        </tr>
+      </tbody>
     </table>
-
-
+    <button type="submit" [disabled]="!formMedicine.valid && sicks.valid" class="btn btn_color">
+      Lưu
+    </button>
   </div>
 </div>
