@@ -38,12 +38,12 @@ export class RegisterScheduleComponent implements OnInit, DoCheck {
     let date = new Date();
     console.log(date.getDate());
     if (date.getDay() !== 6) {
-      for (let i = 2; i < 9; i++) {
+      for (let i = 1; i < 8; i++) {
         const day = moment().add(i, 'days').format('YYYY MM DD');
         date = new Date(day);
-        ELEMENT_DATA[i - 2].date = moment(day).format('DD-MM-YYYY');
-        ELEMENT_DATA[i - 2].weekdays = this.changeDay(date.getDay());
-        ELEMENT_DATA[i - 2].status = 'Chưa đăng ký';
+        ELEMENT_DATA[i - 1].date = moment(day).format('DD-MM-YYYY');
+        ELEMENT_DATA[i - 1].weekdays = this.changeDay(date.getDay());
+        ELEMENT_DATA[i - 1].status = 'Chưa đăng ký';
       }
 
     } else {

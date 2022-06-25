@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, RouterLinkActive} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
+import { AppointmentScheduleService } from 'src/app/service/doctorservice/appointment-schedule.service';
+import { DoctorService } from 'src/app/service/doctorservice/doctor.service';
 
 @Component({
   selector: 'app-home',
@@ -7,57 +9,56 @@ import {ActivatedRoute, Router, RouterLinkActive} from '@angular/router';
   styleUrls: ['../doctor.component.css']
 })
 export class HomeComponent implements OnInit {
-  public datasets: any;
-  public data: any;
-  public salesChart;
-  public clicked = true;
-  public clicked1 = false;
 
-  constructor(private route: Router) {
+
+  constructor(private doctorService: DoctorService, private appointService: AppointmentScheduleService) {
   }
-  ngOnInit() {
-
-    this.datasets = [
-      [0, 20, 10, 30, 15, 40, 20, 60, 60],
-      [0, 20, 5, 25, 10, 30, 15, 40, 40]
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels = [];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  barChartData =
+    [
+      { data: [75, 49, 89, 31, 86, 35, 50], label: 'Series A' },
+      { data: [0, 1, 0, 1, 0, 0, 80], label: 'hmmm' }
     ];
-    this.data = this.datasets[0];
+  public barChartItem: Barchar = new Barchar();
+  public barChartItemCancle: Barchar = new Barchar();
+  // [
+  //   {data: [75, 49, 89, 31, 86, 35, 50], label: 'Series A'},
+  //   {data: [48, 38, 65, 39, 66, 17, 80], label: 'Series B'}
+  // ];
+  doctor;
+  sum=0;
+  sumhuy=0;
+  sumtong=0;
+  ngOnInit() {
+    this.doctor = this.doctorService.currentDoctorValue;
+    this.appointService.getListChart(this.doctor.doctorid).subscribe(data => {
+      console.log(data);
+      for (let item = 0; item < 7; item++) {
+        this.barChartData[0].data[item] = data.listDateSuccess[item].count;
+        this.barChartData[0].label = "Đã khám";
+        this.barChartData[1].data[item] = data.listDateError[item].count;
+        this.barChartData[1].label = "Đã Hủy";
+        this.sumhuy+=this.barChartData[1].data[item];
+        this.sum+=this.barChartData[0].data[item];
+        this.barChartLabels.push(data.listDateSuccess[item].date);
+      }
+      this.sumtong=this.sum+this.sumhuy;
+    })
 
 
-    const chartOrders = document.getElementById('chart-orders');
-
-    parseOptions(Chart, chartOptions());
-    const ordersChart = new Chart(chartOrders, {
-      type: 'bar',
-
-    });
-
-    const chartSales = document.getElementById('chart-sales');
-
-    this.salesChart = new Chart(chartSales, {
-      type: 'line',
-
-    });
   }
 
 
-  public updateOptions() {
-    this.salesChart.data.datasets[0].data = this.data;
-    this.salesChart.update();
-  }
+}
+export class Barchar {
+  data: number[] = [];
+  label: string = '';
 }
 
-// tslint:disable-next-line:no-shadowed-variable
-function parseOptions(Chart: any, arg1: any) {
-  throw new Error('Function not implemented.');
-}
-
-// tslint:disable-next-line:no-shadowed-variable
-function Chart(Chart: any, arg1: any) {
-  throw new Error('Function not implemented.');
-}
-
-function chartOptions(): any {
-  throw new Error('Function not implemented.');
-}
 
