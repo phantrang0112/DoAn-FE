@@ -699,7 +699,7 @@ navbar-vertical
     overflow-y: auto;
 
     width: 100%;
-    max-width: 250px;
+    max-width: 20%;
     padding-right: 1.5rem;
     padding-left: 1.5rem;
 }
@@ -821,7 +821,7 @@ navbar-vertical
         overflow-y: auto;
 
         width: 100%;
-        max-width: 250px;
+        max-width: 20%;
         padding-right: 1.5rem;
         padding-left: 1.5rem;
     }
@@ -947,7 +947,7 @@ navbar-vertical
         overflow-y: auto;
 
         width: 100%;
-        max-width: 250px;
+        max-width: 20%;
         padding-right: 1.5rem;
         padding-left: 1.5rem;
     }
