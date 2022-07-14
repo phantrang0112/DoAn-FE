@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NotifyService } from 'src/app/service/notify.service';
 import { ChatserviceService } from 'src/app/service/userservice/chatservice.service';
 import { environment } from 'src/environments/environment';
 export const ENV_RTCPeerConfiguration = environment.RTCPeerConfiguration;
@@ -31,7 +32,7 @@ export class VideoCallComponent implements AfterViewInit {
   inCall = false;
   localVideoActive = false;
 
-  constructor(private dataService: ChatserviceService) { }
+  constructor(private dataService: ChatserviceService, private notifi: NotifyService) { }
   async call(): Promise<void> {
     this.createPeerConnection();
     this.localStream.getTracks().forEach(
@@ -235,6 +236,9 @@ export class VideoCallComponent implements AfterViewInit {
   hangUp(): void {
     this.dataService.sendMessage({type: 'hangup', data: ''});
     this.closeVideoCall();
+  }
+  return(){
+ this.notifi.notifySuccess("Thoát khỏi phòng khám!","user/home","Bạn có chắc chắn muốn thoát không?")
   }
 }
 export interface Message {

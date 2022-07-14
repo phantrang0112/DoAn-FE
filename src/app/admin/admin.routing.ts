@@ -11,7 +11,7 @@ import {NewsComponent} from './list-news/news.component';
 import {MyAccountComponent} from './my-account/my-account.component';
 
 export const AdminRoutes: Routes = [
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: ListAppointmentComponent},
   {path: 'list-appointment', component: ListAppointmentComponent},
   {path: 'list-of-appointment', component: ListOfAppointmentComponent},
   {path: 'department', component: DepartmentComponent},
